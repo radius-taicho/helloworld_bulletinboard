@@ -1,0 +1,179 @@
+/* styles.css */
+body {
+  background-color: white;
+  min-height: 100vh;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Changed from space-around to space-between for better alignment */
+  align-items: center;
+  background-color: #333;
+  font-family: "DotGothic16", sans-serif;
+  height: 80px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 1);
+  padding: 0 20px; /* Added padding for better spacing */
+}
+
+.navbar-logo{
+  width: 160px;
+  height: 40px;
+  fill: white;
+
+}
+
+
+img.top-characters-image{
+  width: 35px;
+  height: 35px;
+}
+
+
+.navbar-logo a {
+  color: white;
+  text-decoration: none;
+  font-family: "DotGothic16", sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.navbar-search {
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.navbar-search .post {
+  text-decoration: none;
+  margin-left: 20px;
+  display: block;
+  color: white;
+}
+
+.navbar-search .post a:hover {
+  background-color: #111;
+}
+
+.navbar-search input[type="text"] {
+  border: 1px solid #999;
+  padding: 3px 5px;
+  border-radius: 20px;
+  height: 2.5em;
+  width: 200px;
+  overflow: hidden;
+}
+
+.navbar-search input[type="text"]:focus {
+  outline: 0;
+}
+
+.your-status {
+  color: white;
+}
+
+.your-status .your-level {
+  
+}
+
+label {
+  padding-right: 10px;
+  font-size: 1rem;
+}
+
+
+.navbar-links {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.navbar-links li {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-links .adventure-button {
+  margin-right: 50px;
+}
+
+.navbar-links li a {
+  font-family: "DotGothic16", sans-serif;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+.navbar-links li a p {
+  margin: 0 ;
+}
+
+.navbar-links li a:hover {
+  background-color: #111;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  margin-top: 0;
+  right: -250px; /* Hide sidebar by default */
+  height: 100vh;
+  width: 250px;
+  z-index: 999;
+  background-color: rgba(255, 255, 255, 0.9); /* Adjusted opacity */
+  backdrop-filter: blur(10px);
+  box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  transition: right 0.3s ease; /* Add transition for smooth slide-in effect */
+}
+
+.sidebar.active {
+  right: 0; /* Show sidebar when active */
+}
+
+.sidebar li {
+  width: 100%;
+  list-style: none;
+}
+
+.sidebar a {
+  width: 100%;
+  text-decoration: none;
+  padding: 15px; /* Added padding for better spacing */
+  color: #333; /* Added color for better visibility */
+
+}
+
+.sidebar a:hover {
+  background-color: #ddd; /* Added hover effect */
+}
+
+.shoes-image {
+  width: 40px;
+  height: 40px;
+}
+
+.hamberger-image {
+  width: 30px;
+  height: 30px;
+
+}
+
+.house-image {
+  width: 40px;
+  height: 40px;
+}
+
+.key-image {
+  width: 25px;
+  height: auto;
+}
