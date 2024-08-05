@@ -17,18 +17,22 @@
   </div>
 
   <ul class="navbar-links">
-    <li class="adventure-button"><a href="#">
+  <% if user_signed_in? %>
+   <li class="adventure-button"><a href="#">
       <%= image_tag 'adventureshoes.png', alt: '冒険の靴', class: 'shoes-image' %>
       <p>冒険</p>
-    </a>
     </li>
-    <li><a href="#">新規登録</a></li>
-    <li><a href="#">
-      <p>ログイン</p>
-      </a>
-      </li>
+    <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete%></li>
     <li><a href="#">
       <p>マイページ</p>
+    </a>
+    </li>
+  <% else %>
+    <li><%= link_to "新規登録", new_user_registration_path, class: "XXXX" %></li>
+    <li><%= link_to "ログイン", new_user_session_path, class: "YYYY" %></li>
+  <% end %>
+    <li><a href="#">
+      <p>メニュー</p>
       </a>
       </li>
   </ul>
