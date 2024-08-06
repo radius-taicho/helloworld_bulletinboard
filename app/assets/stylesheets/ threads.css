@@ -1,7 +1,7 @@
 /* styles.css */
 body {
   background-color: white;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .navbar {
@@ -14,7 +14,7 @@ body {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 1);
-  padding: 0 20px; /* Added padding for better spacing */
+  padding: 0 10px; /* Added padding for better spacing */
 }
 
 .navbar-logo{
@@ -38,18 +38,21 @@ img.top-characters-image{
   font-weight: bold;
 }
 
+.post-box{
+  display: flex;
+  align-items: center;
+  margin-left: 80px;
+}
+
 .navbar-search {
   width: 300px;
   display: flex;
-  justify-content: center;
   align-items: center;
   box-sizing: border-box;
 }
 
-.navbar-search .post {
+.post {
   text-decoration: none;
-  margin-left: 20px;
-  display: block;
   color: white;
 }
 
@@ -60,7 +63,7 @@ img.top-characters-image{
 .navbar-search input[type="text"] {
   border: 1px solid #999;
   padding: 3px 5px;
-  border-radius: 20px;
+  border-radius: 13px;
   height: 2.5em;
   width: 200px;
   overflow: hidden;
@@ -70,34 +73,48 @@ img.top-characters-image{
   outline: 0;
 }
 
-.your-status {
+.adventure-box {
+  display: flex;
+  align-items: center;
+  color: white;
+  margin-left: 20px;
+}
+
+.adventure-box a {
+  text-decoration: none;
   color: white;
 }
 
-.your-status .your-level {
+.adventure {
+  margin-left: 10px;
+  text-align: center;
+}
 
+.adventure a {
+  display: block;
+  padding: 10px 10px;
+}
+
+.adventure a:hover{
+  background-color: #111;
+}
+
+.adventure p {
+  margin: 0;
 }
 
 label {
-  padding-right: 10px;
   font-size: 1rem;
 }
 
-
 .navbar-links {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
   display: flex;
 }
 
 .navbar-links li {
   display: flex;
   align-items: center;
-}
-
-.navbar-links .adventure-button {
-  margin-right: 50px;
 }
 
 .navbar-links li a {
@@ -109,52 +126,11 @@ label {
   text-decoration: none;
 }
 
-.navbar-links li a p {
-  margin: 0 ;
-}
 
 .navbar-links li a:hover {
   background-color: #111;
 }
 
-.sidebar {
-  position: fixed;
-  top: 0;
-  margin-top: 0;
-  right: -250px; /* Hide sidebar by default */
-  height: 100vh;
-  width: 250px;
-  z-index: 999;
-  background-color: rgba(255, 255, 255, 0.9); /* Adjusted opacity */
-  backdrop-filter: blur(10px);
-  box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  transition: right 0.3s ease; /* Add transition for smooth slide-in effect */
-}
-
-.sidebar.active {
-  right: 0; /* Show sidebar when active */
-}
-
-.sidebar li {
-  width: 100%;
-  list-style: none;
-}
-
-.sidebar a {
-  width: 100%;
-  text-decoration: none;
-  padding: 15px; /* Added padding for better spacing */
-  color: #333; /* Added color for better visibility */
-
-}
-
-.sidebar a:hover {
-  background-color: #ddd; /* Added hover effect */
-}
 
 .shoes-image {
   width: 40px;
@@ -164,15 +140,4 @@ label {
 .hamberger-image {
   width: 30px;
   height: 30px;
-
-}
-
-.house-image {
-  width: 40px;
-  height: 40px;
-}
-
-.key-image {
-  width: 25px;
-  height: auto;
 }
