@@ -54,6 +54,11 @@ img.top-characters-image{
 .post {
   text-decoration: none;
   color: white;
+  padding: 30px 20px;
+}
+
+.post :hover{
+  background-color: #111;
 }
 
 .navbar-search .post a:hover {
@@ -122,7 +127,7 @@ label {
   display: block;
   color: white;
   text-align: center;
-  padding: 10px 20px;
+  padding: 15px 20px;
   text-decoration: none;
 }
 
