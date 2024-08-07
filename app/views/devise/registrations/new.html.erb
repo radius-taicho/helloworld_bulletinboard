@@ -1,0 +1,63 @@
+<body class="account-create-page">
+<div class="back-to-top-page">
+<%= link_to "Top画面へ", root_path, class: "top-button" %>
+</div>
+<div class="whole-wrapper">
+
+<h2 class="account-create-title">アカウント作成</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+<div class="account-wrapper">
+<div class="name-mail-wrapper">
+  <div class="field">
+    <%= f.label :nickname, "ニックネーム(10文字以内)"%><br />
+    <%= f.text_field :nickname, class: 'custom-text-field', autofocus: true %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :email, "メールアドレス"%><br />
+    <%= f.email_field :email, class: 'custom-text-field',autofocus: true, autocomplete: "email" %>
+  </div>
+</div>
+
+  <%if @sns_id.present? %>
+    <%= hidden_field_tag :sns_auth, true %>
+  <% else %>
+  <div class="password-wrapper">
+   <div class="field">
+       <%= f.label :password, "パスワード"%>
+       <% @minimum_password_length %>
+       <em>(<%= @minimum_password_length %> characters minimum)</em>
+       <br />
+      <%= f.password_field :password, class: 'custom-text-field', autocomplete: "new-password" %>
+   </div>
+   <div class="field">
+      <%= f.label :password_confirmation,"パスワード確認" %><br />
+      <%= f.password_field :password_confirmation, class: 'custom-text-field', autocomplete: "new-password" %>
+    </div>
+
+  </div>
+</div>
+  <% end %>
+<div class="registration-buttons">
+<div class="account-create-button">
+    <%= f.submit "アカウント作成" , class: "account-create" %>
+</div>
+<% end %>
+
+<div class="google-registration-button">
+<%= button_to user_google_oauth2_omniauth_authorize_path, data: { turbo: false }, class: "create-by-google" do %>
+  <%= image_tag 'google.png', alt: 'Google', class: 'google-icon' %> Googleアカウントで登録
+<% end %>
+</div>
+</div>
+
+
+<%= render "devise/shared/links" %>
+
+</div>
+
+</body>
+
