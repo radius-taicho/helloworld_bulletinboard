@@ -34,8 +34,10 @@
   font-family: "DotGothic16", sans-serif;
   color: white;
   width: 75vw;
+  border: 5px solid white;
+  border-radius: 20px;
   min-width: 700px;
-  height: 90vh;
+  height: 700px;
   min-height: 600px;
   margin: 0 auto;
 }
@@ -51,7 +53,8 @@
   border: 3px solid white;
   border-radius: 3px;
   color: white;
-  
+  font-weight: bold;
+
 }
 
 .custom-text-field:focus {
@@ -60,15 +63,14 @@
   outline: 0;
 }
 
-
 .account-wrapper{
   display: flex;
 }
 
 .account-create-button{
   margin-top: 20px;
+  cursor: pointer;
 }
-
 
 .account-create{
   width: 200px;
@@ -77,24 +79,38 @@
   background-color: black;
   border: 2px solid white;
   color: white;
+  cursor: pointer;
+  border-radius: 3px;
 }
 
+.account-create:hover{
+  color: #ca4effaa;
+  border: 2px solid #ca4effaa;
+  
+}
 
 .google-icon{
   margin-right: 15px;
 }
+
 .create-by-google{
   width: 360px;
   height: 64px;
   font-size: 20px;
   background-color: black;
   border: 2px solid white;
+  border-radius: 3px;
   color: white;
   display: flex;
   align-items: center;
+  cursor: pointer;
+  margin-top: 30px;
 }
 
-
+.create-by-google:hover{
+  color: #ca4effaa;
+  border: 2px solid #ca4effaa;
+}
 
 .registration-buttons{
   display: flex;
@@ -104,10 +120,9 @@
   margin-bottom: 50px;
 }
 
+
 .google-registration-button{
   margin-top: 20px;
-
-
 }
 
 .would-you-login{

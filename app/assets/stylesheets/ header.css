@@ -132,7 +132,7 @@ label {
 }
 
 
-.navbar-links li a:hover {
+.navbar-links li:hover {
   background-color: #111;
 }
 

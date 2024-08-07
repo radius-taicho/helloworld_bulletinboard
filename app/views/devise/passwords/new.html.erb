@@ -1,16 +1,34 @@
-<h2>Forgot your password?</h2>
+<body class="password-reset-page">
+
+  <div class="back-to-top-page">
+    <%= link_to " ログイン画面へ", new_user_session_path, class: "top-button" %>
+  </div>
+
+<div class="whole-reset-wrapper">
+<h2 class="password-reset-title">パスワードリセット
+</h2>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="reset-wrapper">
+  <div class="reset-mail-field">
+    <%= f.label :email, "メールアドレス"%><br />
+    <%= f.email_field :email, class: "reset-email", autofocus: true, autocomplete: "email" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
+  <div class="reset-button">
+    <%= f.submit "パスワードを再設定する", class: "password-reset"%>
   </div>
 <% end %>
 
+<div class="other-info">
+
 <%= render "devise/shared/links" %>
+
+</div>
+
+</div>
+
+</div>
+</body>

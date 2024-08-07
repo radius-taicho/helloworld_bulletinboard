@@ -1,0 +1,146 @@
+.top-button{
+  text-decoration: none;
+  font-size: 25px;
+  font-family: "DotGothic16", sans-serif;
+  color: white;
+  border: 3px solid ;
+  border-radius: 10px;
+  padding: 3px;
+}
+
+.login-page{
+  font-family:  "DotGothic16", sans-serif;
+  background-color: black;
+  margin-top: 10px;
+
+}
+
+.all-wrapper{
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "DotGothic16", sans-serif;
+  color: white;
+  width: 75vw;
+  min-width: 700px;
+  height: 700px;
+  min-height: 600px;
+  border: 5px solid white;
+  border-radius: 20px;
+  margin: 0 auto;
+}
+
+.login-title{
+  font-size: 40px;
+  margin-top: 40px;
+}
+
+.account-information{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-field{
+  margin: 15px;
+}
+
+.remember-field{
+  margin: 15px;
+  margin-right: 85px;
+  cursor: pointer;
+}
+
+.custom-text-field{
+  width: 270px;
+  height: 60px;
+  font-size: 20px;
+  background-color: black;
+  border: 3px solid white;
+  border-radius: 3px;
+  color: white;
+  font-weight: bold;
+}
+.custom-text-field:focus {
+  border: 2px solid #ca4effaa; 
+  z-index: 10;
+  outline: 0;
+}
+
+.google-icon{
+  margin-right: 15px;
+}
+.login-by-google{
+  width: 360px;
+  height: 64px;
+  font-size: 20px;
+  background-color: black;
+  border: 2px solid white;
+  border-radius: 3px;
+  color: white;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.login-by-google:hover{
+  color: #ca4effaa;
+  border: 2px solid #ca4effaa;
+}
+
+.login-buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 50px;
+}
+
+.login-button{
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.login-account{
+  width: 200px;
+  height: 40px;
+  font-size: 20px;
+  background-color: black;
+  border: 2px solid white;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+}
+
+.login-account:hover{
+  color: #ca4effaa;
+  border: 2px solid #ca4effaa;
+}
+
+.google-login-button{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.another-info{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+}
+
+.forgot-password{
+  color: white;
+  display: block;
+  margin-left: 20px;
+}
+
+.would-you-create-account{
+  color: white;
+  display: block;
+  margin-right: 20px;
+
+}

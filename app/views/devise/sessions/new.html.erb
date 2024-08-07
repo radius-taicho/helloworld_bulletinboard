@@ -1,30 +1,57 @@
-<div class>
+<body class="login-page">
+<div class="back-to-top-page">
+<%= link_to "Top画面へ", root_path, class: "top-button" %>
+</div>
 
-<h2>ログイン</h2>
+<div class="all-wrapper">
+<h2 class="login-title">ログイン</h2>
+
+
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
+<div class="account-information">
+  <div class="login-field">
     <%= f.label :email, "メールアドレス" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, class: "custom-text-field", autocomplete: "email" %>
   </div>
 
-  <div class="field">
+  <div class="login-field">
     <%= f.label :password, "パスワード" %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+    <%= f.password_field :password, class: "custom-text-field", autocomplete: "current-password" %>
   </div>
 
   <% if devise_mapping.rememberable? %>
-    <div class="field">
+    <div class="remember-field">
       <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <%= f.label :remember_me, "ログイン情報を保存する" %>
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "ログインする" %>
+  </div>
+
+
+<div class="login-buttons">
+  <div class="login-button">
+    <%= f.submit "ログインする", class: "login-account"%>
   </div>
 <% end %>
 
-<%= button_to 'Googleでログイン', user_google_oauth2_omniauth_authorize_path, data: { turbo: false } %>
+<div class="google-login-button">
+<%= button_to user_google_oauth2_omniauth_authorize_path, data: { turbo: false }, class: "login-by-google" do %>
+  <%= image_tag 'google.png', alt: 'Google', class: 'google-icon' %> Googleアカウントでログイン
+<% end %>
+</div>
 
-<%= render "devise/shared/links" %>
+
+<div class="another-info">
+  <%= render "devise/shared/links" %>
+</div>
+
+  </div>
+
+  </div>
+
+
+</div>
+
+</body>
