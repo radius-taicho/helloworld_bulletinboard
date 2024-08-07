@@ -21,7 +21,7 @@
 - has_many :room_users
 - has_one :level
 
-## threads table
+## posts table
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
