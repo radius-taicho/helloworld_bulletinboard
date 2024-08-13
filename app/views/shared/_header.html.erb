@@ -1,7 +1,6 @@
 <nav class="navbar">
   <div class="navbar-logo">
-    <?xml version="1.0" encoding="UTF-8"?>
-    <svg id="_レイヤー_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 582.5 125">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 582.5 125">
       <defs>
         <style>
           .cls-1 { letter-spacing: .3em; }
@@ -13,7 +12,7 @@
           .cls-7 { letter-spacing: .06em; }
         </style>
       </defs>
-      <g id="_レイヤー_1-2">
+      <g id="layer-1">
         <text class="cls-2" transform="translate(0 110)">
           <tspan class="cls-7" x="0" y="0">h</tspan>
           <tspan class="cls-4" x="70" y="0">e</tspan>
@@ -30,57 +29,41 @@
     </svg>
   </div>
 
-  <div class="post-box">
+  <div class="post-objects">
+    <form id="search-form" method="get" action="#" class="navbar-search">
+      <input type="text" id="search-input" size="25" placeholder="スレッドタイトル検索" aria-label="検索">
+      <%= image_tag 'buglens.png', alt: '検索ボタン', width: 40, height: 40, id: 'search-button' %>
+    </form>
 
-  <form id="search-form" method="get" action="#" class="navbar-search">
-    <input type="text" id="search-input" size="25" placeholder="スレッドタイトル検索">
-    <%= image_tag 'buglens.png', alt: '検索ボタン', width: 40, height: 40, id: 'search-button' %>
-  </form>
-
-  <div class="post">
-     <a class="post" href="#">投稿</a>
-  </div>
-
+    <div class="post-button-box">
+      <button id="show-post-form" class="post-button">投稿</button>
+    </div>
   </div>
 
   <% if user_signed_in? %>
-  <div class="adventure-box">
-    <div class="your-status">
-      <p>あなたのレベル Lv. <span class="your-level" id="your-level">0</span></p>
-      <label for="fuel">HP:<span>10/20</span></label>
-      <meter id="fuel" min="0" max="100" low="33" high="66" optimum="80" value="50">at 50/100</meter>
+    <div class="adventure-box">
+      <div class="your-status">
+        <p>あなたのレベル Lv. <span class="your-level" id="your-level">0</span></p>
+        <label for="fuel">HP: <span>10/20</span></label>
+        <meter id="fuel" min="0" max="100" low="33" high="66" optimum="80" value="50">at 50/100</meter>
+      </div>
+      <div class="adventure">
+        <a href="#">
+          <%= image_tag 'adventureshoes.png', alt: '冒険の靴', class: 'shoes-image' %>
+          <p>冒険</p>
+        </a>
+      </div>
     </div>
-    <div class="adventure">
-      <a href="#">
-        <%= image_tag 'adventureshoes.png', alt: '冒険の靴', class: 'shoes-image' %>
-        <p>冒険</p>
-      </a>
-    </div>
-  </div>
   <% end %>
 
   <ul class="navbar-links">
     <% if user_signed_in? %>
-      <li>
-        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-      </li>
-      <li>
-        <a href="#">
-          <p>マイページ</p>
-        </a>
-      </li>
+      <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+      <li><%= link_to 'マイページ', '#' %></li>
     <% else %>
-      <li>
-        <%= link_to "新規登録", new_user_registration_path, class: "XXXX" %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_user_session_path, class: "YYYY" %>
-      </li>
+      <li><%= link_to '新規登録', new_user_registration_path, class: 'register-link' %></li>
+      <li><%= link_to 'ログイン', new_user_session_path, class: 'login-link' %></li>
     <% end %>
-    <li>
-      <a href="#">
-        <p>メニュー</p>
-      </a>
-    </li>
+    <li><%= link_to 'メニュー', '#' %></li>
   </ul>
 </nav>

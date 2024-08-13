@@ -1,1 +1,21 @@
 <%= render "shared/header" %>
+
+<h1>スレッド一覧</h1>
+
+<div id="posts-list">
+  <% @posts.each do |post| %>
+    <div class="post">
+      <h2><%= post.title %></h2>
+      <p><%= post.content %></p>
+    </div>
+  <% end %>
+</div>
+
+<!-- モーダルウィンドウ -->
+<div id="post-form-modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close-button">&times;</span>
+    <!-- 部分テンプレートを使ってフォームを表示 -->
+    <%= render 'form', post: @post %>
+  </div>
+</div>

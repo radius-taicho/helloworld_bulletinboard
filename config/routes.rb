@@ -3,6 +3,10 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations'
   }
-  get 'posts/index'
+
+  # Postsリソースのルーティング
+  resources :posts
+
+  # トップページの設定
   root to: "posts#index"
 end

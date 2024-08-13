@@ -1,9 +1,4 @@
 /* styles.css */
-body {
-  background-color: white;
-  height: 100vh;
-}
-
 .navbar {
   display: flex;
   justify-content: space-between; /* Changed from space-around to space-between for better alignment */
@@ -38,7 +33,7 @@ img.top-characters-image{
   font-weight: bold;
 }
 
-.post-box{
+.post-objects{
   display: flex;
   align-items: center;
   margin-left: 80px;
@@ -51,18 +46,15 @@ img.top-characters-image{
   box-sizing: border-box;
 }
 
-.post {
+.post-button {
+  background-color: #333;
   text-decoration: none;
   color: white;
   padding: 30px 20px;
 }
 
-.post :hover{
-  background-color: #111;
-}
-
-.navbar-search .post a:hover {
-  background-color: #111;
+.post-button :hover{
+  background-color: black;
 }
 
 .navbar-search input[type="text"] {
@@ -142,7 +134,3 @@ label {
   height: 40px;
 }
 
-.hamberger-image {
-  width: 30px;
-  height: 30px;
-}
