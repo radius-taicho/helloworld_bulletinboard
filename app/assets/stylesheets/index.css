@@ -1,0 +1,51 @@
+.index-body {
+  background-color: #333;
+}
+.post-media {
+  width: auto;
+  height: auto; /* 画像のアスペクト比を保持 */
+  border-radius: 10px;
+}
+
+#posts-list{
+  width: 65vw;
+  margin: 0 auto;
+  background-color: rgba(255, 247, 243, 0.885);
+  min-width: 500px;
+  margin-top: 10px;
+
+}
+
+.post{
+  width: 100%;
+  border-bottom: 1px solid;
+  padding: 10px;
+  overflow-wrap: break-word;
+}
+
+.post-title-box {
+  width: 100%;
+}
+
+.post-title-link{
+  text-decoration: none;
+  color: black;
+}
+
+.post h2 {
+  overflow-wrap: break-word;
+
+}
+
+
+
+.post h2 :hover{
+  color: blueviolet;
+
+}
+
+.post-contents-media{
+  display: flex;
+  justify-content: space-between;
+  overflow-wrap: anywhere;
+}

@@ -5,13 +5,8 @@ document.addEventListener("turbo:load", () => {
   const closeButton = document.querySelector('.close-button');
   const postForm = document.getElementById('post-form');
   const postsList = document.getElementById("posts-list");
-
-  // HTML ビルダー関数: 新しい投稿のHTMLを作成
-  const buildHTML = (post) => `
-    <div class="post">
-      <h2>${post.title}</h2>
-      <p>${post.content}</p>
-    </div>`;
+  const fileInput = document.querySelector('input[type="file"]');
+  const customUploadButton = document.getElementById("custom-upload-button");
 
   // モーダルの表示・非表示を制御する関数
   const initializeModal = () => {
@@ -32,6 +27,11 @@ document.addEventListener("turbo:load", () => {
     }
   };
 
+  // テキストをトランケートする関数
+  const truncateText = (text, length) => {
+    return text.length > length ? text.substring(0, length) + "(続く...)" : text;
+  };
+
   // 投稿処理関数
   const handlePostSubmit = () => {
     if (postForm) {
@@ -47,10 +47,37 @@ document.addEventListener("turbo:load", () => {
         XHR.onload = () => {
           if (XHR.status === 201 || XHR.status === 200) {
             const post = XHR.response;
-        
-            if (post && post.title && post.content) {
-              const html = buildHTML(post);
+
+            if (post && post.title) {
+              const truncatedContent = post.content ? truncateText(post.content, 100) : '';
+
+              const html = `
+                <div class="post">
+                  <h2><a href="/posts/${post.id}" class="post-title-link">${post.title}</a></h2>
+                  ${(truncatedContent || post.image_url) ? `
+                    <div class="post-content-media">
+                      ${truncatedContent ? `<p>${truncatedContent}</p>` : ''}
+                      ${post.image_url ? `<img src="${post.image_url}" class="post-media" alt="Post image" />` : ''}
+                    </div>` : ''}
+                </div>`;
+
               postsList.insertAdjacentHTML("afterbegin", html);
+
+              const images = postsList.querySelectorAll('.post-media');
+              images.forEach(img => {
+                img.onload = () => {
+                  img.style.width = '320px'; // 明示的にサイズを指定する
+                  img.style.height = 'auto';
+                };
+              });
+
+              const contentAndMedia = postsList.querySelectorAll(".post-content-media");
+              contentAndMedia.forEach(contentMedia => {
+                contentMedia.style.display = "flex";
+                contentMedia.style.justifyContent = "space-between"; // ここを修正
+              });
+              
+
               postForm.reset();
               postFormModal.style.display = 'none';
             } else {
@@ -71,6 +98,13 @@ document.addEventListener("turbo:load", () => {
       });
     }
   };
+
+  // カスタムアップロードボタンのイベントリスナー
+  if (customUploadButton && fileInput) {
+    customUploadButton.addEventListener("click", function() {
+      fileInput.click();
+    });
+  }
 
   // モーダルと投稿フォームのイベントリスナーを初期化
   initializeModal();

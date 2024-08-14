@@ -1,15 +1,29 @@
+<body class="index-body">
 <%= render "shared/header" %>
-
-<h1>スレッド一覧</h1>
 
 <div id="posts-list">
   <% @posts.each do |post| %>
     <div class="post">
-      <h2><%= post.title %></h2>
-      <p><%= post.content %></p>
+      <div class="post-title-box">
+        <h2> <%= link_to "#{post.title}", post_path(post.id) , class: 'post-title-link' %> </h2>
+      </div>
+      <% if post.content.present? %>
+      <div class="post-contents-media">
+        <div class="post-content-box">
+          <p><%= truncate(post.content, length: 200, omission: ' (続く...)') %></p>
+        </div>
+      <% end %>
+      <% if post.image.attached? %>
+      <div class="post-media-box">
+        <%= image_tag post.image.variant(resize: '320x320').processed, class: 'post-media' %>
+      </div>
+      <% end %>
+      </div>
     </div>
   <% end %>
 </div>
+
+
 
 <!-- モーダルウィンドウ -->
 <div id="post-form-modal" style="display: none;">
@@ -19,3 +33,5 @@
     <%= render 'form', post: @post %>
   </div>
 </div>
+
+</body>

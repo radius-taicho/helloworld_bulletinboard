@@ -35,9 +35,9 @@
       <%= image_tag 'buglens.png', alt: '検索ボタン', width: 40, height: 40, id: 'search-button' %>
     </form>
 
-    <div class="post-button-box">
-      <button id="show-post-form" class="post-button">投稿</button>
-    </div>
+    <button id="show-post-form" class="post-button">
+      <p>投稿</p>
+    </button>
   </div>
 
   <% if user_signed_in? %>
@@ -48,22 +48,32 @@
         <meter id="fuel" min="0" max="100" low="33" high="66" optimum="80" value="50">at 50/100</meter>
       </div>
       <div class="adventure">
-        <a href="#">
+        <button class="adventure-button">
           <%= image_tag 'adventureshoes.png', alt: '冒険の靴', class: 'shoes-image' %>
           <p>冒険</p>
-        </a>
+        </button>
       </div>
     </div>
   <% end %>
 
-  <ul class="navbar-links">
+  <div class="navbar-links">
     <% if user_signed_in? %>
-      <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-      <li><%= link_to 'マイページ', '#' %></li>
+      <button class="menu-buttons">
+        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+      </button>
+      <button class="menu-buttons">
+        <%= link_to 'マイページ', '#' %>
+      </button>
     <% else %>
-      <li><%= link_to '新規登録', new_user_registration_path, class: 'register-link' %></li>
-      <li><%= link_to 'ログイン', new_user_session_path, class: 'login-link' %></li>
+      <button class="menu-buttons">
+        <%= link_to '新規登録', new_user_registration_path, class: 'register-link' %>
+      </button>
+      <button class= "menu-buttons">
+        <%= link_to 'ログイン', new_user_session_path, class: 'login-link' %>
+      </button>
     <% end %>
-    <li><%= link_to 'メニュー', '#' %></li>
-  </ul>
+      <button class="menu-buttons">
+        <%= link_to 'メニュー', '#' %>
+      </button>
+  </div>
 </nav>

@@ -3,9 +3,11 @@
   display: flex;
   justify-content: space-between; /* Changed from space-around to space-between for better alignment */
   align-items: center;
-  background-color: #333;
+  background-color: rgb(117, 124, 131);
   font-family: "DotGothic16", sans-serif;
   height: 80px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 1);
@@ -37,6 +39,7 @@ img.top-characters-image{
   display: flex;
   align-items: center;
   margin-left: 80px;
+  height: 100%;
 }
 
 .navbar-search {
@@ -47,15 +50,30 @@ img.top-characters-image{
 }
 
 .post-button {
-  background-color: #333;
+  background-color: inherit;
   text-decoration: none;
   color: white;
-  padding: 30px 20px;
+  cursor: pointer;
+  height: 100%;
+  text-align: center;
+  border: none;
+  outline: none;
+  font: inherit;
+}
+
+.post-button p {
+  height: 100%;
+  line-height: 80px;
+  margin: 0;
+
 }
 
 .post-button :hover{
-  background-color: black;
+  box-shadow: unset;
+  transform: translateY(4px);
 }
+
+
 
 .navbar-search input[type="text"] {
   border: 1px solid #999;
@@ -75,26 +93,37 @@ img.top-characters-image{
   align-items: center;
   color: white;
   margin-left: 20px;
+  height: 100%;
 }
 
-.adventure-box a {
-  text-decoration: none;
-  color: white;
+.your-status {
+  height: 100%;
 }
 
 .adventure {
   margin-left: 10px;
   text-align: center;
+  height: 100%;
 }
 
-.adventure a {
-  display: block;
-  padding: 10px 10px;
+.adventure-button{
+  height: 100%;
+  color: white;
+  padding: 0;
+  border: none;
+  outline: none;
+  font: inherit;
+  color: inherit;
+  background-color: inherit;
+  cursor: pointer;
 }
 
-.adventure a:hover{
-  background-color: #111;
+.adventure-button :hover {
+  box-shadow: unset;
+  transform: translateY(3px);
+  
 }
+
 
 .adventure p {
   margin: 0;
@@ -105,28 +134,39 @@ label {
 }
 
 .navbar-links {
-  list-style-type: none;
-  display: flex;
-}
-
-.navbar-links li {
   display: flex;
   align-items: center;
-}
-
-.navbar-links li a {
-  font-family: "DotGothic16", sans-serif;
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 15px 20px;
+  height: 100%;
   text-decoration: none;
+  color: white;
+  cursor: pointer;
 }
 
-
-.navbar-links li:hover {
-  background-color: #111;
+.navbar-links :hover{
+  box-shadow: unset;
+  transform: translateY(3px);
+  
 }
+
+.navbar-links a {
+  display: block;
+  width: 100px;
+  text-decoration: none;
+  color: white;
+  height: 100%;
+}
+
+.menu-buttons {
+  display: flex;
+  align-items: center;
+  border: none;
+  outline: none;
+  font: inherit;
+  background-color: inherit;
+  height: 100%;
+  line-height: 80px;
+}
+
 
 
 .shoes-image {

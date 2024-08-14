@@ -10,7 +10,8 @@ class PostsController < ApplicationController
 
     if @post.save
       respond_to do |format|
-        format.json { render json: @post.as_json(only: [:id, :title, :content, :created_at]), status: :created }
+        format.json { render json: @post.as_json(methods: [:image_url]), status: :created }
+
       end
     else
       respond_to do |format|
@@ -19,9 +20,13 @@ class PostsController < ApplicationController
     end
   end
 
+  def show
+    @post = Post.find(params[:id])
+  end
+
   private
 
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content, :image)
   end
 end

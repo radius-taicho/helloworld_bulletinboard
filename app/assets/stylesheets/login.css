@@ -89,6 +89,8 @@
 .login-by-google:hover{
   color: #ca4effaa;
   border: 2px solid #ca4effaa;
+  box-shadow: unset;
+  transform: translateY(3px);
 }
 
 .login-buttons{
@@ -118,6 +120,8 @@
 .login-account:hover{
   color: #ca4effaa;
   border: 2px solid #ca4effaa;
+  box-shadow: unset;
+  transform: translateY(3px);
 }
 
 .google-login-button{
