@@ -1,3 +1,72 @@
-.show-body
-{
+.show-body{
+  position: relative;
+  margin-top: 0;
+  background-color:  rgb(209, 209, 236);
 }
+
+.back-to-post-page{
+  position: fixed;
+  top: 0;
+  left: 0;
+  border: 1px solid;
+  border-radius: 10px;
+  margin-top: 1px;
+}
+
+.post-top-button{
+  text-decoration: none;
+  padding: 2px;
+  font-family: "DotGothic16", sans-serif;
+  font-size: 20px;
+}
+
+.back-to-post-page :hover{
+  color: black;
+}
+
+#posts-list {
+  position: relative; /* 親要素を相対位置に設定 */
+}
+
+#modal-buttons {
+  position: absolute; /* 絶対位置に設定 */
+  top: 0; /* 上端に配置 */
+  left: 100%; /* 親要素の右端に配置 */
+  margin-left: 10px; /* ボタンと投稿の間にスペースを追加 */ /* デフォルトでは非表示 */
+}
+
+.edit-button{
+  width: 65px;
+
+}
+
+.delete-button{
+  width: 65px;
+
+}
+
+.meatball-menu-image{
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.meatball-menu-image :hover{
+  box-shadow: unset;
+  transform: translateY(4px);
+}
+
+.poster{
+  text-align: right;
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+}
+
+#modal-buttons{
+  position: absolute;
+}
+

@@ -5,26 +5,32 @@
   <% @posts.each do |post| %>
     <div class="post">
       <div class="post-title-box">
-        <h2> <%= link_to "#{post.title}", post_path(post.id) , class: 'post-title-link' %> </h2>
+        <h2> <%= link_to "#{post.title}", post_path(post.id), class: 'post-title-link' %> </h2>
       </div>
+
       <% if post.content.present? %>
       <div class="post-contents-media">
         <div class="post-content-box">
           <p><%= truncate(post.content, length: 200, omission: ' (続く...)') %></p>
         </div>
       <% end %>
+
       <% if post.image.attached? %>
-      <div class="post-media-box">
-        <%= image_tag post.image.variant(resize: '320x320').processed, class: 'post-media' %>
-      </div>
+        <div class="post-media-box">
+          <%= image_tag post.image.variant(resize: '320x320').processed, class: 'post-media' %>
+        </div>
       <% end %>
       </div>
+
       <div class="poster">
-          <%= "by #{post.user.nickname}" %>
-        </div>
+        <%= "by #{post.user.nickname}"%>
+        <br>
+        <%= l post.created_at %> <!-- 投稿日時の表示 -->
+      </div>
     </div>
   <% end %>
 </div>
+
 
 
 

@@ -1,5 +1,6 @@
 .index-body {
-  background-color: #333;
+  background-color: rgb(209, 209, 236);
+  box-shadow: 0 0 8px gray;
 }
 .post-media {
   width: auto;
@@ -10,15 +11,16 @@
 #posts-list{
   width: 65vw;
   margin: 0 auto;
-  background-color: rgba(255, 247, 243, 0.885);
+  background-color: rgba(240, 245, 254, 0.885);
   min-width: 500px;
   margin-top: 10px;
 
 }
 
 .post{
+  position: relative;
   width: 100%;
-  border-bottom: 1px solid;
+  border-bottom: 0.2px solid rgb(190, 190, 190);
   padding: 10px;
   overflow-wrap: break-word;
 }

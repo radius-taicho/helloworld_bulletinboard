@@ -1,6 +1,12 @@
 <body class="show-body">
+  <div class="back-to-post-page">
+    <%= link_to "Top画面へ", root_path, class: "post-top-button" %>
+  </div>
   <div id="posts-list">
     <div class="post">
+      <!-- 画像ホバー時に変更される画像のタグ -->
+      <%= image_tag "meat-bomb1.png", alt: "meatballmenu image", class: "meatball-menu-image", id: "hover-bomb-image" %>
+
       <div class="post-title-box">
         <h2><%= @post.title %></h2>
       </div>
@@ -10,18 +16,67 @@
           <div class="post-content-box">
             <p><%= @post.content %></p>
           </div>
-        </div>
+        
       <% end %>
       
       <% if @post.image.attached? %>
         <div class="post-media-box">
           <%= image_tag @post.image.variant(resize: '320x320').processed, class: 'post-media' %>
         </div>
+
       <% end %>
+        </div>
       
       <div class="poster">
-        <%= "by #{@post.user.nickname}" %>
+        <%= "by #{@post.user.nickname}" %><br>
+        <%= l @post.created_at %> <!-- 投稿日時の表示 -->
       </div>
     </div>
+
+    <!-- モーダルのボタン -->
+    <div id="modal-buttons">
+      <button id="edit-thread-btn" class="edit-button">編集</button>
+      <button id="delete-thread-btn" class="delete-button">削除</button>
+    </div>
   </div>
+
+  <!-- JavaScript: 画像ホバー時に画像を変更 -->
+  <script>
+    document.addEventListener("turbo:load", function() {
+      const hoverImage = document.getElementById("hover-bomb-image");
+      const modalButtons = document.getElementById("modal-buttons");
+
+      let hoverTimer;
+      let hoverTime = 0;
+
+      const images = [
+        "<%= asset_path('meat-bomb1.png') %>", 
+        "<%= asset_path('meat-bomb2.png') %>", 
+        "<%= asset_path('meat-bomb3.png') %>", 
+        "<%= asset_path('meat-bomb4.png') %>", 
+        "<%= asset_path('meat-bomb5.png') %>", 
+        "<%= asset_path('meat-bomb6.png') %>", 
+        "<%= asset_path('meat-bomb7.png') %>", 
+        "<%= asset_path('meat-bomb8.png') %>", 
+        "<%= asset_path('meat-bomb9.png') %>", 
+        "<%= asset_path('meat-bomb10.png') %>"
+      ];
+
+      hoverImage.addEventListener("mouseover", function() {
+        hoverTimer = setInterval(() => {
+          hoverTime += 1000; // 1秒ごとに時間を加算
+          const imageIndex = Math.floor(hoverTime / 1000); // 時間に応じてインデックスを計算
+          if (imageIndex < images.length) {
+            hoverImage.src = images[imageIndex]; // インデックスに対応する画像に切り替える
+          }
+        }, 1000); // 1秒ごとにチェック
+      });
+
+      hoverImage.addEventListener("mouseout", function() {
+        clearInterval(hoverTimer); // hoverが外れたらタイマーをクリア
+        hoverTime = 0; // 時間をリセット
+        hoverImage.src = images[0]; // 最初の画像に戻す
+      });
+    });
+  </script>
 </body>
