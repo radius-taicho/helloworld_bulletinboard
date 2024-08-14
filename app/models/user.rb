@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
   has_many :sns_credentials
-  has_many :threads
+  has_many :posts
 
   def guest?
     email == 'guest@example.com'
@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|
-      user.nickname = 'Guest'
+      user.nickname = 'ゲスト'
       user.password = SecureRandom.urlsafe_base64 # ゲスト用のパスワード
       user.password_confirmation = user.password
     end

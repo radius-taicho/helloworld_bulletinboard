@@ -1,6 +1,27 @@
-<%= @post.title %>
-<%= @post.content %>
-
-<% if @post.image.present? %>
-  <%= image_tag @post.image %>
-<% end %>
+<body class="show-body">
+  <div id="posts-list">
+    <div class="post">
+      <div class="post-title-box">
+        <h2><%= @post.title %></h2>
+      </div>
+      
+      <% if @post.content.present? %>
+        <div class="post-contents-media">
+          <div class="post-content-box">
+            <p><%= @post.content %></p>
+          </div>
+        </div>
+      <% end %>
+      
+      <% if @post.image.attached? %>
+        <div class="post-media-box">
+          <%= image_tag @post.image.variant(resize: '320x320').processed, class: 'post-media' %>
+        </div>
+      <% end %>
+      
+      <div class="poster">
+        <%= "by #{@post.user.nickname}" %>
+      </div>
+    </div>
+  </div>
+</body>
