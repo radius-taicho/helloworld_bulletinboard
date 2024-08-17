@@ -8,9 +8,10 @@ document.addEventListener("turbo:load", function() {
   const deleteCancelButton = document.getElementById("cancel-complete-button");
   const editThreadBtn = document.getElementById("edit-thread-btn");
   const deleteThreadBtn = document.getElementById("delete-thread-btn");
+  const postId = editThreadBtn ? editThreadBtn.dataset.postId : null;
 
   // 必須要素が存在しない場合は処理を終了
-  if (!hoverImage) return null;
+  if (!hoverImage || !postId) return null;
 
   // モーダルを閉じる関数
   function closeModal(modal) {
@@ -43,18 +44,31 @@ document.addEventListener("turbo:load", function() {
 
   // 編集ボタンが存在する場合のみ、クリックイベントを設定
   if (editThreadBtn) {
-    editThreadBtn.addEventListener("click", function(event) {
-      event.preventDefault();
-      const postId = editThreadBtn.dataset.postId;
+    // ページ読み込み時に投稿の作成時間をチェック
+    fetch(`/posts/${postId}.json`)
+      .then(response => response.json())
+      .then(data => {
+        const postCreatedAt = new Date(data.post.created_at);
+        const currentTime = new Date();
+        const timeDifference = (currentTime - postCreatedAt) / 1000 / 60; // ミリ秒を分に変換
 
-      fetch(`/posts/${postId}/edit.json`)
-        .then(response => response.json())
-        .then(data => {
-          document.querySelector('#modal-body').innerHTML = data.form;
-          postFormModal.style.display = 'block';
-        })
-        .catch(error => console.error('Error:', error));
-    });
+        if (timeDifference > 10) {
+          editThreadBtn.style.display = 'none';
+        } else {
+          editThreadBtn.addEventListener("click", function(event) {
+            event.preventDefault();
+
+            fetch(`/posts/${postId}/edit.json`)
+              .then(response => response.json())
+              .then(data => {
+                document.querySelector('#modal-body').innerHTML = data.form;
+                postFormModal.style.display = 'block';
+              })
+              .catch(error => console.error('Error:', error));
+          });
+        }
+      })
+      .catch(error => console.error('Error:', error));
   }
 
   // 削除ボタンが存在する場合のみ、クリックイベントを設定

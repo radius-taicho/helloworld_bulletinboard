@@ -9,9 +9,11 @@
   </div>
    <div class="custom-file-upload">
     <%= f.file_field :image, accept: "image/*,video/*", style: "display: none;" %>
+    <div class= "file-upload-image">
     <%= image_tag "camera.png", alt: "Upload Image", id: "custom-upload-button" %>
-  </div>
-  <div class="form-button">
+    </div>
+    <div class="form-button">
     <%= f.submit '投稿する', class: 'post-button-complete' %>
+    </div>
   </div>
 <% end %>

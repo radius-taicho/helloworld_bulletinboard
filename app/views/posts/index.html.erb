@@ -16,7 +16,7 @@
       <% if post.content.present? %>
       <div class="post-contents-media">
         <div class="post-content-box">
-          <p><%= truncate(post.content, length: 200, omission: ' (続く...)') %></p>
+          <p><%= truncate(post.content, length: 300, omission: ' (続く...)') %></p>
         </div>
       <% end %>
 
@@ -44,7 +44,9 @@
   <div class="modal-content">
     <span class="close-button">&times;</span>
     <!-- 部分テンプレートを使ってフォームを表示 -->
+    <div class="modal-body">
     <%= render 'form', post: @post %>
+    </div>
   </div>
 </div>
 

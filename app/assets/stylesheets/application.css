@@ -54,7 +54,11 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   z-index: 1001;
   position: relative;
-  margin-left: 300px;
+  margin: 0 auto;
+}
+
+.modal-body{
+  width: 600px;
 }
 
 .form-group{
@@ -86,11 +90,10 @@
 }
 
 .form-button{
-
-  margin-left: 500px;
-  margin-top: 10px;
-  font-family: "DotGothic16", sans-serif;
+  margin-left: auto;
+  margin-top: auto;
 }
+
 
 .form-button :hover{
   box-shadow: unset;
@@ -109,17 +112,16 @@
 }
 
 .custom-file-upload {
-  position: relative;
-  display: inline-block;
+  display: flex;
 }
 
-#custom-upload-button {
+.file-upload-image {
   cursor: pointer;
   width: 50px;
   height: 50px;
 }
 
-.custom-file-upload :hover{
+.file-upload-image :hover{
   box-shadow: unset;
   transform: translateY(-4px);
 }
