@@ -1,0 +1,17 @@
+<%= form_with model: post, local: true, html: { id: 'post-form' } do |f| %>
+  <div class="form-group">
+    <%= f.label :title, "タイトル" %>
+    <%= f.text_field :title, class: 'form-title-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :content, "本文" %>
+    <%= f.text_area :content, class: 'form-content-control' %>
+  </div>
+   <div class="custom-file-upload">
+    <%= f.file_field :image, accept: "image/*,video/*", style: "display: none;" %>
+    <%= image_tag "camera.png", alt: "Upload Image", id: "custom-upload-button" %>
+  </div>
+  <div class="form-button">
+    <%= f.submit '編集する', class: 'post-button-complete' %>
+  </div>
+<% end %>

@@ -1,9 +1,14 @@
-<body class="index-body">
+
+
+<!-- 残りのHTMLコンテンツ -->
+
 <%= render "shared/header" %>
+
+<body class="index-page">
 
 <div id="posts-list">
   <% @posts.each do |post| %>
-    <div class="post">
+    <div class="post" id="post-box">
       <div class="post-title-box">
         <h2> <%= link_to "#{post.title}", post_path(post.id), class: 'post-title-link' %> </h2>
       </div>

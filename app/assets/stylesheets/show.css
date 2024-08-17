@@ -1,4 +1,4 @@
-.show-body{
+.show-post-page{
   position: relative;
   margin-top: 0;
   background-color:  rgb(209, 209, 236);
@@ -33,6 +33,7 @@
   top: 0; /* 上端に配置 */
   left: 100%; /* 親要素の右端に配置 */
   margin-left: 10px; /* ボタンと投稿の間にスペースを追加 */ /* デフォルトでは非表示 */
+  display: none;
 }
 
 .edit-button{
@@ -59,14 +60,69 @@
   transform: translateY(4px);
 }
 
-.poster{
-  text-align: right;
-  position: absolute;
-  bottom: 10px;
-  right: 20px;
+#delete-modal{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(251, 250, 250, 0.209);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* モーダルを最前面に表示 */
 }
 
-#modal-buttons{
-  position: absolute;
+.post-delete-box {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color:  rgb(209, 209, 236);
+  padding: 20px;
+  border-radius: 10px;
+  min-width: 300px;
+  width: 300px;
+  height: 200px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
 }
+
+.delete-post {
+  background-color: rgba(248, 58, 58, 0.726);
+  margin-top: 10px;
+  padding: 5px;
+  border: none;
+  outline: none;
+  font-family: "DotGothic16", sans-serif;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 10px;
+
+}
+
+.delete-post a {
+  text-decoration: none;
+}
+
+.delete-cancel {
+  background-color: rgba(174, 174, 174, 0.845);
+  margin-top: 10px;
+  padding: 5px;
+  border: none;
+  outline: none;
+  font-family: "DotGothic16", sans-serif;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.poster{
+  text-align: right;
+}
+
 

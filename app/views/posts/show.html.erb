@@ -1,4 +1,8 @@
-<body class="show-body">
+
+
+
+<body class="show-page">
+<!-- 残りのHTMLコンテンツ -->
   <div class="back-to-post-page">
     <%= link_to "Top画面へ", root_path, class: "post-top-button" %>
   </div>
@@ -35,16 +39,40 @@
 
     <!-- モーダルのボタン -->
     <div id="modal-buttons">
-      <button id="edit-thread-btn" class="edit-button">編集</button>
-      <button id="delete-thread-btn" class="delete-button">削除</button>
+      <button id="edit-thread-btn" class="edit-button">edit</button>
+      <button id="delete-thread-btn" class="delete-button">delete</button>
     </div>
   </div>
+
+  <!-- モーダルウィンドウ -->
+  <div id="post-form-modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <!-- 部分テンプレートを使ってフォームを表示 -->
+      <%= render 'edit-form', post: @post %>
+    </div>
+  </div>
+
+  <div id ="delete-modal" style="display: none;">
+    <div class="post-delete-box">
+      <div class ="delete-details">
+        ※スレッド内容を編集・削除できるのはこの投稿の投稿者のみ、かつ投稿から30分以内までです。
+      </div>
+      <button class="delete-post"><%= link_to 'Delete', post_path(@post.id), data: { turbo_method: :delete } %></button>
+      <button id ="cancel-complete-button" class="delete-cancel">Cancel</button>
+    </div>
+  </div>
+    
+    
+
 
   <!-- JavaScript: 画像ホバー時に画像を変更 -->
   <script>
     document.addEventListener("turbo:load", function() {
       const hoverImage = document.getElementById("hover-bomb-image");
       const modalButtons = document.getElementById("modal-buttons");
+
+      if (!hoverImage) return null;
 
       let hoverTimer;
       let hoverTime = 0;

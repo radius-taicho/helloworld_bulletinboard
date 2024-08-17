@@ -4,3 +4,4 @@
 pin "application", preload: true
 pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
 pin "post", to: "post.js"
+pin "edit-delete-modal", to: "edit-delete-modal.js"
