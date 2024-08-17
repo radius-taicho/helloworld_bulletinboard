@@ -43,8 +43,17 @@ document.addEventListener("turbo:load", function() {
 
   // 編集ボタンが存在する場合のみ、クリックイベントを設定
   if (editThreadBtn) {
-    editThreadBtn.addEventListener("click", function() {
-      postFormModal.style.display = 'block';
+    editThreadBtn.addEventListener("click", function(event) {
+      event.preventDefault();
+      const postId = editThreadBtn.dataset.postId;
+
+      fetch(`/posts/${postId}/edit.json`)
+        .then(response => response.json())
+        .then(data => {
+          document.querySelector('#modal-body').innerHTML = data.form;
+          postFormModal.style.display = 'block';
+        })
+        .catch(error => console.error('Error:', error));
     });
   }
 
@@ -62,4 +71,33 @@ document.addEventListener("turbo:load", function() {
       closeModal(showDeleteModal);
     });
   }
+
+  // モーダル内のフォーム送信を非同期に処理
+  document.addEventListener('submit', function(event) {
+    if (event.target.matches('#post-form')) {
+      event.preventDefault();
+      const form = event.target;
+      const formData = new FormData(form);
+
+      fetch(form.action, {
+        method: 'PATCH',
+        body: formData,
+        headers: {
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.errors) {
+          // エラーメッセージの表示（必要に応じて実装）
+          console.error(data.errors);
+        } else {
+          // 成功した場合、モーダルを閉じてページをリロード
+          closeModal(postFormModal);
+          location.reload(); // ページをリロードする
+        }
+      })
+      .catch(error => console.error('Error:', error));
+    }
+  });
 });

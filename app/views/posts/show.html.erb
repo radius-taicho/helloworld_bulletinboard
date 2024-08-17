@@ -1,7 +1,6 @@
 
-
-
 <body class="show-page">
+  
 <!-- 残りのHTMLコンテンツ -->
   <div class="back-to-post-page">
     <%= link_to "Top画面へ", root_path, class: "post-top-button" %>
@@ -39,19 +38,23 @@
 
     <!-- モーダルのボタン -->
     <div id="modal-buttons">
-      <button id="edit-thread-btn" class="edit-button">edit</button>
+      <button id="edit-thread-btn" class="edit-button" data-post-id="<%= @post.id %>">edit</button>
       <button id="delete-thread-btn" class="delete-button">delete</button>
     </div>
   </div>
 
   <!-- モーダルウィンドウ -->
-  <div id="post-form-modal" style="display: none;">
-    <div class="modal-content">
-      <span class="close-button">&times;</span>
-      <!-- 部分テンプレートを使ってフォームを表示 -->
+<div id="post-form-modal" style="display: none;">
+  <div class="modal-content">
+    <!-- モーダルウィンドウを閉じるためのボタン -->
+    <span class="close-button">&times;</span>
+    
+    <!-- 部分テンプレートを使ってフォームを表示 -->
+    <div id="modal-body">
       <%= render 'edit-form', post: @post %>
     </div>
   </div>
+</div>
 
   <div id ="delete-modal" style="display: none;">
     <div class="post-delete-box">

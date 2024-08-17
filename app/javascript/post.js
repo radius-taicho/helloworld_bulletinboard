@@ -4,7 +4,6 @@ document.addEventListener("turbo:load", () => {
   const postFormModal = document.getElementById('post-form-modal');
   const closeButton = document.querySelector('.close-button');
   const postForm = document.getElementById('post-form');
-  const postsList = document.getElementById("posts-list");
   const fileInput = document.querySelector('input[type="file"]');
   const customUploadButton = document.getElementById("custom-upload-button");
 
@@ -28,11 +27,6 @@ document.addEventListener("turbo:load", () => {
     });
   };
 
-  // テキストをトランケートする関数
-  const truncateText = (text, length) => {
-    return text.length > length ? text.substring(0, length) + "(続く...)" : text;
-  };
-
   // 投稿処理関数
   const handlePostSubmit = () => {
     postForm.addEventListener('submit', (event) => {
@@ -49,48 +43,8 @@ document.addEventListener("turbo:load", () => {
           const post = XHR.response;
 
           if (post && post.title) {
-            const truncatedContent = post.content ? truncateText(post.content, 100) : '';
-
-            const html = `
-            <div class="post">
-              <h2><a href="/posts/${post.id}" class="post-title-link">${post.title}</a></h2>
-              ${(truncatedContent || post.image_url) ? `
-            <div class="post-content-media">
-              ${truncatedContent ? `<p>${truncatedContent}</p>` : ''}
-              ${post.image_url ? `<img src="${post.image_url}" class="post-media" alt="Post image" />` : ''}
-            </div>` : ''}
-            <div class="poster">
-              ${post.user ? `by ${post.user.nickname}` : ''}
-            <br>
-              ${new Date(post.created_at).toLocaleString()}
-            </div>
-            </div>
-            `;
-
-
-            postsList.insertAdjacentHTML("afterbegin", html);
-
-            const images = postsList.querySelectorAll('.post-media');
-            images.forEach(img => {
-              img.onload = () => {
-                img.style.width = '320px'; // 明示的にサイズを指定する
-                img.style.height = 'auto';
-              };
-            });
-
-            const postDetails = postsList.querySelectorAll(".poster");
-            postDetails.forEach(postDetail => {
-              postDetail.style.textAlign = "right";
-            });
-
-            const contentAndMedia = postsList.querySelectorAll(".post-content-media");
-            contentAndMedia.forEach(contentMedia => {
-              contentMedia.style.display = "flex";
-              contentMedia.style.justifyContent = "space-between"; // ここを修正
-            });
-
-            postForm.reset();
-            postFormModal.style.display = 'none';
+            // 投稿が成功した場合、ページをリロードして最新の内容を表示
+            location.reload();
           } else {
             console.error("Error: Received invalid post data from server.");
           }

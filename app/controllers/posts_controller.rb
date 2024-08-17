@@ -19,7 +19,52 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json { render json: { post: @post } }
+    end
   end
+  
+
+  def edit
+    @post = Post.find(params[:id])
+    
+    respond_to do |format|
+      format.html # 通常のHTMLリクエスト
+      format.json { render json: { form: render_to_string(partial: 'edit-form', locals: { post: @post }, formats: [:html]) } }
+    end
+  end
+  
+  def update
+    @post = Post.find(params[:id])
+  
+    time_difference = Time.current - @post.created_at
+  
+    if time_difference > 600
+      respond_to do |format|
+        format.json { render json: { error: '投稿の編集期限が切れています。' }, status: :forbidden }
+      end
+      return
+    end
+  
+    if @post.user.id != (current_user&.id || User.guest.id)
+      respond_to do |format|
+        format.json { render json: { error: 'この投稿の編集権限がありません。' }, status: :forbidden }
+      end
+      return
+    end
+  
+    if @post.update(post_params)
+      respond_to do |format|
+        format.json { render json: { message: '投稿が更新されました。', post: @post }, status: :ok }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity }
+      end
+    end
+  end
+  
 
   def destroy
     @post = Post.find(params[:id])
