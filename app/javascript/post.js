@@ -4,31 +4,31 @@ document.addEventListener("turbo:load", () => {
   const postFormModal = document.getElementById('post-form-modal');
   const closeButton = document.querySelector('.close-button');
   const postForm = document.getElementById('post-form');
-  const fileInput = document.querySelector('input[type="file"]');
+  const fileInput = document.getElementById('media-file-post');
   const customUploadButton = document.getElementById("custom-upload-button");
 
-  // 要素がnullの場合に処理を終了
+  // 必要な要素が存在しない場合に処理を終了
   if (!showPostFormButton) return null;
 
-  // モーダルの表示・非表示を制御する関数
-  const initializeModal = () => {
-    showPostFormButton.addEventListener('click', () => {
-      postFormModal.style.display = 'block';
-    });
+  // モーダル表示ボタンがクリックされたときにモーダルを表示
+  showPostFormButton.addEventListener('click', () => {
+    postFormModal.style.display = 'block';
+  });
 
-    closeButton.addEventListener('click', () => {
+  // 閉じるボタンがクリックされたときにモーダルを非表示
+  closeButton.addEventListener('click', () => {
+    postFormModal.style.display = 'none';
+  });
+
+  // モーダルの外部がクリックされたときにモーダルを非表示
+  window.addEventListener('click', (event) => {
+    if (event.target === postFormModal) {
       postFormModal.style.display = 'none';
-    });
+    }
+  });
 
-    window.addEventListener('click', (event) => {
-      if (event.target === postFormModal) {
-        postFormModal.style.display = 'none';
-      }
-    });
-  };
-
-  // 投稿処理関数
-  const handlePostSubmit = () => {
+  // 投稿フォームが存在する場合のみ、イベントリスナーを追加
+  if (postForm) {
     postForm.addEventListener('submit', (event) => {
       event.preventDefault(); // フォームのデフォルトの送信を防ぐ
 
@@ -37,12 +37,17 @@ document.addEventListener("turbo:load", () => {
       XHR.open("POST", "/posts", true);
       XHR.responseType = "json";
 
+      // Acceptヘッダーを設定
+      XHR.setRequestHeader("Accept", "application/json");
+
       // リクエスト成功時の処理
       XHR.onload = () => {
         if (XHR.status === 201 || XHR.status === 200) {
           const post = XHR.response;
 
           if (post && post.title) {
+            // 成功時にモーダルを閉じる
+            postFormModal.style.display = 'none';
             // 投稿が成功した場合、ページをリロードして最新の内容を表示
             location.reload();
           } else {
@@ -63,12 +68,9 @@ document.addEventListener("turbo:load", () => {
     });
   };
 
-  // カスタムアップロードボタンのイベントリスナー
+  // カスタムアップロードボタンがクリックされたときにファイル入力をトリガー
   customUploadButton.addEventListener("click", function() {
+    console.log("クリック")
     fileInput.click();
   });
-
-  // モーダルと投稿フォームのイベントリスナーを初期化
-  initializeModal();
-  handlePostSubmit();
 });

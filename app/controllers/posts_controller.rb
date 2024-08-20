@@ -10,6 +10,7 @@ class PostsController < ApplicationController
   
     respond_to do |format|
       if @post.save
+        format.html { redirect_to root_path, notice: 'Post was successfully created.' }
         format.json { render json: @post.as_json(include: { user: { only: :nickname } }, methods: [:image_url]), status: :created }
       else
         format.json { render json: @post.errors, status: :unprocessable_entity }

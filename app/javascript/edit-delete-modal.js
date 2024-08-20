@@ -1,17 +1,23 @@
-document.addEventListener("turbo:load", function() {
+document.addEventListener("turbo:load", ()=> {
   // 要素の取得
   const hoverImage = document.getElementById("hover-bomb-image");
   const modalButtons = document.getElementById("modal-buttons");
-  const postFormModal = document.getElementById("post-form-modal");
+  const editFormModal = document.getElementById("edit-form-modal");
   const showDeleteModal = document.getElementById("delete-modal");
-  const closeButton = document.querySelector('.close-button');
+  const closeModalButton = document.querySelector('.close-modal-button');
   const deleteCancelButton = document.getElementById("cancel-complete-button");
   const editThreadBtn = document.getElementById("edit-thread-btn");
   const deleteThreadBtn = document.getElementById("delete-thread-btn");
+  const mediaFileEdit = document.getElementById("media-file-edit");
+  const editUploadMediaButton = document.getElementById("edit-upload-media-button");
   const postId = editThreadBtn ? editThreadBtn.dataset.postId : null;
 
+  console.log(mediaFileEdit)
+  console.log(editUploadMediaButton)
+
+
   // 必須要素が存在しない場合は処理を終了
-  if (!hoverImage || !postId) return null;
+  if (!hoverImage) return null;
 
   // モーダルを閉じる関数
   function closeModal(modal) {
@@ -35,8 +41,8 @@ document.addEventListener("turbo:load", function() {
       modalButtons.style.display = 'none'; // modalButtons以外がクリックされたら非表示にする
     }
 
-    if (event.target === postFormModal) {
-      closeModal(postFormModal);
+    if (event.target === editFormModal) {
+      closeModal(editFormModal);
     } else if (event.target === showDeleteModal || event.target === deleteCancelButton) {
       closeModal(showDeleteModal);
     }
@@ -44,9 +50,13 @@ document.addEventListener("turbo:load", function() {
 
   // 編集ボタンが存在する場合のみ、クリックイベントを設定
   if (editThreadBtn) {
-    // ページ読み込み時に投稿の作成時間をチェック
     fetch(`/posts/${postId}.json`)
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then(data => {
         const postCreatedAt = new Date(data.post.created_at);
         const currentTime = new Date();
@@ -59,16 +69,21 @@ document.addEventListener("turbo:load", function() {
             event.preventDefault();
 
             fetch(`/posts/${postId}/edit.json`)
-              .then(response => response.json())
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+              })
               .then(data => {
                 document.querySelector('#modal-body').innerHTML = data.form;
-                postFormModal.style.display = 'block';
+                editFormModal.style.display = 'block';
               })
-              .catch(error => console.error('Error:', error));
+              .catch(error => console.error('Error during post edit fetch:', error));
           });
         }
       })
-      .catch(error => console.error('Error:', error));
+      .catch(error => console.error('Error during post fetch:', error));
   }
 
   // 削除ボタンが存在する場合のみ、クリックイベントを設定
@@ -79,16 +94,16 @@ document.addEventListener("turbo:load", function() {
   }
 
   // モーダルを閉じるボタンが存在する場合のみ、クリックイベントを設定
-  if (closeButton) {
-    closeButton.addEventListener('click', () => {
-      closeModal(postFormModal);
+  if (closeModalButton) {
+    closeModalButton.addEventListener('click', () => {
+      closeModal(editFormModal);
       closeModal(showDeleteModal);
     });
   }
 
   // モーダル内のフォーム送信を非同期に処理
   document.addEventListener('submit', function(event) {
-    if (event.target.matches('#post-form')) {
+    if (event.target.matches('#edit-form')) {
       event.preventDefault();
       const form = event.target;
       const formData = new FormData(form);
@@ -107,11 +122,18 @@ document.addEventListener("turbo:load", function() {
           console.error(data.errors);
         } else {
           // 成功した場合、モーダルを閉じてページをリロード
-          closeModal(postFormModal);
+          closeModal(editFormModal);
           location.reload(); // ページをリロードする
         }
       })
       .catch(error => console.error('Error:', error));
     }
+  });
+
+  // カスタムアップロードボタンがクリックされたときにファイル入力をトリガー
+
+  editUploadMediaButton.addEventListener("click", function() {
+    console.log("クリック")
+    mediaFileEdit.click();
   });
 });
