@@ -74,5 +74,8 @@ gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
 gem 'omniauth', '~>2.1.1'
-
 gem 'pry-rails'
+gem 'mini_magick'
+gem 'image_processing', '~> 1.2'
+
+

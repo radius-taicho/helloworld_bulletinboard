@@ -1,0 +1,119 @@
+
+<body class="show-page">
+  
+<!-- 残りのHTMLコンテンツ -->
+  <div class="back-to-post-page">
+    <%= link_to "Top画面へ", root_path, class: "post-top-button" %>
+  </div>
+  <div id="posts-list">
+    <div class="post">
+      <!-- 画像ホバー時に変更される画像のタグ -->
+      <% if @post.user && @post.user.id == (current_user&.id || User.guest.id) %>
+        <%= image_tag "meat-bomb1.png", alt: "meatballmenu image", class: "meatball-menu-image", id: "hover-bomb-image" %>
+      <% end %>
+
+
+      <div class="post-title-box">
+        <h2><%= @post.title %></h2>
+      </div>
+      
+      <% if @post.content.present? %>
+        <div class="post-contents-media">
+          <div class="post-content-box">
+            <p><%= @post.content %></p>
+          </div>
+        
+      <% end %>
+      
+      <% if @post.image.attached? %>
+        <div class="post-media-box">
+          <%= image_tag @post.image.variant(resize: '320x320').processed, class: 'post-media' %>
+        </div>
+
+      <% end %>
+        </div>
+      
+      <div class="poster">
+        <%= "by #{@post.user.nickname}" %><br>
+        <%= l @post.created_at %> <!-- 投稿日時の表示 -->
+      </div>
+    </div>
+
+    <!-- モーダルのボタン -->
+
+    
+
+    <div id="modal-buttons">
+      <button id="edit-thread-btn" class="edit-button" data-post-id="<%= @post.id %>">編集</button>
+      <button id="delete-thread-btn" class="delete-button">削除</button>
+    </div>
+  </div>
+
+  <!-- モーダルウィンドウ -->
+<div id="edit-form-modal" style="display: none;">
+  <div class="edit-modal-content">
+    <!-- モーダルウィンドウを閉じるためのボタン -->
+    <span class="close-modal-button">&times;</span>
+    
+    <!-- 部分テンプレートを使ってフォームを表示 -->
+    <div id="modal-body" class="modal-body">
+      <%= render 'edit-form', post: @post %>
+    </div>
+  </div>
+</div>
+
+  <div id ="delete-modal" style="display: none;">
+    <div class="post-delete-box">
+      <div class ="delete-details">
+        ※スレッド内容を編集できるのは10分以内。削除できるのは投稿から30分以内までです。
+      </div>
+      <button class="delete-post"><%= link_to '削除', post_path(@post.id), data: { turbo_method: :delete } %></button>
+      <button id ="cancel-complete-button" class="delete-cancel">キャンセル</button>
+    </div>
+  </div>
+    
+    
+
+
+  <!-- JavaScript: 画像ホバー時に画像を変更 -->
+  <script>
+    document.addEventListener("turbo:load", function() {
+      const hoverImage = document.getElementById("hover-bomb-image");
+      const modalButtons = document.getElementById("modal-buttons");
+
+      if (!hoverImage || !modalButtons) return null;
+
+      let hoverTimer;
+      let hoverTime = 0;
+
+      const images = [
+        "<%= asset_path('meat-bomb1.png') %>", 
+        "<%= asset_path('meat-bomb2.png') %>", 
+        "<%= asset_path('meat-bomb3.png') %>", 
+        "<%= asset_path('meat-bomb4.png') %>", 
+        "<%= asset_path('meat-bomb5.png') %>", 
+        "<%= asset_path('meat-bomb6.png') %>", 
+        "<%= asset_path('meat-bomb7.png') %>", 
+        "<%= asset_path('meat-bomb8.png') %>", 
+        "<%= asset_path('meat-bomb9.png') %>", 
+        "<%= asset_path('meat-bomb10.png') %>"
+      ];
+
+      hoverImage.addEventListener("mouseover", function() {
+        hoverTimer = setInterval(() => {
+          hoverTime += 1000; // 1秒ごとに時間を加算
+          const imageIndex = Math.floor(hoverTime / 1000); // 時間に応じてインデックスを計算
+          if (imageIndex < images.length) {
+            hoverImage.src = images[imageIndex]; // インデックスに対応する画像に切り替える
+          }
+        }, 1000); // 1秒ごとにチェック
+      });
+
+      hoverImage.addEventListener("mouseout", function() {
+        clearInterval(hoverTimer); // hoverが外れたらタイマーをクリア
+        hoverTime = 0; // 時間をリセット
+        hoverImage.src = images[0]; // 最初の画像に戻す
+      });
+    });
+  </script>
+</body>

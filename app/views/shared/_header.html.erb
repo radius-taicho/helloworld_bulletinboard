@@ -1,50 +1,79 @@
 <nav class="navbar">
   <div class="navbar-logo">
-    <?xml version="1.0" encoding="UTF-8"?><svg id="_レイヤー_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 582.5 125"><defs><style>.cls-1{letter-spacing:.3em;}.cls-2{font-family:DotGothic16-Regular, DotGothic16;font-size:125px;}.cls-3{letter-spacing:-.26em;}.cls-4{letter-spacing:-.1em;}.cls-5{letter-spacing:-.18em;}.cls-6{letter-spacing:-.12em;}.cls-7{letter-spacing:.06em;}</style></defs><g id="_レイヤー_1-2"><text class="cls-2" transform="translate(0 110)"><tspan class="cls-7" x="0" y="0">H</tspan><tspan class="cls-4" x="70" y="0">e</tspan><tspan class="cls-3" x="120" y="0">l</tspan><tspan class="cls-4" x="150" y="0">l</tspan><tspan class="cls-1" x="200" y="0">o</tspan><tspan class="cls-7" x="300" y="0">W</tspan><tspan x="370" y="0">o</tspan><tspan class="cls-5" x="432.5" y="0">r</tspan><tspan class="cls-6" x="472.5" y="0">l</tspan><tspan x="520" y="0">d</tspan></text></g></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 582.5 125">
+      <defs>
+        <style>
+          .cls-1 { letter-spacing: .3em; }
+          .cls-2 { font-family: DotGothic16-Regular, DotGothic16; font-size: 125px; }
+          .cls-3 { letter-spacing: -.26em; }
+          .cls-4 { letter-spacing: -.1em; }
+          .cls-5 { letter-spacing: -.18em; }
+          .cls-6 { letter-spacing: -.12em; }
+          .cls-7 { letter-spacing: .06em; }
+        </style>
+      </defs>
+      <g id="layer-1">
+        <text class="cls-2" transform="translate(0 110)">
+          <tspan class="cls-7" x="0" y="0">h</tspan>
+          <tspan class="cls-4" x="70" y="0">e</tspan>
+          <tspan class="cls-3" x="120" y="0">l</tspan>
+          <tspan class="cls-4" x="150" y="0">l</tspan>
+          <tspan class="cls-1" x="200" y="0">o</tspan>
+          <tspan class="cls-7" x="300" y="0">w</tspan>
+          <tspan x="370" y="0">o</tspan>
+          <tspan class="cls-5" x="432.5" y="0">r</tspan>
+          <tspan class="cls-6" x="472.5" y="0">l</tspan>
+          <tspan x="520" y="0">d</tspan>
+        </text>
+      </g>
+    </svg>
   </div>
 
-  <form method="get" action="#" class="navbar-search">
-    <input type="text" size="25" placeholder="スレッドタイトル検索">
-    <input type="image" src="" alt="検索ボタン" width="40" height="40"class="magicwand-image">
-    <a class="post" href="#">投稿</a>
-  </form>
+  <div class="post-objects">
+    <form id="search-form" method="get" action="#" class="navbar-search">
+      <input type="text" id="search-input" size="25" placeholder="スレッドタイトル検索" aria-label="検索">
+      <%= image_tag 'buglens.png', alt: '検索ボタン', width: 40, height: 40, id: 'search-button' %>
+    </form>
 
-  <% if user_signed_in? %>
-
-  <div class="your-status">
-    <p>あなたのレベル Lv. <span class="your-level" id="your-level">0</span>
-    </p>
-    <label for="fuel">HP:<span>10/20</span></label>
-    <meter id="fuel" min="0" max="100" low="33" high="66" optimum="80" value="50">at 50/100</meter>
+    <button id="show-post-form" class="post-button">
+      <p>投稿</p>
+    </button>
   </div>
 
-  <% end %>
-
-  <ul class="navbar-links">
   <% if user_signed_in? %>
-   <li class="adventure-button"><a href="#">
-      <%= image_tag 'adventureshoes.png', alt: '冒険の靴', class: 'shoes-image' %>
-      <p>冒険</p>
-    </li>
-    <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete%></li>
-    <li><a href="#">
-      <p>マイページ</p>
-    </a>
-    </li>
-  <% else %>
-    <li><%= link_to "新規登録", new_user_registration_path, class: "XXXX" %></li>
-    <li><%= link_to "ログイン", new_user_session_path, class: "YYYY" %></li>
+    <div class="adventure-box">
+      <div class="your-status">
+        <p>あなたのレベル Lv. <span class="your-level" id="your-level">0</span></p>
+        <label for="fuel">HP: <span>10/20</span></label>
+        <meter id="fuel" min="0" max="100" low="33" high="66" optimum="80" value="50">at 50/100</meter>
+      </div>
+      <div class="adventure">
+        <button class="adventure-button">
+          <%= image_tag 'adventureshoes.png', alt: '冒険の靴', class: 'shoes-image' %>
+          <p>冒険</p>
+        </button>
+      </div>
+    </div>
   <% end %>
-    <li><a href="#">
-      <p>メニュー</p>
-      </a>
-      </li>
-  </ul>
 
-  <ul class="sidebar" id="sidebar">
-    <li><a href="#">投稿</a></li>
-    <li><a href="#">ログイン</a></li>
-    <li><a href="#">マイページ</a></li>
-
-  </ul>
+  <div class="navbar-links">
+    <% if user_signed_in? %>
+      <button class="menu-buttons">
+        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+      </button>
+      <button class="menu-buttons">
+        <%= link_to 'マイページ', '#' %>
+      </button>
+    <% else %>
+      <button class="menu-buttons">
+        <%= link_to '新規登録', new_user_registration_path, class: 'register-link' %>
+      </button>
+      <button class= "menu-buttons">
+        <%= link_to 'ログイン', new_user_session_path, class: 'login-link' %>
+      </button>
+    <% end %>
+      <button class="menu-buttons">
+        <%= link_to 'メニュー', '#' %>
+      </button>
+  </div>
 </nav>

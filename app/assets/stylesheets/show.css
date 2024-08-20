@@ -1,0 +1,175 @@
+.show-page{
+  position: relative;
+  margin-top: 0;
+  background-color:  rgb(209, 209, 236);
+}
+
+.back-to-post-page{
+  position: fixed;
+  top: 0;
+  left: 0;
+  border: 1px solid;
+  border-radius: 10px;
+  margin-top: 1px;
+}
+
+.post-top-button{
+  text-decoration: none;
+  padding: 2px;
+  font-family: "DotGothic16", sans-serif;
+  font-size: 20px;
+}
+
+.back-to-post-page :hover{
+  color: black;
+}
+
+#posts-list {
+  position: relative; /* 親要素を相対位置に設定 */
+}
+
+#modal-buttons {
+  position: absolute; /* 絶対位置に設定 */
+  top: 0; /* 上端に配置 */
+  left: 100%; /* 親要素の右端に配置 */
+  margin-left: 10px; /* ボタンと投稿の間にスペースを追加 */ /* デフォルトでは非表示 */
+  display: none;
+}
+
+#edit-form-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none; /* 初期状態では非表示 */
+  justify-content: center;
+  align-items: center;
+  z-index: 1001; /* モーダルを最前面に表示 */
+}
+
+.edit-modal-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(185, 188, 213);
+  padding: 20px;
+  border-radius: 10px;
+  min-width: 800px;
+  width: 700px;
+  height: 600px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1002;
+  position: relative;
+  margin: 0 auto;
+}
+
+.edit-button{
+  width: 65px;
+
+}
+
+.delete-button{
+  width: 65px;
+
+}
+
+.meatball-menu-image{
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.meatball-menu-image :hover{
+  box-shadow: unset;
+  transform: translateY(4px);
+}
+
+#delete-modal{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(251, 250, 250, 0.209);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* モーダルを最前面に表示 */
+}
+
+.post-delete-box {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color:  rgb(209, 209, 236);
+  padding: 20px;
+  border-radius: 10px;
+  min-width: 300px;
+  width: 300px;
+  height: 200px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+.delete-post {
+  background-color: rgba(248, 58, 58, 0.726);
+  margin-top: 10px;
+  padding: 5px;
+  border: none;
+  outline: none;
+  font-family: "DotGothic16", sans-serif;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 10px;
+
+}
+
+.delete-post a {
+  text-decoration: none;
+}
+
+.delete-cancel {
+  background-color: rgba(174, 174, 174, 0.845);
+  margin-top: 10px;
+  padding: 5px;
+  border: none;
+  outline: none;
+  font-family: "DotGothic16", sans-serif;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.poster{
+  text-align: right;
+}
+
+.custom-file-edit {
+  display: flex;
+}
+
+.close-modal-button {
+  background: none;
+  border: none;
+  font-size: 30px;
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  cursor: pointer;
+}
+
+
+
+
+
