@@ -12,9 +12,6 @@ document.addEventListener("turbo:load", ()=> {
   const editUploadMediaButton = document.getElementById("edit-upload-media-button");
   const postId = editThreadBtn ? editThreadBtn.dataset.postId : null;
 
-  console.log(mediaFileEdit)
-  console.log(editUploadMediaButton)
-
 
   // 必須要素が存在しない場合は処理を終了
   if (!hoverImage) return null;
@@ -76,7 +73,7 @@ document.addEventListener("turbo:load", ()=> {
                 return response.json();
               })
               .then(data => {
-                document.querySelector('#modal-body').innerHTML = data.form;
+                document.querySelector('.edit-modal-body').innerHTML = data.form;
                 editFormModal.style.display = 'block';
               })
               .catch(error => console.error('Error during post edit fetch:', error));
@@ -133,7 +130,6 @@ document.addEventListener("turbo:load", ()=> {
   // カスタムアップロードボタンがクリックされたときにファイル入力をトリガー
 
   editUploadMediaButton.addEventListener("click", function() {
-    console.log("クリック")
     mediaFileEdit.click();
   });
 });

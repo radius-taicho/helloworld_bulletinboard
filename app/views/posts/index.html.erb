@@ -13,8 +13,8 @@
         <h2> <%= link_to "#{post.title}", post_path(post.id), class: 'post-title-link' %> </h2>
       </div>
 
-      <% if post.content.present? %>
       <div class="post-contents-media">
+      <% if post.content.present? %>
         <div class="post-content-box">
           <p><%= truncate(post.content, length: 300, omission: ' (続く...)') %></p>
         </div>
@@ -26,6 +26,7 @@
         </div>
       <% end %>
       </div>
+
 
       <div class="poster">
         <%= "by #{post.user.nickname}"%>
