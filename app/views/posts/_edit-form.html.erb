@@ -1,19 +1,23 @@
-<%= form_with model: post, url: post_path, local: true, html: { id: 'edit-form' } do |f| %>
+<%= form_with model: post, url: post_path(post), local: true, html: { id: 'edit-form' } do |f| %>
   <div class="form-group">
     <%= f.label :title, "タイトル" %>
     <%= f.text_field :title, class: 'form-title-control' %>
   </div>
+  
   <div class="form-group">
     <%= f.label :content, "本文" %>
     <%= f.text_area :content, class: 'form-content-control' %>
   </div>
-   <div class="custom-file-edit">
+  
+  <div class="custom-file-upload">
     <%= f.file_field :image, accept: "image/*,video/*", style: "display: none;", id: 'media-file-edit' %>
-    <div class= "file-upload-image">
-    <%= image_tag "camera2.png", alt: "Upload Image", id: "edit-upload-media-button" %>
+    <div class="file-upload-image">
+      <%= image_tag "camera2.png", alt: "Upload Image", id: "edit-upload-media-button" %>
     </div>
-    <div class="form-button">
+
+  <div class="form-button">
     <%= f.submit '編集する', class: 'post-button-complete' %>
-    </div>
   </div>
+  </div>
+
 <% end %>

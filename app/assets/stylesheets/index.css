@@ -2,19 +2,19 @@
   background-color: rgb(209, 209, 236);
   box-shadow: 0 0 8px gray;
 }
+
 .post-media {
-  width: auto;
-  height: auto; /* 画像のアスペクト比を保持 */
+  max-width: 100%;
+  max-height: 100%;
   border-radius: 10px;
 }
 
-#posts-list{
+#posts-list {
   width: 65vw;
   margin: 0 auto;
   background-color: rgba(240, 245, 254, 0.885);
   min-width: 500px;
   margin-top: 10px;
-
 }
 
 #post-form-modal {
@@ -46,7 +46,7 @@
   margin: 0 auto;
 }
 
-.post{
+.post {
   position: relative;
   width: 100%;
   border-bottom: 0.2px solid rgb(190, 190, 190);
@@ -58,33 +58,29 @@
   width: 100%;
 }
 
-.post-title-link{
+.post-title-link {
   text-decoration: none;
   color: black;
 }
 
 .post h2 {
   overflow-wrap: break-word;
-
 }
 
-
-
-.post h2 :hover{
+.post h2 :hover {
   color: blueviolet;
-
 }
 
-.post-contents-media{
+.post-contents-media {
   display: flex;
   justify-content: space-between;
   overflow-wrap: anywhere;
 }
 
-
-.custom-file-upload {
-  display: flex;
+.post-media-box{
+  margin-left: auto;
 }
+
 
 .file-upload-image {
   cursor: pointer;
@@ -92,7 +88,7 @@
   height: 50px;
 }
 
-.file-upload-image :hover{
+.file-upload-image:hover {
   box-shadow: unset;
   transform: translateY(-4px);
 }

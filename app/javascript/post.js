@@ -70,7 +70,6 @@ document.addEventListener("turbo:load", () => {
 
   // カスタムアップロードボタンがクリックされたときにファイル入力をトリガー
   customUploadButton.addEventListener("click", function() {
-    console.log("クリック")
     fileInput.click();
   });
 });
