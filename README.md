@@ -40,7 +40,7 @@
 | ---------- | ------ | ----------------------------- |
 | content    | text   | null: false                   |
 | user_id    | bigint | null: false, foreign_key: true |
-| thread_id  | bigint | null: false, foreign_key: true |
+| post_id    | bigint | null: false, foreign_key: true |
 
 ### Association
 

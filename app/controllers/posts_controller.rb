@@ -20,13 +20,15 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comments = @post.comments.includes(:user)
+    @comment = Comment.new
+    
     respond_to do |format|
       format.html
-      format.json { render json: { post: @post } }
+      format.json { render json: { post: @post, comments: @comments } }
     end
   end
   
-
   def edit
     @post = Post.find(params[:id])
     

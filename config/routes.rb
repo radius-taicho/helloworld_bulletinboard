@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   }
 
   # Postsリソースのルーティング
-  resources :posts
+  resources :posts do
+    resources :comments
+  end
 
   # トップページの設定
   root to: "posts#index"

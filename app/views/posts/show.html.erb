@@ -24,7 +24,7 @@
         <% end %>
 
         <% if @post.image.attached? %>
-          <div class="post-media-box" >
+          <div class="post-media-box">
             <%= image_tag @post.image.variant(resize: '320x320').processed, class: 'post-media' %>
           </div>
         <% end %>
@@ -37,10 +37,52 @@
       </div>
     </div>
 
-    <!-- モーダルボタン -->
+    <% @comments.each do |comment| %>
+      <div class="comment" id="comment-box">
+        <div class="comment-content-box">
+          <p><%= comment.content %></p>
+        </div>
+
+        <div class="commenter">
+          <%= "by #{comment.user.nickname}" %>
+          <br>
+          <%= l comment.created_at %> <!-- 投稿日時の表示 -->
+        </div>
+      </div>
+    <% end %>
+
+      <!-- モーダルボタン -->
     <div id="modal-buttons">
       <button id="edit-thread-btn" class="edit-button" data-post-id="<%= @post.id %>">編集</button>
       <button id="delete-thread-btn" class="delete-button">削除</button>
+    </div>
+    
+  </div>
+
+  <div class="add-comment">
+    <button id="add-comment-button">
+      ＋コメント追加
+    </button>
+  </div>
+
+  <div id="comment-modal-window" style="display: none;">
+    <div class="comment-content">
+      <!-- モーダルウィンドウを閉じるためのボタン -->
+      <span class="close-modal-button">&times;</span>
+
+      <!-- 部分テンプレートを使ってフォームを表示 -->
+      <div class="comment-body">
+        <%= form_with(model: [@post, @comment], local: true, html: { id: 'comment-form' }) do |f| %>
+          <div class="comment-form-group">
+            <%= f.label :content, "コメント" %>
+            <%= f.text_area :content, class: 'comment-content-form' %>
+          </div>
+
+          <div class="comment-form-button">
+            <%= f.submit '送信', class: 'comment-submit-button' %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 
