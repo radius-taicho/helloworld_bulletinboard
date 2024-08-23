@@ -102,3 +102,29 @@
   box-shadow: unset;
   transform: translateY(2px);
 }
+
+#comment-edit-delete-modal-buttons {
+  width: 200px;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: rgba(186, 186, 230, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 0.2px solid rgb(190, 190, 190);
+}
+
+#edit-comment-button {
+  width: 80px;
+  cursor: pointer;
+}
+
+#delete-comment-button {
+  width: 80px;
+  margin-top: 10px;
+  cursor: pointer;
+
+}

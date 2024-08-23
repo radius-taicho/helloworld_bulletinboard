@@ -37,7 +37,7 @@
       </div>
     </div>
 
-    <% @comments.each do |comment| %>
+    <% @post.comments.each do |comment| %>
       <div class="comment" id="comment-box">
         <div class="comment-content-box">
           <p><%= comment.content %></p>
@@ -48,6 +48,30 @@
           <br>
           <%= l comment.created_at %> <!-- 投稿日時の表示 -->
         </div>
+
+        <% if comment.user && comment.user.id == (current_user&.id || User.guest.id) %>
+          <%= image_tag "meat-bomb1.png", alt: "meatballmenu image", class: "meatball-menu-image", id: "hover-bomb-image2" %>
+        <% end %>
+
+        <div id="comment-edit-delete-modal-buttons" style="display: none;">
+          <button id ="edit-comment-button">
+            edit
+          </button>
+          <button id ="delete-comment-button">
+            delete
+          </button>
+        </div>
+
+        <div id="delete-comment-modal">
+          <div class="comment-delete-box">
+            <div class="delete-details">
+            ※コメント内容を編集できるのは10分以内の一回のみ。削除できるのは投稿から30分以内までです。
+            </div>
+            <%= link_to '削除', post_comment_path(@post.id, comment.id), data: { turbo_method: :delete }, class: 'delete-comment-link' %>
+            button id="cancel-complete-button" class="delete-cancel">キャンセル</button>
+          </div>
+        </div>
+
       </div>
     <% end %>
 
@@ -56,7 +80,7 @@
       <button id="edit-thread-btn" class="edit-button" data-post-id="<%= @post.id %>">編集</button>
       <button id="delete-thread-btn" class="delete-button">削除</button>
     </div>
-    
+
   </div>
 
   <div class="add-comment">

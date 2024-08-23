@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   # Postsリソースのルーティング
   resources :posts do
-    resources :comments
+    resources :comments, only: [:create, :destroy]
   end
 
   # トップページの設定
