@@ -68,7 +68,7 @@
             ※コメント内容を編集できるのは10分以内の一回のみ。削除できるのは投稿から30分以内までです。
             </div>
             <%= link_to '削除', post_comment_path(@post.id, comment.id), data: { turbo_method: :delete }, class: 'delete-comment-link' %>
-            button id="cancel-complete-button" class="delete-cancel">キャンセル</button>
+            <button id="cancel-complete-button" class="delete-cancel">キャンセル</button>
           </div>
         </div>
 
