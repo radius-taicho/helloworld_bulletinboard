@@ -8,9 +8,9 @@
     <%= f.text_area :content, class: 'form-content-control' %>
   </div>
   <div class="custom-file-upload">
-    <%= f.file_field :image, accept: "image/*,video/*", style: "display: none;", id: "media-file-post" %>
+    <%= f.file_field :image, accept: "image/*,video/*", style: "display: none;", class: "media-file-post" %>
     <div class="file-upload-image">
-      <%= image_tag "camera.png", alt: "Upload Image", id: "custom-upload-button" %>
+      <%= image_tag "camera.png", alt: "Upload Image", class: "custom-upload-button" %>
     </div>
 
     <div class="form-button">
