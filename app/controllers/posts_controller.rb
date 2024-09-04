@@ -20,13 +20,16 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comments = @post.comments.includes(:user)
+    @comment = Comment.new
+    
+    
     respond_to do |format|
       format.html
-      format.json { render json: { post: @post } }
+      format.json { render json: { post: @post, comments: @comments } }
     end
   end
   
-
   def edit
     @post = Post.find(params[:id])
     
@@ -95,6 +98,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, :image)
+    params.require(:post).permit(:title, :content, :image).merge(user_id: current_user&.id || User.guest.id)
   end
+  
 end

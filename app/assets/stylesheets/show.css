@@ -1,5 +1,4 @@
 .show-page {
-  position: relative;
   margin-top: 0;
   background-color: rgb(209, 209, 236);
 }
@@ -142,14 +141,12 @@
   text-align: right;
 }
 
-
-
 .close-modal-button {
   background: none;
   border: none;
   font-size: 30px;
   position: absolute;
   top: 10px;
-  right: 30px;
+  right: 20px;
   cursor: pointer;
 }

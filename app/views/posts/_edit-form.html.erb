@@ -10,9 +10,9 @@
   </div>
   
   <div class="custom-file-upload">
-    <%= f.file_field :image, accept: "image/*,video/*", style: "display: none;", id: 'media-file-edit' %>
+    <%= f.file_field :image, accept: "image/*,video/*", style: "display: none;", class: "media-file-post" %>
     <div class="file-upload-image">
-      <%= image_tag "camera2.png", alt: "Upload Image", id: "edit-upload-media-button" %>
+      <%= image_tag "camera.png", alt: "Upload Image", class: "custom-upload-button" %>
     </div>
 
   <div class="form-button">

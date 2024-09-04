@@ -1,0 +1,10 @@
+<%= form_with(model: [ @post, @comment ], class: 'edit-comment-form', data: { comment_id: @comment.id, post_id: @post.id }) do |f| %>
+  <div class="comment-form-group">
+    <%= f.label :content, "コメント" %>
+    <%= f.text_area :content, class: 'comment-content-form' %>
+  </div>
+
+  <div class="comment-form-button">
+    <%= f.submit '編集', class: 'comment-submit-button' %>
+  </div>
+<% end %>

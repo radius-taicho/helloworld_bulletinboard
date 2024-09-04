@@ -4,8 +4,6 @@ document.addEventListener("turbo:load", () => {
   const postFormModal = document.getElementById('post-form-modal');
   const closeButton = document.querySelector('.close-button');
   const postForm = document.getElementById('post-form');
-  const fileInput = document.getElementById('media-file-post');
-  const customUploadButton = document.getElementById("custom-upload-button");
 
   // 必要な要素が存在しない場合に処理を終了
   if (!showPostFormButton) return null;
@@ -67,9 +65,4 @@ document.addEventListener("turbo:load", () => {
       XHR.send(formData);
     });
   };
-
-  // カスタムアップロードボタンがクリックされたときにファイル入力をトリガー
-  customUploadButton.addEventListener("click", function() {
-    fileInput.click();
-  });
 });

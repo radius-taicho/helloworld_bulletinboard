@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
   has_many :sns_credentials
   has_many :posts
+  has_many :comments
 
   def guest?
     email == 'guest@example.com'

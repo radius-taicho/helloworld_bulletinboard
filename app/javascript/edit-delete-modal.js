@@ -1,15 +1,13 @@
 document.addEventListener("turbo:load", ()=> {
   // 要素の取得
-  const hoverImage = document.getElementById("hover-bomb-image");
+  const hoverImage = document.getElementById("hover-bomb-image2");
   const modalButtons = document.getElementById("modal-buttons");
   const editFormModal = document.getElementById("edit-form-modal");
   const showDeleteModal = document.getElementById("delete-modal");
-  const closeModalButton = document.querySelector('.close-modal-button');
+  const closeModalButtons = document.querySelectorAll('.close-modal-button');
   const deleteCancelButton = document.getElementById("cancel-complete-button");
   const editThreadBtn = document.getElementById("edit-thread-btn");
   const deleteThreadBtn = document.getElementById("delete-thread-btn");
-  const mediaFileEdit = document.getElementById("media-file-edit");
-  const editUploadMediaButton = document.getElementById("edit-upload-media-button");
   const postId = editThreadBtn ? editThreadBtn.dataset.postId : null;
 
 
@@ -91,10 +89,12 @@ document.addEventListener("turbo:load", ()=> {
   }
 
   // モーダルを閉じるボタンが存在する場合のみ、クリックイベントを設定
-  if (closeModalButton) {
-    closeModalButton.addEventListener('click', () => {
-      closeModal(editFormModal);
-      closeModal(showDeleteModal);
+    
+  if (closeModalButtons){
+    closeModalButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        closeModal( editFormModal); 
+      });
     });
   }
 
@@ -125,11 +125,5 @@ document.addEventListener("turbo:load", ()=> {
       })
       .catch(error => console.error('Error:', error));
     }
-  });
-
-  // カスタムアップロードボタンがクリックされたときにファイル入力をトリガー
-
-  editUploadMediaButton.addEventListener("click", function() {
-    mediaFileEdit.click();
   });
 });
