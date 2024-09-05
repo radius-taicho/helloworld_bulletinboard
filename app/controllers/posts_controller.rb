@@ -4,6 +4,10 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
+  def search
+    @posts = Post.search(params[:keyword])
+  end
+
   def create
     @post = Post.new(post_params)
     @post.user = current_user || User.guest
@@ -68,7 +72,6 @@ class PostsController < ApplicationController
       end
     end
   end
-  
 
   def destroy
     @post = Post.find(params[:id])

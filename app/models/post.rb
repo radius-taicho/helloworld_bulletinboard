@@ -3,7 +3,6 @@ class Post < ApplicationRecord
   has_one_attached :image
   has_many :comments, dependent: :destroy
 
-  
   validates :title, presence: true
   validates :content, presence: true, unless: :was_attached?
 
@@ -14,4 +13,12 @@ class Post < ApplicationRecord
   def image_url
     Rails.application.routes.url_helpers.rails_blob_url(self.image, only_path: true) if image.attached?
   end
+
+  scope :search, -> (query) {
+    if query.present?
+      where('title LIKE :query', query: "%#{sanitize_sql_like(query)}%")
+    else
+      all
+    end
+  }
 end

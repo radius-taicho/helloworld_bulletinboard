@@ -30,10 +30,12 @@
   </div>
 
   <div class="post-objects">
-    <form id="search-form" method="get" action="#" class="navbar-search">
-      <input type="text" id="search-input" size="25" placeholder="スレッドタイトル検索" aria-label="検索">
+   <%= form_with(url: search_posts_path, method: :get, local: true, class: "navbar-search") do |form| %>
+    <%= form.text_field :keyword, placeholder: "スレッドタイトル検索", class: "search-input", size: 25, aria: { label: "検索" } %>
+    <button type="submit" class="search-btn">
       <%= image_tag 'buglens.png', alt: '検索ボタン', width: 40, height: 40, id: 'search-button' %>
-    </form>
+    </button>
+  <% end %>
 
     <button id="show-post-form" class="post-button">
       <p>投稿</p>

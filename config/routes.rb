@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   # Postsリソースのルーティング
   resources :posts do
     resources :comments
+    collection do 
+      get 'search'
+    end
   end
   
   

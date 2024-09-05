@@ -1,0 +1,14 @@
+.search-page {
+  background-color: rgb(209, 209, 236);
+}
+
+.cant-find-query {
+  text-align: center;
+  font-size: 40px;
+  font-family: "DotGothic16", sans-serif;
+
+}
+
+.green-dig-dig{
+  text-align: center;
+}
