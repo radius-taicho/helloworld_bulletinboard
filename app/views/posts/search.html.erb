@@ -1,0 +1,44 @@
+<body class="search-page">
+  <div class="back-to-post-page">
+    <%= link_to "Top画面へ", root_path, class: "post-top-button" %>
+  </div>
+
+  <% if @posts.present? %>
+    <div id="posts-list">
+      <% @posts.each do |post| %>
+        <div class="post" id="post-box">
+          <div class="post-title-box">
+            <h2>
+              <%= link_to post.title, post_path(post.id), class: 'post-title-link' %>
+            </h2>
+          </div>
+
+          <div class="post-contents-media">
+            <% if post.content.present? %>
+              <div class="post-content-box">
+                <p><%= truncate(post.content, length: 300, omission: ' (続く...)') %></p>
+              </div>
+            <% end %>
+
+            <% if post.image.attached? %>
+              <div class="post-media-box">
+                <%= image_tag post.image.variant(resize: '320x320').processed, class: 'post-media' %>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="poster">
+            <%= "by #{post.user.nickname}" %>
+            <br>
+            <%= l post.created_at %> <!-- 投稿日時の表示 -->
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="cant-find-query">スレッドが見つからないよ </p>
+    <div class="green-dig-dig">
+      <%= image_tag 'greenmoguri2.png', alt: 'スレッドが見つからないキャラクターイメージ', class:" green-dig-man", id: 'green-moguri' %>
+    </div>
+  <% end %>
+</body>

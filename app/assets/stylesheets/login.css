@@ -86,7 +86,7 @@
   cursor: pointer;
 }
 
-.login-by-google:hover{
+.login-by-google:active{
   color: #ca4effaa;
   border: 2px solid #ca4effaa;
   box-shadow: unset;
@@ -117,7 +117,7 @@
   cursor: pointer;
 }
 
-.login-account:hover{
+.login-account:active{
   color: #ca4effaa;
   border: 2px solid #ca4effaa;
   box-shadow: unset;
