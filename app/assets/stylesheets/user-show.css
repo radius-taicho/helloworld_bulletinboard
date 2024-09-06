@@ -1,0 +1,217 @@
+.user-show-page {
+  margin-top: 0;
+  background-color: rgb(209, 209, 236);
+  min-width: 960px;
+  min-height: 500px;
+}
+
+.back-to-top-page {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 1px;
+  width: 100px;
+}
+
+.profile-container {
+  width: 100%;
+  height: 40%;
+  font-family: "DotGothic16", sans-serif;
+}
+
+.profile-wrapper {
+  position: relative;
+  width: 55%;
+  margin: 0 auto;
+}
+
+.settings-image {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  cursor: pointer;
+}
+.profile-box {
+  width: 40%;
+  height: 30%;
+  display: flex;
+  align-items: center;
+}
+
+.profile-image {
+  border: 1px solid black;
+  border-radius: 33px;
+  width: 64px;
+  height: 64px;
+  margin-right: 10px;
+}
+
+.edit-profile-box {
+  border: 1px solid black;
+  border-radius: 10px;
+  height: 26px;
+}
+ .edit-profile {
+  font-size: 13px;
+  line-height: 0px;
+ }
+
+
+.profile-detail {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.profile-user-name {
+  width: 300px;
+  height: 30px;
+  border: 1px solid black;
+  background-color: white;
+}
+
+.user-name{
+  text-align: left;
+}
+
+.user-one-liner{
+  text-align: left;
+}
+
+.profile-user-one-liner {
+  width: 300px;
+  height: 30px;
+  border: 1px solid black;
+  background-color: white;
+  
+}
+
+
+
+.post-direct-message-collection-box {
+  margin-top: 70px;
+  width: 100%;
+  height: 60%;
+}
+
+.post-direct-message-collection-buttons {
+  display: flex;
+  width: 100%;
+  height: 70px;
+  font-family: "DotGothic16", sans-serif;
+  font-size: 20px;
+  background-color: rgb(210, 190, 230);
+}
+
+.users-post-list-button {
+  width: 34%;
+  border: none;
+  outline: none;
+  font: inherit;
+  cursor: pointer;
+  border-left: 1px solid black;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.direct-message-list-button {
+  width: 33%;
+  border: none;
+  outline: none;
+  font: inherit;
+  border: 1px solid black;
+  cursor: pointer;
+
+}
+
+.character-collection-list-button {
+  width: 33%;
+  border: none;
+  outline: none;
+  font: inherit;
+  cursor: pointer;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.lists-container {
+  width: 100%;
+}
+
+.my-posts-list {
+  width: 65vw;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.my-posts-list .post {
+  position: relative;
+  width: 100%;
+  border-bottom: 0.2px solid rgb(190, 190, 190);
+  padding: 10px;
+  overflow-wrap: break-word;
+  background-color: white;
+}
+
+.post-direct-message-collection-box .post a {
+  text-decoration: none;
+  color: black;
+}
+
+.post-direct-message-collection-box .post a:hover{
+  color: blueviolet;
+}
+
+.my-character-collection-list {
+  width: 100%;
+}
+
+.character-lists {
+  width: 85vw;
+  min-width: 960px;
+  margin: 0 auto;
+  margin-top: 20px;
+  background-color: white;
+  padding: 20px;
+}
+.character-container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.characters-wrapper {
+  border: 6px solid black;
+  display: inline-block;
+}
+
+.characters {
+  display: flex;
+  height: 128px;
+  font-family: "DotGothic16", sans-serif;
+}
+
+.character {
+  width: 128px;
+  font-weight: bold;
+  font-size: 16px;
+  border: 8px solid black;
+  padding: 1px;
+}
+
+.character p {
+  display: inline;    
+}
+
+.character-image {
+  transform: translateY(-15px);
+}
+
+.characters > :nth-child(n+2):nth-child(-n+6) {
+  border-top: 7px solid black;
+}
+
+
+
+
+

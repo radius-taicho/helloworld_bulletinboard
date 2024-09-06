@@ -64,7 +64,7 @@
         <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
       </button>
       <button class="menu-buttons">
-        <%= link_to 'マイページ', '#' %>
+        <%= link_to 'マイページ', user_path(current_user) %>
       </button>
     <% else %>
       <button class="menu-buttons">

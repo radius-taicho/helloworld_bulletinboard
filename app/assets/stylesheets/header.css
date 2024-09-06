@@ -154,7 +154,7 @@ label {
   cursor: pointer;
 }
 
-.navbar-links :hover{
+.navbar-links :active{
   box-shadow: unset;
   transform: translateY(3px);
   

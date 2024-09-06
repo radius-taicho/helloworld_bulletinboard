@@ -4,17 +4,15 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  resources :users, only: [:show]  # ユーザーのshowアクションに対応したルート
+
   # Postsリソースのルーティング
   resources :posts do
     resources :comments
-    collection do 
+    collection do
       get 'search'
     end
   end
-  
-  
-  
-  
 
   # トップページの設定
   root to: "posts#index"
