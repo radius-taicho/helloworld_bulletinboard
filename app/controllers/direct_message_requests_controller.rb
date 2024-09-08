@@ -3,27 +3,29 @@ class DirectMessageRequestsController < ApplicationController
     sender_id = current_user.id
     receiver_id = direct_message_request_params[:receiver_id]
 
-    # 既存のリクエストを確認
-    existing_request = DirectMessageRequest.find_by(sender_id: sender_id, receiver_id: receiver_id)
+    existing_request = DirectMessageRequest.where(sender_id: sender_id, receiver_id: receiver_id).first
 
     if existing_request
       render json: { success: false, errors: ['You have already sent a request.'] }, status: :unprocessable_entity
-      return
-    end
-
-    # 新しいリクエストを作成
-    @direct_message_request = DirectMessageRequest.new(direct_message_request_params.merge(sender_id: sender_id))
-
-    if @direct_message_request.save
-      send_direct_message_request_email(@direct_message_request)
-      render json: { success: true }, status: :created
     else
-      Rails.logger.error("DirectMessageRequest creation failed: #{@direct_message_request.errors.full_messages.join(', ')}")
-      render json: { success: false, errors: @direct_message_request.errors.full_messages }, status: :unprocessable_entity
+      @request = DirectMessageRequest.new(direct_message_request_params.merge(sender_id: sender_id))
+
+      if @request.save
+        send_direct_message_request_email(@request)
+        render json: { success: true }
+      else
+        Rails.logger.error("DirectMessageRequest creation failed: #{@request.errors.full_messages.join(', ')}")
+        render json: { success: false, errors: @request.errors.full_messages }, status: :unprocessable_entity
+      end
     end
   rescue StandardError => e
     Rails.logger.error("An error occurred: #{e.message}")
     render json: { success: false, errors: ['An internal server error occurred.'] }, status: :internal_server_error
+  end
+
+  def approve
+    # 承認処理のロジックを追加する
+    # 例えば、リクエストを承認して、リダイレクトするなど
   end
 
   private
@@ -32,7 +34,7 @@ class DirectMessageRequestsController < ApplicationController
     params.require(:direct_message_request).permit(:receiver_id)
   end
 
-  def send_direct_message_request_email(direct_message_request)
-    DirectMessageMailer.request_email(direct_message_request).deliver_now
+  def send_direct_message_request_email(request)
+    DirectMessageMailer.request_email(request).deliver_now
   end
 end

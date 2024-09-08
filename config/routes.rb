@@ -13,7 +13,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :direct_message_requests, only: [:create] # リソースのルーティングを確認
+  resources :direct_message_requests, only: [:create] do
+    member do
+      get 'approve' # ここでapproveアクションのルーティングを追加
+    end
+  end
 
   root to: "posts#index"
 end

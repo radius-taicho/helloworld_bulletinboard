@@ -1,6 +1,7 @@
 document.addEventListener("turbo:load", () => {
   const directMessageStartButton = document.querySelector(".direct-message-image");
   const directMessageStart = document.querySelector(".direct-message-box");
+  const directMessageChoiceBox = document.querySelector(".direct-message-yes-or-no")
   const directMessageCancel = document.querySelector(".direct-message-no");
   const directMessageYesButton = document.querySelector(".direct-message-yes");
   const directMessageText = document.getElementById("direct-message-text");
@@ -41,6 +42,7 @@ document.addEventListener("turbo:load", () => {
     .then(data => {
       if (data.success) {
         directMessageText.textContent = "申請中";
+        directMessageChoiceBox.style.display = "none";
       } else {
         alert("申請に失敗しました: " + data.errors.join(", "));
       }
