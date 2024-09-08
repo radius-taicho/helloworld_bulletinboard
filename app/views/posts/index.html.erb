@@ -1,10 +1,8 @@
 
 
-<!-- 残りのHTMLコンテンツ -->
+<body class="index-page">
 
 <%= render "shared/header" %>
-
-<body class="index-page">
 
 <div id="posts-list">
   <% @posts.each do |post| %>
@@ -29,17 +27,13 @@
 
 
       <div class="poster">
-        <%= "by #{post.user.nickname}"%>
+        <%= link_to "by #{post.user.nickname}", user_path(post.user, from: 'nickname'), class: 'post-user-link'%>
         <br>
         <%= l post.created_at %> <!-- 投稿日時の表示 -->
       </div>
     </div>
   <% end %>
 </div>
-
-
-
-
 
 
 <!-- モーダルウィンドウ -->
@@ -52,5 +46,7 @@
     </div>
   </div>
 </div>
+
+<%= render "shared/footer" %>
 
 </body>

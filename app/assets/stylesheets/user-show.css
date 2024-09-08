@@ -165,14 +165,15 @@
 
 .my-character-collection-list {
   width: 100%;
+  background-color: rgb(38, 39, 40);
+
 }
 
 .character-lists {
   width: 85vw;
   min-width: 960px;
   margin: 0 auto;
-  margin-top: 20px;
-  background-color: white;
+  background-color: rgb(38, 39, 40);
   padding: 20px;
 }
 .character-container {
@@ -181,7 +182,7 @@
 }
 
 .characters-wrapper {
-  border: 6px solid black;
+  border: 6px solid rgb(38, 39, 40);
   display: inline-block;
 }
 
@@ -195,8 +196,9 @@
   width: 128px;
   font-weight: bold;
   font-size: 16px;
-  border: 8px solid black;
+  border: 8px solid rgb(38, 39, 40);
   padding: 1px;
+  background-color: white;
 }
 
 .character p {
@@ -204,12 +206,35 @@
 }
 
 .character-image {
-  transform: translateY(-15px);
+  translate: -8px -18px;
 }
 
-.characters > :nth-child(n+2):nth-child(-n+6) {
-  border-top: 7px solid black;
+
+/* .characters.characters1 > .character:nth-child(1),
+.characters.characters1 > .character:nth-child(2) {
+  background-color: rgb(255, 212, 212);
 }
+
+.characters.characters1 > .character:nth-child(3),
+.characters.characters1 > .character:nth-child(4) {
+  background-color: rgb(212, 255, 212);
+}
+
+.characters.characters1 > .character:nth-child(5),
+.characters.characters1 > .character:nth-child(6) {
+  background-color: rgb(255, 253, 212);
+} */
+
+
+
+
+
+
+
+
+
+
+
 
 
 

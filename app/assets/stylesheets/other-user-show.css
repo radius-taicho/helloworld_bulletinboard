@@ -1,0 +1,76 @@
+.other-user-show-page {
+  width: 100%;
+  height: 100%;
+  margin-top: 0;
+  background-color: rgb(209, 209, 236);
+  min-width: 960px;
+  min-height: 500px;
+}
+.profile-container-from-other-user-view {
+  width: 100%;
+  height: 70%;
+  font-family: "DotGothic16", sans-serif;
+}
+
+.profile-wrapper-from-other-user-view {
+  position: relative;
+  width: 55%;
+  height: 90%;
+  margin: 0 auto;
+}
+
+.direct-message-box {
+  position: absolute;
+  display: inline-block;
+  top: 100px;
+  right: 25px;
+  display: none;
+}
+
+.direct-message-start {
+  position: relative;
+  padding: 7px 10px;
+  color: black;
+  background: white;
+  border: solid 1px black;
+}
+
+.direct-message-start:before {
+  content: "";
+  position: absolute;
+  top: -26px;
+  right: 0px;
+  border: 14px solid transparent;
+  border-bottom: 13px solid white;
+  z-index: 2;
+}
+
+.direct-message-start:after {
+  content: "";
+  position: absolute;
+  top: -27px;
+  right: 0px;
+  border: 14px solid transparent;
+  border-bottom: 13px solid black;
+  z-index: 1;
+}
+
+.direct-message-image {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
+.direct-message-image:hover{
+  box-shadow: unset;
+  transform: translateX(5px);
+}
+
+.direct-message-yes-or-no {
+  margin-top: 10px;
+  text-align: right;
+}
+

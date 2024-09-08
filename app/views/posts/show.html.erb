@@ -38,7 +38,8 @@
 
       <!-- 投稿者情報 -->
       <div class="poster">
-        <%= "by #{@post.user.nickname}" %><br>
+        <%= link_to "by #{@post.user.nickname}", user_path(@post.user, from: 'nickname'), class: 'post-user-link'%>
+        <br>
         <%= l @post.created_at %> <!-- 投稿日時の表示 -->
       </div>
     </div>
@@ -50,7 +51,7 @@
     </div>
 
     <div class="commenter">
-      <%= "by #{comment.user.nickname}" %>
+      <%= link_to "by #{comment.user.nickname}", user_path(comment.user, from: 'nickname'), class: 'post-user-link'%>
       <br>
       <%= l comment.created_at %> <!-- 投稿日時の表示 -->
     </div>

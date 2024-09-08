@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_03_035947) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_08_015231) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -50,6 +50,28 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_035947) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "direct_message_requests", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "sender_id", null: false
+    t.bigint "receiver_id", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["receiver_id"], name: "index_direct_message_requests_on_receiver_id"
+    t.index ["sender_id"], name: "index_direct_message_requests_on_sender_id"
+  end
+
+  create_table "messages", charset: "utf8mb3", force: :cascade do |t|
+    t.text "content", null: false
+    t.bigint "sender_id", null: false
+    t.bigint "receiver_id", null: false
+    t.bigint "room_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
+  end
+
   create_table "posts", charset: "utf8mb3", force: :cascade do |t|
     t.string "title", null: false
     t.text "content", null: false
@@ -57,6 +79,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_035947) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "room_users", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_room_users_on_room_id"
+    t.index ["user_id", "room_id"], name: "index_room_users_on_user_id_and_room_id", unique: true
+    t.index ["user_id"], name: "index_room_users_on_user_id"
+  end
+
+  create_table "rooms", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name"
+    t.boolean "is_group", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "sns_credentials", charset: "utf8mb3", force: :cascade do |t|
@@ -88,6 +127,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_035947) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "direct_message_requests", "users", column: "receiver_id"
+  add_foreign_key "direct_message_requests", "users", column: "sender_id"
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users", column: "receiver_id"
+  add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "posts", "users"
+  add_foreign_key "room_users", "rooms"
+  add_foreign_key "room_users", "users"
   add_foreign_key "sns_credentials", "users"
 end

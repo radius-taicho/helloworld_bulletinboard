@@ -4,9 +4,8 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  resources :users, only: [:show]  # ユーザーのshowアクションに対応したルート
+  resources :users, only: [:show]
 
-  # Postsリソースのルーティング
   resources :posts do
     resources :comments
     collection do
@@ -14,6 +13,7 @@ Rails.application.routes.draw do
     end
   end
 
-  # トップページの設定
+  resources :direct_message_requests, only: [:create] # リソースのルーティングを確認
+
   root to: "posts#index"
 end

@@ -70,6 +70,15 @@
   color: blueviolet;
 }
 
+.post-user-link{
+  text-decoration: none;
+  color:  black;
+}
+
+.post-user-link:hover {
+  color: blueviolet;
+}
+
 .post-contents-media {
   display: flex;
   justify-content: space-between;
