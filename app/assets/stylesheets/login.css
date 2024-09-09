@@ -8,6 +8,15 @@
   padding: 3px;
 }
 
+.login-page .back-to-top-page {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 1px;
+  width: 200px;
+}
+
+
+
 .login-page{
   font-family:  "DotGothic16", sans-serif;
   background-color: black;

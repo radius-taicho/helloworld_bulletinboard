@@ -18,6 +18,13 @@
   transform: translateY(3px);
 }
 
+.account-create-page .back-to-top-page {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 1px;
+  width: 200px;
+}
+
 .account-create-title{
   font-size: 40px;
 }

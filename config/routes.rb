@@ -20,14 +20,16 @@ Rails.application.routes.draw do
     end
   end
   
-
-  # config/routes.rb
+  # 既存のnotificationsに追加
   resources :notifications, only: [] do
     member do
       patch 'mark_as_read'
     end
+    collection do
+      patch 'approval', to: 'notifications#create_approval_notification'
+      patch 'rejection', to: 'notifications#create_rejection_notification'
+    end
   end
-
 
   root to: "posts#index"
 end

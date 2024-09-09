@@ -7,12 +7,10 @@ document.addEventListener("turbo:load", () => {
   const directMessageText = document.getElementById("direct-message-text");
 
   if (!directMessageStartButton || !directMessageStart || !directMessageYesButton || !directMessageCancel || !directMessageText) {
-    console.log("One or more elements are missing.");
     return;
   }
 
   directMessageStartButton.addEventListener("click", () => {
-    console.log("Direct message start button clicked");
     directMessageStart.style.display = "block";
   });
 

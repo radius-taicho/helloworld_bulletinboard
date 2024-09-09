@@ -175,8 +175,10 @@
             <li class="<%= notification.read ? 'read' : 'unread' %>">
               <% if notification.notification_type == 'dm_request' %>
                 <%= "DMリクエスト: #{notification.message}" %>
-                <%= link_to '承認', approve_direct_message_request_path(notification), method: :patch, remote: true %>
-                <%= link_to '拒否', reject_direct_message_request_path(notification), method: :patch, remote: true %>
+                <br>
+                <%= link_to '承認', approve_direct_message_request_path(notification), method: :patch, class: 'approve-request-button' %>
+                <%= link_to '拒否', reject_direct_message_request_path(notification), method: :patch, class: 'reject-request-button' %>
+
               <% else %>
                 <%= notification.message %>
               <% end %>
