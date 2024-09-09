@@ -6,8 +6,6 @@ document.addEventListener("turbo:load", () => {
   const directMessageYesButton = document.querySelector(".direct-message-yes");
   const directMessageText = document.getElementById("direct-message-text");
 
-  console.log(directMessageStartButton, directMessageStart, directMessageCancel, directMessageYesButton, directMessageText);
-
   if (!directMessageStartButton || !directMessageStart || !directMessageYesButton || !directMessageCancel || !directMessageText) {
     console.log("One or more elements are missing.");
     return;

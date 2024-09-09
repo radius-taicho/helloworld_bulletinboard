@@ -24,12 +24,73 @@
   margin: 0 auto;
 }
 
+.notification-image {
+  position: absolute;
+  top: 0px;
+  right: 250px;
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+}
+
+.notification-image:hover {
+  box-shadow: unset;
+  transform: translateY(-2px);
+
+}
+
+.notification-reaction-image {
+  position: absolute;
+  top: 0px;
+  right: 250px;
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+}
+
+.notification-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(251, 250, 250, 0.209);
+  z-index: 1000;
+}
+
+.notification-modal-content {
+  font-family: "DotGothic16", sans-serif;
+  width: 33%;
+  height: 300px;
+  margin: 0 auto;
+  background-color: white;
+  text-align: center;
+  border: black 2px solid;
+  transform: translateY(40%);
+}
+
+.notification-modal-content ul {
+  border-top: 1px solid;
+  margin: 0px;
+  padding: 0px;
+}
+
+.notification-modal-content li {
+  text-align: left;
+  list-style: none;
+  width: 100%;
+  border-bottom:1px solid black ;
+  padding: 3px;
+}
+
 .settings-image {
   position: absolute;
   top: 0px;
   right: 0px;
   cursor: pointer;
 }
+
+
 .profile-box {
   width: 40%;
   height: 30%;

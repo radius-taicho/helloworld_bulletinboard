@@ -38,20 +38,20 @@
 .direct-message-start:before {
   content: "";
   position: absolute;
-  top: -26px;
+  top: -24px;
   right: 0px;
   border: 14px solid transparent;
-  border-bottom: 13px solid white;
+  border-bottom: 11px solid white;
   z-index: 2;
 }
 
 .direct-message-start:after {
   content: "";
   position: absolute;
-  top: -27px;
+  top: -25px;
   right: 0px;
   border: 14px solid transparent;
-  border-bottom: 13px solid black;
+  border-bottom: 11px solid black;
   z-index: 1;
 }
 

@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :sns_credentials
   has_many :posts
   has_many :comments
+  has_many :notifications, dependent: :destroy
 
   def guest?
     email == 'guest@example.com'

@@ -7,6 +7,7 @@
     <div class="profile-container-from-other-user-view">
       <div class="profile-wrapper-from-other-user-view">
         <% if user_signed_in? %>
+        
           <%= image_tag 'dmpot2.png', alt: 'ダイレクトメッセージのイメージ', class: "direct-message-image", data: { user_id: @user.id } %>
 
           <div class="direct-message-box">
@@ -42,6 +43,11 @@
 
     <div class="profile-container">
       <div class="profile-wrapper">
+        <% if @user.notifications.any? { |notification| !notification.read }%>
+          <%= image_tag 'postman-reaction.png', alt: 'お知らせのイメージ', class: "notification-image", data: { user_id: @user.id } %>
+        <% else %>
+          <%= image_tag 'postman2.png', alt: 'お知らせのイメージ', class: "notification-image", data: { user_id: @user.id } %>
+        <% end %>
         <%= image_tag 'engranaje.png', alt: '設定のイメージ', class: "settings-image" %>
 
         <div class="profile-box">
@@ -160,5 +166,28 @@
         </div>
       </div>
     </div>
+
+    <div class="notification-modal" style="display: none;">
+      <div class="notification-modal-content">
+        <h2>通知一覧</h2>
+        <ul>
+          <% @notifications.each do |notification| %>
+            <li class="<%= notification.read ? 'read' : 'unread' %>">
+              <% if notification.notification_type == 'dm_request' %>
+                <%= "DMリクエスト: #{notification.message}" %>
+                <%= link_to '承認', approve_direct_message_request_path(notification), method: :patch, remote: true %>
+                <%= link_to '拒否', reject_direct_message_request_path(notification), method: :patch, remote: true %>
+              <% else %>
+                <%= notification.message %>
+              <% end %>
+              <% unless notification.read %>
+                <%= link_to '既読', mark_as_read_notification_path(notification), method: :patch, remote: true %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
   </body>
 <% end %>

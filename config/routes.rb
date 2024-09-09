@@ -15,9 +15,19 @@ Rails.application.routes.draw do
 
   resources :direct_message_requests, only: [:create] do
     member do
-      get 'approve' # ここでapproveアクションのルーティングを追加
+      patch :approve
+      patch :reject
     end
   end
+  
+
+  # config/routes.rb
+  resources :notifications, only: [] do
+    member do
+      patch 'mark_as_read'
+    end
+  end
+
 
   root to: "posts#index"
 end

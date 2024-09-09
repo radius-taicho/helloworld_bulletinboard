@@ -10,5 +10,9 @@ class UsersController < ApplicationController
     @rooms.each do |room|
       @last_messages[room.id] = room.messages.order(created_at: :desc).first
     end
+
+    # ユーザーの通知を取得
+    @notifications = Notification.where(user: @user).order(created_at: :desc)
   end
 end
+
