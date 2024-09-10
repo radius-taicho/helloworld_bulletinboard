@@ -1,14 +1,22 @@
-<h2><%= @room.name %></h2>
+<div class="message-container">
 
-<div>
-  <% @messages.each do |message| %>
-    <p><strong><%= message.sender.nickname %>:</strong> <%= message.content %></p>
-  <% end %>
+  <div class="message-header">
+    <%= link_to 'マイページに戻る', user_path(current_user), class: "post-top-button" %>
+  </div>
+
+  <div class="message-wrapper">
+    <% @messages.each do |message| %>
+      <p><strong><%= message.sender.nickname %>:</strong> <%= message.content %></p>
+    <% end %>
+  </div>
+
+  <div class="message-submit-box">
+    <%= form_with(model: @message, url: room_messages_path(@room), class: "message-form-box", local: true) do |form| %>
+      <%= form.text_area :content, class: "message-text-area" %>
+      <%= form.submit '送信', class: "message-submit-button" %>
+    <% end %>
+  </div>
+
 </div>
-
-<%= form_with(model: @message, url: room_messages_path(@room), local: true) do |form| %>
-  <%= form.text_area :content %>
-  <%= form.submit '送信' %>
-<% end %>
 
 

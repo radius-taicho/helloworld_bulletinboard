@@ -224,6 +224,62 @@
   color: blueviolet;
 }
 
+.my-dm-list {
+  background-color: white;
+}
+
+.dm-list-descriptions {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  border-bottom: 1px solid black;
+}
+
+.dm-partner-name-description {
+  width: 30%;
+  height: 30px;
+  line-height: 30px;
+  border-right: 1px solid black;
+}
+
+.dm-last-message-description {
+  width: 70%;
+}
+
+.my-dm-box {
+  background-color: white;
+  height: 90px;
+  margin: 0 auto;
+  border-bottom: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.dm-partner-name {
+  width: 30%;
+  border-right: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+}
+
+.dm-start-box {
+  width: 70%;
+  height: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+
+
+
+
 .my-character-collection-list {
   width: 100%;
   background-color: rgb(38, 39, 40);
@@ -260,6 +316,7 @@
   border: 8px solid rgb(38, 39, 40);
   padding: 1px;
   background-color: white;
+  cursor: pointer;
 }
 
 .character p {

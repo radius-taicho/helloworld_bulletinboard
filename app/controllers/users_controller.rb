@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id]) # URLのパラメータからユーザーを取得
+    @is_guest = guest_user?(@user) # ユーザーがゲストかどうかを判定
     @posts = @user.posts.order(created_at: :desc) # ユーザーの投稿を取得
     @from_nickname = params[:from] == 'nickname'
     
@@ -17,4 +18,12 @@ class UsersController < ApplicationController
     # ユーザーの通知を取得
     @notifications = Notification.where(user: @user).order(created_at: :desc)
   end
+
+  private
+
+  def guest_user?(user)
+    # ユーザーがゲストかどうかを判定するロジック
+    user.guest?
+  end
+  
 end

@@ -6,10 +6,8 @@
 
     <div class="profile-container-from-other-user-view">
       <div class="profile-wrapper-from-other-user-view">
-        <% if user_signed_in? %>
-        
+        <% if user_signed_in? && !@is_guest %>
           <%= image_tag 'dmpot2.png', alt: 'ダイレクトメッセージのイメージ', class: "direct-message-image", data: { user_id: @user.id } %>
-
           <div class="direct-message-box">
             <div class="direct-message-start">
               <span id="direct-message-text"><%= "#{@user.nickname}に話しかけますか？" %></span>
@@ -84,24 +82,42 @@
         </div>
 
         <div class="my-dm-list" style="display: none;" id="my-dm-list-display">
-<ul>
-  <% @dm_rooms.each do |room| %>
-    <li>
-      DMルーム: <%= room.name %>
-      <!-- DMルームの相手ユーザーを表示 -->
-      相手: 
-      <% room.users.each do |participant| %>
-        <% if participant != @user %>
-          <%= participant.nickname %>
-        <% end %>
-      <% end %>
-      <!-- DMルームへのリンク -->
-      <%= link_to 'DMを開く', room_path(room) %>
-    </li>
-  <% end %>
-</ul>
+          <div class="dm-list-descriptions">
+            <div class="dm-partner-name-description">
+              チャット相手
+            </div>
+            <div class="dm-last-message-description">
+              メッセージ
+            </div>
+          </div>
 
+          <% @dm_rooms.each do |room| %>
+            <div class="my-dm-box">
+              <div class="dm-partner-name">
+                <% room.users.each do |participant| %>
+                  <% if participant != @user %>
+                    <!-- DMの相手のニックネームを表示 -->
+                    <%= participant.nickname %>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="dm-start-box">
+                <div class="dm-last-message">
+                  <% if @last_messages[room.id] %>
+                    <p><%= @last_messages[room.id].content %></p>
+                  <% else %>
+                    <p>まだメッセージがありません。</p>
+                  <% end %>
+                </div>
+                <div class="start-dm">
+                  <%= link_to 'DMを開く', room_path(room), class: "start-dm-button", style: "display: none;" %>
+                </div>
+              </div>
+            </div>
+          <% end %>
         </div>
+
+
 
         <div class="my-character-collection-list" style="display: none;" id="my-character-collection-list">
           <div class="character-lists">

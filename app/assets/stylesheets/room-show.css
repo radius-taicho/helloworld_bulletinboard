@@ -1,0 +1,44 @@
+.message-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.message-header {
+  width: 100%;
+  height: 10%;
+  background-color: #333;
+}
+
+.message-wrapper {
+  width: 100%;
+  height: 75%;
+  background-color: white;
+}
+
+.message-submit-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 15%;
+  background-color: rgb(186, 185, 185);
+}
+
+.message-form-box {
+  display: flex;
+  align-items: center;
+
+  width: 90%;
+  height: 90%;
+}
+
+.message-text-area {
+  width:  90%;
+  height: 60%;
+  margin-right: 10px;
+}
+
+.message-submit-button {
+  padding: 10px;
+}
+
