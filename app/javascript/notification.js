@@ -9,7 +9,6 @@ document.addEventListener("turbo:load", () => {
     });
 
     window.addEventListener("click", (event) => {
-      // モーダル外をクリックしたら閉じる
       if (event.target === notificationModal) {
         notificationModal.style.display = "none";
       }
@@ -21,7 +20,7 @@ document.addEventListener("turbo:load", () => {
     button.addEventListener('click', (event) => {
       event.preventDefault();
       const url = event.target.getAttribute('href');
-      const userId = event.target.dataset.userId; // ユーザーIDを取得
+      const requestId = event.target.dataset.id; // ここでIDを取得する
 
       fetch(url, {
         method: 'PATCH',
@@ -30,30 +29,30 @@ document.addEventListener("turbo:load", () => {
           "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
         }
       }).then(response => {
-        if (!response.ok) throw new Error('リクエストが失敗しました');
+        if (!response.ok) throw new Error('承認リクエストの送信に失敗しました');
         return response.json();
       }).then(data => {
-        // 承認後に通知を送信
-        fetch(`/notifications/approval`, {
+        return fetch(`/notifications/approval`, {
           method: 'PATCH',
           headers: {
             "Content-Type": "application/json",
             "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
           },
-          body: JSON.stringify({ user_id: userId })
-        }).then(response => {
-          if (!response.ok) throw new Error('通知の送信に失敗しました');
-          return response.json();
-        }).then(notificationData => {
-          alert(notificationData.message);
-          location.reload(); // 必要に応じてページをリロード
-        }).catch(error => {
-          console.error(error);
-          alert('通知の送信に失敗しました');
+          body: JSON.stringify({ request_id: requestId }) // IDをここで使用する
         });
+      }).then(response => {
+        if (!response.ok) throw new Error('通知の送信に失敗しました');
+        return response.json();
+      }).then(notificationData => {
+        // リクエストの要素を削除または更新
+        const requestElement = event.target.closest('.direct-message-request'); // リクエストの親要素を取得
+        if (requestElement) {
+          requestElement.remove(); // リクエスト要素を削除
+        }
+        alert(notificationData.message);
       }).catch(error => {
         console.error(error);
-        alert('承認に失敗しました');
+        alert('承認処理中にエラーが発生しました');
       });
     });
   });
@@ -63,7 +62,7 @@ document.addEventListener("turbo:load", () => {
     button.addEventListener('click', (event) => {
       event.preventDefault();
       const url = event.target.getAttribute('href');
-      const userId = event.target.dataset.userId; // ユーザーIDを取得
+      const requestId = event.target.dataset.id; // ここでIDを取得する
 
       fetch(url, {
         method: 'PATCH',
@@ -72,30 +71,30 @@ document.addEventListener("turbo:load", () => {
           "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
         }
       }).then(response => {
-        if (!response.ok) throw new Error('リクエストが失敗しました');
+        if (!response.ok) throw new Error('拒否リクエストの送信に失敗しました');
         return response.json();
       }).then(data => {
-        // 拒否後に通知を送信
-        fetch(`/notifications/rejection`, {
+        return fetch(`/notifications/rejection`, {
           method: 'PATCH',
           headers: {
             "Content-Type": "application/json",
             "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
           },
-          body: JSON.stringify({ user_id: userId })
-        }).then(response => {
-          if (!response.ok) throw new Error('通知の送信に失敗しました');
-          return response.json();
-        }).then(notificationData => {
-          alert(notificationData.message);
-          location.reload(); // 必要に応じてページをリロード
-        }).catch(error => {
-          console.error(error);
-          alert('通知の送信に失敗しました');
+          body: JSON.stringify({ request_id: requestId }) // IDをここで使用する
         });
+      }).then(response => {
+        if (!response.ok) throw new Error('通知の送信に失敗しました');
+        return response.json();
+      }).then(notificationData => {
+        // リクエストの要素を削除または更新
+        const requestElement = event.target.closest('.direct-message-request'); // リクエストの親要素を取得
+        if (requestElement) {
+          requestElement.remove(); // リクエスト要素を削除
+        }
+        alert(notificationData.message);
       }).catch(error => {
         console.error(error);
-        alert('拒否に失敗しました');
+        alert('拒否処理中にエラーが発生しました');
       });
     });
   });

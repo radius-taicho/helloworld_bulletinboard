@@ -31,5 +31,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :rooms do
+    resources :messages, only: [:create] # ここで messages リソースをネスト
+  end
+
+
   root to: "posts#index"
 end

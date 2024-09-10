@@ -83,7 +83,25 @@
           <% end %>
         </div>
 
-        <div class="my-dm-list" style="display: none;" id="my-dm-list-display"></div>
+        <div class="my-dm-list" style="display: none;" id="my-dm-list-display">
+<ul>
+  <% @dm_rooms.each do |room| %>
+    <li>
+      DMルーム: <%= room.name %>
+      <!-- DMルームの相手ユーザーを表示 -->
+      相手: 
+      <% room.users.each do |participant| %>
+        <% if participant != @user %>
+          <%= participant.nickname %>
+        <% end %>
+      <% end %>
+      <!-- DMルームへのリンク -->
+      <%= link_to 'DMを開く', room_path(room) %>
+    </li>
+  <% end %>
+</ul>
+
+        </div>
 
         <div class="my-character-collection-list" style="display: none;" id="my-character-collection-list">
           <div class="character-lists">
@@ -167,29 +185,32 @@
       </div>
     </div>
 
-    <div class="notification-modal" style="display: none;">
-      <div class="notification-modal-content">
-        <h2>通知一覧</h2>
-        <ul>
-          <% @notifications.each do |notification| %>
-            <li class="<%= notification.read ? 'read' : 'unread' %>">
-              <% if notification.notification_type == 'dm_request' %>
-                <%= "DMリクエスト: #{notification.message}" %>
-                <br>
-                <%= link_to '承認', approve_direct_message_request_path(notification), method: :patch, class: 'approve-request-button' %>
-                <%= link_to '拒否', reject_direct_message_request_path(notification), method: :patch, class: 'reject-request-button' %>
-
-              <% else %>
-                <%= notification.message %>
-              <% end %>
-              <% unless notification.read %>
-                <%= link_to '既読', mark_as_read_notification_path(notification), method: :patch, remote: true %>
-              <% end %>
-            </li>
+   <div class="notification-modal" style="display: none;">
+  <div class="notification-modal-content">
+    <h2>通知一覧</h2>
+    <ul>
+      <% @notifications.each do |notification| %>
+        <li class="<%= notification.read ? 'read' : 'unread' %>">
+          <% if notification.notification_type == 'dm_request' %>
+            <%= "DMリクエスト: #{notification.message}" %>
+            <br>
+            <% # リクエストのIDを取得してリンクに追加する %>
+            <% request_id = notification.direct_message_request_id %> <!-- 修正: request_id を直接取得 -->
+            <%= link_to '承認', approve_direct_message_request_path(request_id), method: :patch, class: 'approve-request-button', data: { id: request_id } %>
+            <%= link_to '拒否', reject_direct_message_request_path(request_id), method: :patch, class: 'reject-request-button', data: { id: request_id } %>
+          <% else %>
+            <%= notification.message %>
           <% end %>
-        </ul>
-      </div>
-    </div>
+          <% unless notification.read %>
+            <%= link_to '既読', mark_as_read_notification_path(notification), method: :patch, remote: true %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+
 
   </body>
 <% end %>

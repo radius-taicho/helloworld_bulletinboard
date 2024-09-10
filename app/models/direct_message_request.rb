@@ -1,6 +1,7 @@
 class DirectMessageRequest < ApplicationRecord
   belongs_to :sender, class_name: 'User'
   belongs_to :receiver, class_name: 'User'
+  has_many :notifications, dependent: :destroy
 
   # enumでステータスを管理
   enum status: { pending: 0, approved: 1, rejected: 2 }

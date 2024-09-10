@@ -1,0 +1,14 @@
+<h2><%= @room.name %></h2>
+
+<div>
+  <% @messages.each do |message| %>
+    <p><strong><%= message.sender.nickname %>:</strong> <%= message.content %></p>
+  <% end %>
+</div>
+
+<%= form_with(model: @message, url: room_messages_path(@room), local: true) do |form| %>
+  <%= form.text_area :content %>
+  <%= form.submit '送信' %>
+<% end %>
+
+
