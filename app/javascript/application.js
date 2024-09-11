@@ -8,3 +8,4 @@ import "display"
 import "direct-message-request"
 import "notification"
 import "direct-message"
+import "./channels/room_channel";

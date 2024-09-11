@@ -1,0 +1,7 @@
+<!-- app/views/messages/_message.html.erb -->
+<div class="message <%= message.sender == current_user ? 'message-right' : 'message-left' %>">
+  <p><%= message.content %></p>
+  <strong class="<%= message.sender == current_user ? 'right-messenger-name' : 'left-messenger-name' %>">
+    <%= message.sender.nickname %>
+  </strong>
+</div>

@@ -1,20 +1,32 @@
 class MessagesController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     @room = Room.find(params[:room_id])
-    @message = @room.messages.new(message_params)
-    
-    # current_userをメッセージの送信者（sender）として設定
+    @message = current_user.messages.build(message_params)
+    @message.room = @room
     @message.sender = current_user
-
-    # 受信者をルーム内の他のユーザーとして設定
     @message.receiver = @room.receiver_user(current_user)
 
     if @message.save
-      Rails.logger.debug "Message saved successfully: #{@message.inspect}"
-      redirect_to @room, notice: 'メッセージが送信されました。'
+      ActionCable.server.broadcast "room_#{@room.id}", {
+        message: {
+          content: @message.content,
+          sender_id: @message.sender.id,
+          sender_nickname: @message.sender.nickname
+        },
+        current_user_id: current_user.id  # 現在のユーザーIDを送信
+      }
+
+      respond_to do |format|
+        format.html { redirect_to @room }
+        format.json { render json: @message }
+      end
     else
-      Rails.logger.error "Message save failed: #{@message.errors.full_messages.join(', ')}"
-      redirect_to @room, alert: 'メッセージの送信に失敗しました。'
+      respond_to do |format|
+        format.html { redirect_to @room, alert: 'メッセージの送信に失敗しました。' }
+        format.json { render json: @message.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -23,4 +35,6 @@ class MessagesController < ApplicationController
   def message_params
     params.require(:message).permit(:content)
   end
+
+  # メッセージをHTMLとしてレンダリングするメソッドは削除しました
 end
