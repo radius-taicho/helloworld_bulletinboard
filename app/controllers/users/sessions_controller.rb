@@ -14,6 +14,19 @@ class Users::SessionsController < Devise::SessionsController
   # def create
   #   super
   # end
+  # 
+  ## 例: SessionsController
+def create
+  user = User.find_by(email: params[:email])
+  if user&.authenticate(params[:password])
+    cookies.signed[:user_id] = user.id
+    redirect_to root_path
+  else
+    flash[:alert] = "Invalid email or password"
+    render :new
+  end
+end
+
 
   # DELETE /resource/sign_out
   # def destroy
