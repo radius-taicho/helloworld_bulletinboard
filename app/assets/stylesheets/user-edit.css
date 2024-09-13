@@ -1,0 +1,168 @@
+.edit-profile-body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #333;
+  color: white;
+  font-family: "DotGothic16", sans-serif;
+}
+
+.edit-profile-body .post-top-button {
+  text-decoration: none;
+  padding: 2px;
+  font-family: "DotGothic16", sans-serif;
+  font-size: 20px;
+  color: white;
+}
+
+
+.edit-profile-container {
+  width: 100%;
+  height: 100%;
+
+}
+.edit-profile-wrapper {
+  width: 85%;
+  height: 90%;
+  margin: 0 auto;
+  position: relative;
+  background-color: #333;
+}
+
+.edit-profile-form {
+  width: 100%;
+  height: 100%;
+}
+
+.edit-profile-button-box {
+  position: absolute;
+  bottom: 20px;
+  right: 100px;
+}
+
+.edit-profile-button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.edit-profile-upper-wrapper {
+  display: flex;
+  position: relative;
+  width: 70%;
+  margin: 0 auto;
+  height: 60%;
+}
+
+.edit-profile-user-image-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+}
+
+.edit-profile-user-image-description {
+  text-align: center;
+}
+
+.edit-profile-user-image {
+  border-radius: 256px;
+  border: 1px solid white;
+  width: 256px;
+  height: 256px;
+  margin-top: 20px;
+  background-color: transparent;
+}
+
+.edit-profile-user-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.edit-profile-user-name {
+
+}
+
+.edit-profile-user-thought {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-profile-label {
+  margin-bottom: 5px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.edit-profile-text-field {
+  width: 300px;
+  height: 30px;
+}
+
+.edit-profile-downer-wrapper {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-profile-image-container {
+  border: 1px solid ;
+  border-radius: 10px;
+  width:  55%;
+  height: 65%;
+  display: flex;
+  margin: 0 10px;
+}
+
+.edit-profile-image-box {
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+}
+
+.edit-profile-image-box img {
+  cursor: pointer;
+  display: block;
+  height: 100%;
+  width: auto;
+}
+
+.upper-profile-image {
+  display: flex;
+  height: 50%;
+}
+
+.downer-profile-image {
+  display: flex;
+  height: 50%;
+  width: 100%;
+}
+
+
+.scroll-button {
+  background-color: #ccc;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  z-index: 1;
+}
+
+
+
+
+
+

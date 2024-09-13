@@ -16,7 +16,6 @@ document.addEventListener("turbo:load", () => {
       received(data) {
         const { content, sender_id, sender_nickname } = data.message;
         const isCurrentUser = sender_id === currentUserId;
-
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message');
         messageDiv.classList.add(isCurrentUser ? 'message-right' : 'message-left');

@@ -28,7 +28,7 @@
           </div>
 
           <div class="poster">
-            <%= "by #{post.user.nickname}" %>
+            <%= link_to "by #{post.user.nickname}", user_path(post.user, from: 'nickname'), class: 'post-user-link'%>
             <br>
             <%= l post.created_at %> <!-- 投稿日時の表示 -->
           </div>
@@ -36,10 +36,12 @@
       <% end %>
     </div>
   <% else %>
+  <div class="search-container">
     <p class="cant-find-query">スレッドが見つからないよ </p>
     <div class="green-dig-dig">
       <%= image_tag 'greenmoguri.png', alt: 'スレッドが見つからないキャラクターイメージ', class:" green-dig-man", id: 'green-moguri' %>
     </div>
+  </div>
   <% end %>
 
   <%= render "shared/footer" %>

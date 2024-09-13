@@ -9,6 +9,8 @@ footer {
   font-family: "DotGothic16", sans-serif;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  position: sticky;
+  top: 100vh;
 }
 
 .site-detail {

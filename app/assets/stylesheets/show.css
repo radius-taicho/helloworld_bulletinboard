@@ -22,12 +22,22 @@
 
 }
 
+.show-page .post-top-button {
+  text-decoration: none;
+  padding: 2px;
+  font-family: "DotGothic16", sans-serif;
+  font-size: 20px;
+  color: white;
+}
+
 .post-top-button {
   text-decoration: none;
   padding: 2px;
   font-family: "DotGothic16", sans-serif;
   font-size: 20px;
 }
+
+
 
 .back-to-post-page:hover {
   color: black;

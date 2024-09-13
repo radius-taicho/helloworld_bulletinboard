@@ -27,7 +27,7 @@
 .notification-image {
   position: absolute;
   top: 0px;
-  right: 250px;
+  right: 150px;
   width: 70px;
   height: 70px;
   cursor: pointer;
@@ -73,6 +73,7 @@
   border-top: 1px solid;
   margin: 0px;
   padding: 0px;
+  overflow-y: auto;
 }
 
 .notification-modal-content li {
@@ -92,7 +93,7 @@
 
 
 .profile-box {
-  width: 40%;
+  width: 60%;
   height: 30%;
   display: flex;
   align-items: center;
@@ -104,18 +105,30 @@
   width: 64px;
   height: 64px;
   margin-right: 10px;
+  background-color: white;
+}
+
+.profile-image img {
+  width: 64px;
+  height: 64px;
 }
 
 .edit-profile-box {
   border: 1px solid black;
   border-radius: 10px;
+  text-align: center;
   height: 26px;
+  width: 120px;
+  cursor: pointer;
+  background-color: white;
 }
  .edit-profile {
   font-size: 13px;
-  line-height: 0px;
+  line-height: 26px;
+  margin: 0;
+  text-decoration: none;
+  color: black;
  }
-
 
 .profile-detail {
   margin-top: 40px;
@@ -125,10 +138,9 @@
 }
 
 .profile-user-name {
-  width: 300px;
+  width: 100px;
   height: 30px;
-  border: 1px solid black;
-  background-color: white;
+  line-height: 30px;
 }
 
 .user-name{
@@ -144,6 +156,9 @@
   height: 30px;
   border: 1px solid black;
   background-color: white;
+  line-height: 30px;
+  padding: 0px 3px;
+  border-radius: 5px;
   
 }
 
@@ -212,7 +227,7 @@
   border-bottom: 0.2px solid rgb(190, 190, 190);
   padding: 10px;
   overflow-wrap: break-word;
-  background-color: white;
+  background-color: rgba(240, 245, 254, 0.885);
 }
 
 .post-direct-message-collection-box .post a {
@@ -225,7 +240,7 @@
 }
 
 .my-dm-list {
-  background-color: white;
+  background-color: rgba(240, 245, 254, 0.885);
 }
 
 .dm-list-descriptions {
@@ -248,7 +263,7 @@
 }
 
 .my-dm-box {
-  background-color: white;
+  background-color: rgba(240, 245, 254, 0.885);
   height: 90px;
   margin: 0 auto;
   border-bottom: 1px solid black;

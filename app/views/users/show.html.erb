@@ -22,13 +22,17 @@
         <% end %>
 
         <div class="profile-box">
-          <div class="profile-image"></div>
+          <div class="profile-image">
+            <%= image_tag(@user.profile_image.present? ? @user.profile_image : 'default_profile_image.png') %>
+          </div>
           <%= @user.nickname %>
         </div>
 
         <div class="profile-detail">
           <label class="user-one-liner">ひとこと</label>
-          <div class="profile-user-one-liner"></div>
+          <div class="profile-user-one-liner">
+            <%= @user.thought%>
+          </div>
         </div>
       </div>
     </div>
@@ -49,17 +53,22 @@
         <%= image_tag 'engranaje.png', alt: '設定のイメージ', class: "settings-image" %>
 
         <div class="profile-box">
-          <div class="profile-image"></div>
+          <div class="profile-image">
+            <%= image_tag(@user.profile_image.present? ? @user.profile_image : 'default_profile_image.png') %>
+          </div>
+          <div class="profile-user-name">
+            <%= @user.nickname %>
+          </div>
           <div class="edit-profile-box">
-            <p class="edit-profile">プロフィール変更</p>
+            <%= link_to "プロフィール変更", edit_user_path(@user), class: "edit-profile" %>
           </div>
         </div>
 
         <div class="profile-detail">
-          <label class="user-name">ニックネーム</label>
-          <div class="profile-user-name"><%= @user.nickname %></div>
           <label class="user-one-liner">ひとこと</label>
-          <div class="profile-user-one-liner"></div>
+          <div class="profile-user-one-liner">
+            <%= @user.thought%>
+          </div>
         </div>
       </div>
     </div>
@@ -201,7 +210,7 @@
       </div>
     </div>
 
-   <div class="notification-modal" style="display: none;">
+<div class="notification-modal" style="display: none;">
   <div class="notification-modal-content">
     <h2>通知一覧</h2>
     <ul>
@@ -225,8 +234,6 @@
     </ul>
   </div>
 </div>
-
-
 
   </body>
 <% end %>
