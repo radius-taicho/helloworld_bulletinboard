@@ -1,0 +1,98 @@
+<body class="edit-profile-body">
+
+  <%= link_to 'マイページに戻る', user_path(current_user), class: "post-top-button" %>
+
+  <div class="edit-profile-container">
+    <div class="edit-profile-wrapper">
+      <%= form_with(model: @user, local: true, class: "edit-profile-form") do |form| %>
+      <%= form.hidden_field :profile_image, id: "selected-profile-image" %>
+      
+        <div class="edit-profile-upper-wrapper">
+
+          <div class="edit-profile-user-image-box">
+
+            <div class="edit-profile-user-image-description">
+              プロフィール画像
+            </div>
+
+            <div class="edit-profile-user-image">
+            </div>
+
+          </div>
+
+          <div class="edit-profile-user-detail">
+        
+            <div class="edit-profile-user-name">
+              <%= form.label :nickname, "ニックネーム", class: "edit-profile-label" %>
+              <%= form.text_field :nickname, class: "edit-profile-text-field" %>
+            </div>
+
+            <div class="edit-profile-user-thought">
+              <%= form.label :thought, "ひとこと", class: "edit-profile-label"%>
+              <%= form.text_field :thought, class: "edit-profile-text-field" %>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="edit-profile-downer-wrapper">
+          <button class="scroll-button left" type="button">&#9664;</button>
+
+          <div class="edit-profile-image-container">
+
+            <div class="edit-profile-image-box">
+
+              <div class="upper-profile-image">
+                <%= image_tag 'postman2.png', alt: 'お知らせのイメージ'%>
+                <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                 <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                  <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                   <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                    <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                     <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                      <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                 <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                  <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                   <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                    <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                     <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                      <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+              </div>
+
+              
+              <div class="downer-profile-image">
+                <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                 <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                  <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                   <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                    <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                     <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                      <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                      <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                 <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                  <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                   <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                    <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                     <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                      <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+                       <%= image_tag 'engranaje.png', alt: '設定のイメージ' %>
+              </div>
+
+            </div>
+
+          </div>
+
+          <button class="scroll-button right" type="button">&#9654;</button>
+        </div>
+
+        <div class="edit-profile-button-box">
+          <%= form.submit "更新", class: "edit-profile-button"%>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+
+</body>

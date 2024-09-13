@@ -26,6 +26,9 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @comments = @post.comments.includes(:user)
     @comment = Comment.new
+    @from_my_page = params[:from] == 'mypage'
+
+
     
     
     respond_to do |format|

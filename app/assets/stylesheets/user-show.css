@@ -1,0 +1,375 @@
+.user-show-page {
+  margin-top: 0;
+  background-color: rgb(209, 209, 236);
+  min-width: 960px;
+  min-height: 500px;
+}
+
+.back-to-top-page {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 1px;
+  width: 100px;
+}
+
+.profile-container {
+  width: 100%;
+  height: 40%;
+  font-family: "DotGothic16", sans-serif;
+}
+
+.profile-wrapper {
+  position: relative;
+  width: 55%;
+  margin: 0 auto;
+}
+
+.notification-image {
+  position: absolute;
+  top: 0px;
+  right: 150px;
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+}
+
+.notification-image:hover {
+  box-shadow: unset;
+  transform: translateY(-2px);
+
+}
+
+.notification-reaction-image {
+  position: absolute;
+  top: 0px;
+  right: 250px;
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+}
+
+.notification-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(251, 250, 250, 0.209);
+  z-index: 1000;
+}
+
+.notification-modal-content {
+  font-family: "DotGothic16", sans-serif;
+  width: 33%;
+  height: 300px;
+  margin: 0 auto;
+  background-color: white;
+  text-align: center;
+  border: black 2px solid;
+  transform: translateY(40%);
+}
+
+.notification-modal-content ul {
+  border-top: 1px solid;
+  margin: 0px;
+  padding: 0px;
+  overflow-y: auto;
+}
+
+.notification-modal-content li {
+  text-align: left;
+  list-style: none;
+  width: 100%;
+  border-bottom:1px solid black ;
+  padding: 3px;
+}
+
+.settings-image {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  cursor: pointer;
+}
+
+
+.profile-box {
+  width: 60%;
+  height: 30%;
+  display: flex;
+  align-items: center;
+}
+
+.profile-image {
+  border: 1px solid black;
+  border-radius: 33px;
+  width: 64px;
+  height: 64px;
+  margin-right: 10px;
+  background-color: white;
+}
+
+.profile-image img {
+  width: 64px;
+  height: 64px;
+}
+
+.edit-profile-box {
+  border: 1px solid black;
+  border-radius: 10px;
+  text-align: center;
+  height: 26px;
+  width: 120px;
+  cursor: pointer;
+  background-color: white;
+}
+ .edit-profile {
+  font-size: 13px;
+  line-height: 26px;
+  margin: 0;
+  text-decoration: none;
+  color: black;
+ }
+
+.profile-detail {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.profile-user-name {
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.user-name{
+  text-align: left;
+}
+
+.user-one-liner{
+  text-align: left;
+}
+
+.profile-user-one-liner {
+  width: 300px;
+  height: 30px;
+  border: 1px solid black;
+  background-color: white;
+  line-height: 30px;
+  padding: 0px 3px;
+  border-radius: 5px;
+  
+}
+
+
+
+.post-direct-message-collection-box {
+  margin-top: 70px;
+  width: 100%;
+  height: 60%;
+}
+
+.post-direct-message-collection-buttons {
+  display: flex;
+  width: 100%;
+  height: 70px;
+  font-family: "DotGothic16", sans-serif;
+  font-size: 20px;
+  background-color: rgb(210, 190, 230);
+}
+
+.users-post-list-button {
+  width: 34%;
+  border: none;
+  outline: none;
+  font: inherit;
+  cursor: pointer;
+  border-left: 1px solid black;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.direct-message-list-button {
+  width: 33%;
+  border: none;
+  outline: none;
+  font: inherit;
+  border: 1px solid black;
+  cursor: pointer;
+
+}
+
+.character-collection-list-button {
+  width: 33%;
+  border: none;
+  outline: none;
+  font: inherit;
+  cursor: pointer;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.lists-container {
+  width: 100%;
+}
+
+.my-posts-list {
+  width: 65vw;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.my-posts-list .post {
+  position: relative;
+  width: 100%;
+  border-bottom: 0.2px solid rgb(190, 190, 190);
+  padding: 10px;
+  overflow-wrap: break-word;
+  background-color: rgba(240, 245, 254, 0.885);
+}
+
+.post-direct-message-collection-box .post a {
+  text-decoration: none;
+  color: black;
+}
+
+.post-direct-message-collection-box .post a:hover{
+  color: blueviolet;
+}
+
+.my-dm-list {
+  background-color: rgba(240, 245, 254, 0.885);
+}
+
+.dm-list-descriptions {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  border-bottom: 1px solid black;
+}
+
+.dm-partner-name-description {
+  width: 30%;
+  height: 30px;
+  line-height: 30px;
+  border-right: 1px solid black;
+}
+
+.dm-last-message-description {
+  width: 70%;
+}
+
+.my-dm-box {
+  background-color: rgba(240, 245, 254, 0.885);
+  height: 90px;
+  margin: 0 auto;
+  border-bottom: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.dm-partner-name {
+  width: 30%;
+  border-right: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+}
+
+.dm-start-box {
+  width: 70%;
+  height: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+
+
+
+
+.my-character-collection-list {
+  width: 100%;
+  background-color: rgb(38, 39, 40);
+
+}
+
+.character-lists {
+  width: 85vw;
+  min-width: 960px;
+  margin: 0 auto;
+  background-color: rgb(38, 39, 40);
+  padding: 20px;
+}
+.character-container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.characters-wrapper {
+  border: 6px solid rgb(38, 39, 40);
+  display: inline-block;
+}
+
+.characters {
+  display: flex;
+  height: 128px;
+  font-family: "DotGothic16", sans-serif;
+}
+
+.character {
+  width: 128px;
+  font-weight: bold;
+  font-size: 16px;
+  border: 8px solid rgb(38, 39, 40);
+  padding: 1px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.character p {
+  display: inline;    
+}
+
+.character-image {
+  translate: -8px -18px;
+}
+
+
+/* .characters.characters1 > .character:nth-child(1),
+.characters.characters1 > .character:nth-child(2) {
+  background-color: rgb(255, 212, 212);
+}
+
+.characters.characters1 > .character:nth-child(3),
+.characters.characters1 > .character:nth-child(4) {
+  background-color: rgb(212, 255, 212);
+}
+
+.characters.characters1 > .character:nth-child(5),
+.characters.characters1 > .character:nth-child(6) {
+  background-color: rgb(255, 253, 212);
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

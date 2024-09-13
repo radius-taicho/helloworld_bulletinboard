@@ -6,6 +6,10 @@ class User < ApplicationRecord
   has_many :sns_credentials
   has_many :posts
   has_many :comments
+  has_many :room_users
+  has_many :rooms, through: :room_users
+  has_many :messages, foreign_key: :sender_id
+  has_many :notifications, dependent: :destroy
 
   def guest?
     email == 'guest@example.com'

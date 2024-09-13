@@ -77,5 +77,7 @@ gem 'omniauth', '~>2.1.1'
 gem 'pry-rails'
 gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
+gem 'redis', '>= 4.0.1'
+
 
 

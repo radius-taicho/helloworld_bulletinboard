@@ -1,9 +1,15 @@
 <body class="show-page">
   <!-- 残りのHTMLコンテンツ -->
-  <div class="back-to-post-page">
+<% if @from_my_page %>
+  <div class="back-to-my-page">
+    <%= link_to 'マイページに戻る', user_path(current_user), class: "post-top-button" %>
+  </div>
+<% else %>
+   <div class="back-to-post-page">
     <%= link_to "Top画面へ", root_path, class: "post-top-button" %>
   </div>
-  
+<% end %>
+
   <div id="posts-list">
     <div class="post" id="post-box">
       <!-- 画像ホバー時に変更される画像のタグ -->
@@ -32,7 +38,8 @@
 
       <!-- 投稿者情報 -->
       <div class="poster">
-        <%= "by #{@post.user.nickname}" %><br>
+        <%= link_to "by #{@post.user.nickname}", user_path(@post.user, from: 'nickname'), class: 'post-user-link'%>
+        <br>
         <%= l @post.created_at %> <!-- 投稿日時の表示 -->
       </div>
     </div>
@@ -44,7 +51,7 @@
     </div>
 
     <div class="commenter">
-      <%= "by #{comment.user.nickname}" %>
+      <%= link_to "by #{comment.user.nickname}", user_path(comment.user, from: 'nickname'), class: 'post-user-link'%>
       <br>
       <%= l comment.created_at %> <!-- 投稿日時の表示 -->
     </div>

@@ -1,0 +1,7 @@
+<p><%= @receiver.nickname %>さん、</p>
+
+<p><%= @sender.nickname %>さんがあなたにダイレクトメッセージを送りたいとリクエストしています。</p>
+
+<p>このリクエストに応じるには、以下のリンクをクリックしてください。</p>
+
+<%= link_to 'リクエストを承認する', approve_direct_message_request_url(@direct_message_request), method: :get %>

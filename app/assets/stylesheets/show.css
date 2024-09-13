@@ -12,12 +12,32 @@
   margin-top: 1px;
 }
 
+.back-to-my-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border: 1px solid;
+  border-radius: 10px;
+  margin-top: 1px;
+
+}
+
+.show-page .post-top-button {
+  text-decoration: none;
+  padding: 2px;
+  font-family: "DotGothic16", sans-serif;
+  font-size: 20px;
+  color: white;
+}
+
 .post-top-button {
   text-decoration: none;
   padding: 2px;
   font-family: "DotGothic16", sans-serif;
   font-size: 20px;
 }
+
+
 
 .back-to-post-page:hover {
   color: black;

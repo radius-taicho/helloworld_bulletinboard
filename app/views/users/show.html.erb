@@ -1,0 +1,239 @@
+<% if @from_nickname %>
+  <body class="other-user-show-page">
+    <div class="back-to-top">
+      <%= link_to "Top画面へ", root_path, class: "post-top-button" %>
+    </div>
+
+    <div class="profile-container-from-other-user-view">
+      <div class="profile-wrapper-from-other-user-view">
+        <% if user_signed_in? && !@is_guest %>
+          <%= image_tag 'dmpot2.png', alt: 'ダイレクトメッセージのイメージ', class: "direct-message-image", data: { user_id: @user.id } %>
+          <div class="direct-message-box">
+            <div class="direct-message-start">
+              <span id="direct-message-text"><%= "#{@user.nickname}に話しかけますか？" %></span>
+              <div id="direct-message-actions">
+                <div class="direct-message-yes-or-no">
+                  <button class="direct-message-yes">yes</button>
+                  <button class="direct-message-no">no</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="profile-box">
+          <div class="profile-image">
+            <%= image_tag(@user.profile_image.present? ? @user.profile_image : 'default_profile_image.png') %>
+          </div>
+          <%= @user.nickname %>
+        </div>
+
+        <div class="profile-detail">
+          <label class="user-one-liner">ひとこと</label>
+          <div class="profile-user-one-liner">
+            <%= @user.thought%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+<% else %>
+  <body class="user-show-page">
+    <div class="back-to-top">
+      <%= link_to "Top画面へ", root_path, class: "post-top-button" %>
+    </div>
+
+    <div class="profile-container">
+      <div class="profile-wrapper">
+        <% if @user.notifications.any? { |notification| !notification.read }%>
+          <%= image_tag 'postman-reaction.png', alt: 'お知らせのイメージ', class: "notification-image", data: { user_id: @user.id } %>
+        <% else %>
+          <%= image_tag 'postman2.png', alt: 'お知らせのイメージ', class: "notification-image", data: { user_id: @user.id } %>
+        <% end %>
+        <%= image_tag 'engranaje.png', alt: '設定のイメージ', class: "settings-image" %>
+
+        <div class="profile-box">
+          <div class="profile-image">
+            <%= image_tag(@user.profile_image.present? ? @user.profile_image : 'default_profile_image.png') %>
+          </div>
+          <div class="profile-user-name">
+            <%= @user.nickname %>
+          </div>
+          <div class="edit-profile-box">
+            <%= link_to "プロフィール変更", edit_user_path(@user), class: "edit-profile" %>
+          </div>
+        </div>
+
+        <div class="profile-detail">
+          <label class="user-one-liner">ひとこと</label>
+          <div class="profile-user-one-liner">
+            <%= @user.thought%>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-direct-message-collection-box">
+      <div class="post-direct-message-collection-buttons">
+        <button class="users-post-list-button">投稿一覧</button>
+        <button class="direct-message-list-button">DM一覧</button>
+        <button class="character-collection-list-button">仲間図鑑</button>
+      </div>
+
+      <div class="lists-container">
+        <div class="my-posts-list" id="my-posts-list-display">
+          <% @posts.limit(30).each do |post| %>
+            <div class="post">
+              <h3><%= link_to post.title, post_path(post, from: 'mypage') %></h3>
+              <p><%= truncate(post.content, length: 100) %></p>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="my-dm-list" style="display: none;" id="my-dm-list-display">
+          <div class="dm-list-descriptions">
+            <div class="dm-partner-name-description">
+              チャット相手
+            </div>
+            <div class="dm-last-message-description">
+              メッセージ
+            </div>
+          </div>
+
+          <% @dm_rooms.each do |room| %>
+            <div class="my-dm-box">
+              <div class="dm-partner-name">
+                <% room.users.each do |participant| %>
+                  <% if participant != @user %>
+                    <!-- DMの相手のニックネームを表示 -->
+                    <%= participant.nickname %>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="dm-start-box">
+                <div class="dm-last-message">
+                  <% if @last_messages[room.id] %>
+                    <p><%= @last_messages[room.id].content %></p>
+                  <% else %>
+                    <p>まだメッセージがありません</p>
+                  <% end %>
+                </div>
+                <div class="start-dm">
+                  <%= link_to 'DMを開く', room_path(room), class: "start-dm-button", style: "display: none;" %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+
+
+        <div class="my-character-collection-list" style="display: none;" id="my-character-collection-list">
+          <div class="character-lists">
+            <div class="character-container">
+              <div class="characters-wrapper">
+                <div class="characters characters1">
+                  <div class="character">No.1
+                    <%= image_tag 'iwanttobeG.png', alt: 'iwanttobeGのキャラクターイメージ', class: "character-image" %>
+                  </div>
+                  <div class="character">No.2</div>
+                  <div class="character">No.3</div>
+                  <div class="character">No.4</div>
+                  <div class="character">No.5</div>
+                  <div class="character">No.6</div>
+                  <div class="character">No.7</div>
+                </div>
+
+                <div class="characters characters2">
+                  <div class="character">No.8</div>
+                  <div class="character">No.9</div>
+                  <div class="character">No.10</div>
+                  <div class="character">No.11</div>
+                  <div class="character">No.12</div>
+                  <div class="character">No.13</div>
+                  <div class="character">No.14</div>
+                </div>
+
+                <div class="characters characters3">
+                  <div class="character">No.15</div>
+                  <div class="character">No.16</div>
+                  <div class="character">No.17</div>
+                  <div class="character">No.18</div>
+                  <div class="character">No.19</div>
+                  <div class="character">No.20</div>
+                  <div class="character">No.21</div>
+                </div>
+
+                <div class="characters characters4">
+                  <div class="character">No.22</div>
+                  <div class="character">No.23</div>
+                  <div class="character">No.24</div>
+                  <div class="character">No.25</div>
+                  <div class="character">No.26</div>
+                  <div class="character">No.27</div>
+                  <div class="character">No.28</div>
+                </div>
+
+                <div class="characters characters5">
+                  <div class="character">No.29</div>
+                  <div class="character">No.30</div>
+                  <div class="character">No.31</div>
+                  <div class="character">No.32</div>
+                  <div class="character">No.33</div>
+                  <div class="character">No.34</div>
+                  <div class="character">No.35</div>
+                </div>
+
+                <div class="characters characters6">
+                  <div class="character">No.36</div>
+                  <div class="character">No.37</div>
+                  <div class="character">No.38</div>
+                  <div class="character">No.39</div>
+                  <div class="character">No.40</div>
+                  <div class="character">No.41</div>
+                  <div class="character">No.42</div>
+                </div>
+
+                <div class="characters characters7">
+                  <div class="character">No.43</div>
+                  <div class="character">No.44</div>
+                  <div class="character">No.45</div>
+                  <div class="character">No.46</div>
+                  <div class="character">No.47</div>
+                  <div class="character">No.48</div>
+                  <div class="character">No.49</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div class="notification-modal" style="display: none;">
+  <div class="notification-modal-content">
+    <h2>通知一覧</h2>
+    <ul>
+      <% @notifications.each do |notification| %>
+        <li class="<%= notification.read ? 'read' : 'unread' %>">
+          <% if notification.notification_type == 'dm_request' %>
+            <%= "DMリクエスト: #{notification.message}" %>
+            <br>
+            <% # リクエストのIDを取得してリンクに追加する %>
+            <% request_id = notification.direct_message_request_id %> <!-- 修正: request_id を直接取得 -->
+            <%= link_to '承認', approve_direct_message_request_path(request_id), method: :patch, class: 'approve-request-button', data: { id: request_id } %>
+            <%= link_to '拒否', reject_direct_message_request_path(request_id), method: :patch, class: 'reject-request-button', data: { id: request_id } %>
+          <% else %>
+            <%= notification.message %>
+          <% end %>
+          <% unless notification.read %>
+            <%= link_to '既読', mark_as_read_notification_path(notification), method: :patch, remote: true %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+  </body>
+<% end %>

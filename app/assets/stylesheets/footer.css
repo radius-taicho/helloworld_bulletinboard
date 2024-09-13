@@ -1,0 +1,43 @@
+footer {
+  display: flex;
+  height: 100px;
+  background-color: #333;
+  width: 100%;
+  color: white;
+  margin-top: 100px;
+  align-items: center;
+  font-family: "DotGothic16", sans-serif;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  position: sticky;
+  top: 100vh;
+}
+
+.site-detail {
+  width: 20%;
+  height: 100%;
+  padding-top: 7px;
+  margin-right: -150px;
+
+}
+
+footer li a{
+  color: white;
+  margin-right: 5px;
+}
+
+footer li{
+  list-style: none;
+  margin-bottom: 15px ;
+}
+
+footer ul {
+  margin: 0;
+}
+
+footer .copyright {
+  width: 80%;
+  height: 100%;
+  text-align: center;
+  line-height: 100px;
+}

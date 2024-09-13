@@ -1,0 +1,2 @@
+document.querySelector('.message-box').innerHTML += "<%= j render partial: 'messages/message', locals: { message: @message, current_user: current_user } %>";
+document.querySelector('.message-text-area').value = ''; 

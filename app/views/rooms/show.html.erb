@@ -1,0 +1,22 @@
+<div class="message-container">
+  <div class="message-header">
+    <%= link_to 'マイページに戻る', user_path(current_user), class: "post-top-button" %>
+  </div>
+
+  <div class="message-wrapper" data-room-id="<%= @room.id %>" data-current-user-id="<%= current_user.id %>">
+    <div class="message-box">
+      <% @messages.each do |message| %>
+        <%= render partial: 'messages/message', locals: { message: message, current_user: current_user } %>
+      <% end %>
+    </div>
+  </div>
+
+
+  <div class="message-submit-box">
+    <%= form_with(model: @message, url: room_messages_path(@room), class: "message-form-box", remote: true) do |form| %>
+      <%= form.text_area :content, class: "message-text-area", placeholder: "メッセージを入力..." %>
+      <%= form.submit '送信', class: "message-submit-button" %>
+    <% end %>
+  </div>
+</div>
+

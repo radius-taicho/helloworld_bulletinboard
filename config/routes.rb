@@ -4,18 +4,37 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  # Postsリソースのルーティング
+  resources :users, only: [:show, :edit, :update]
+
   resources :posts do
     resources :comments
-    collection do 
+    collection do
       get 'search'
     end
   end
-  
-  
-  
-  
 
-  # トップページの設定
+  resources :direct_message_requests, only: [:create] do
+    member do
+      patch :approve
+      patch :reject
+    end
+  end
+  
+  # 既存のnotificationsに追加
+  resources :notifications, only: [] do
+    member do
+      patch 'mark_as_read'
+    end
+    collection do
+      patch 'approval', to: 'notifications#create_approval_notification'
+      patch 'rejection', to: 'notifications#create_rejection_notification'
+    end
+  end
+
+  resources :rooms do
+    resources :messages, only: [:create] # ここで messages リソースをネスト
+  end
+
+
   root to: "posts#index"
 end

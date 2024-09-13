@@ -1,3 +1,4 @@
+
 <nav class="navbar">
   <div class="navbar-logo">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 582.5 125">
@@ -64,7 +65,7 @@
         <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
       </button>
       <button class="menu-buttons">
-        <%= link_to 'マイページ', '#' %>
+        <%= link_to 'マイページ', user_path(current_user) %>
       </button>
     <% else %>
       <button class="menu-buttons">
