@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_12_235455) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_14_015036) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -58,6 +58,29 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_12_235455) do
     t.datetime "updated_at", null: false
     t.index ["receiver_id"], name: "index_direct_message_requests_on_receiver_id"
     t.index ["sender_id"], name: "index_direct_message_requests_on_sender_id"
+  end
+
+  create_table "exps", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "points", null: false
+    t.string "source", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "related_entity_type", null: false
+    t.bigint "related_entity_id", null: false
+    t.index ["related_entity_type", "related_entity_id"], name: "index_exps_on_related_entity"
+    t.index ["user_id"], name: "index_exps_on_user_id"
+  end
+
+  create_table "levels", charset: "utf8mb3", force: :cascade do |t|
+    t.integer "level_number", null: false
+    t.integer "exp_required", null: false
+    t.integer "hp_increase", null: false
+    t.string "reward_type"
+    t.string "reward_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["level_number"], name: "index_levels_on_level_number", unique: true
   end
 
   create_table "messages", charset: "utf8mb3", force: :cascade do |t|
@@ -143,6 +166,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_12_235455) do
   add_foreign_key "comments", "users"
   add_foreign_key "direct_message_requests", "users", column: "receiver_id"
   add_foreign_key "direct_message_requests", "users", column: "sender_id"
+  add_foreign_key "exps", "users"
   add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
