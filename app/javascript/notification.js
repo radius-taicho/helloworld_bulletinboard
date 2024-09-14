@@ -50,6 +50,7 @@ document.addEventListener("turbo:load", () => {
           requestElement.remove(); // リクエスト要素を削除
         }
         alert(notificationData.message);
+        location.reload()
       }).catch(error => {
         console.error(error);
         alert('承認処理中にエラーが発生しました');
@@ -92,6 +93,7 @@ document.addEventListener("turbo:load", () => {
           requestElement.remove(); // リクエスト要素を削除
         }
         alert(notificationData.message);
+        location.reload();
       }).catch(error => {
         console.error(error);
         alert('拒否処理中にエラーが発生しました');

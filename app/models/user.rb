@@ -3,13 +3,40 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
+  belongs_to :level
   has_many :sns_credentials
   has_many :posts
   has_many :comments
   has_many :room_users
   has_many :rooms, through: :room_users
   has_many :messages, foreign_key: :sender_id
+  has_many :direct_message_requests, dependent: :destroy
   has_many :notifications, dependent: :destroy
+
+  def add_experience(points)
+    self.experience_points += points
+    level_up if experience_points >= current_level.exp_required
+    save
+  end
+  
+  def level_up
+    transaction do
+      while experience_points >= current_level.exp_required
+        self.experience_points -= current_level.exp_required
+        self.level_id = next_level.id
+      end
+      save
+    end
+  end
+  
+  
+  def current_level
+    Level.find(level_id) # 現在のレベルを取得
+  end
+  
+  def next_level
+    Level.where("level_number > ?", current_level.level_number).order(:level_number).first || current_level
+  end
 
   def guest?
     email == 'guest@example.com'

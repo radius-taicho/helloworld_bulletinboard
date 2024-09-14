@@ -5,6 +5,9 @@ class UsersController < ApplicationController
     @is_guest = guest_user?(@user) # ユーザーがゲストかどうかを判定
     @posts = @user.posts.order(created_at: :desc) # ユーザーの投稿を取得
     @from_nickname = params[:from] == 'nickname'
+    sender_id = current_user.id
+    receiver_id = @user.id
+    @existing_request = DirectMessageRequest.find_by(sender_id: sender_id, receiver_id: receiver_id)
     
     # ユーザーが参加しているDMルームとグループルームを取得
     @dm_rooms = @user.rooms.where(is_group: false)
