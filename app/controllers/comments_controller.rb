@@ -7,10 +7,14 @@ class CommentsController < ApplicationController
     @comment.user = current_user || User.guest
 
     if @comment.save
-      render json: { comment: @comment, message: 'コメントが追加されました' }, status: :created
+      # コメント保存後にレベルアップを確認
+      #     
+      # レベルアップ情報を含めてJSONレスポンスを返す
+      render json: { success: true, comment: @comment.as_json(include: { user: { only: [:id, :nickname] } }), current_user_id: current_user&.id || User.guest.id }
     else
       render json: { errors: @comment.errors.full_messages }, status: :unprocessable_entity
     end
+    
   end
 
   def show

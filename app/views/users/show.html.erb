@@ -30,6 +30,7 @@
             <%= image_tag(@user.profile_image.present? ? @user.profile_image : 'default_profile_image.png') %>
           </div>
           <%= @user.nickname %>
+          Lv.<%= @user.current_level.level_number %>
         </div>
 
         <div class="profile-detail">
@@ -63,6 +64,7 @@
           <div class="profile-user-name">
             <%= @user.nickname %>
           </div>
+          Lv.<%= @user.current_level.level_number %>
           <div class="edit-profile-box">
             <%= link_to "プロフィール変更", edit_user_path(@user), class: "edit-profile" %>
           </div>
@@ -217,6 +219,7 @@
 <div class="notification-modal" style="display: none;">
   <div class="notification-modal-content">
     <h2>通知一覧</h2>
+    <div class="notification-content-box">
     <ul>
       <% @notifications.each do |notification| %>
         <li class="<%= notification.read ? 'read' : 'unread' %>">
@@ -227,15 +230,21 @@
             <% request_id = notification.direct_message_request_id %> <!-- 修正: request_id を直接取得 -->
             <%= link_to '承認', approve_direct_message_request_path(request_id), method: :patch, class: 'approve-request-button', data: { id: request_id } %>
             <%= link_to '拒否', reject_direct_message_request_path(request_id), method: :patch, class: 'reject-request-button', data: { id: request_id } %>
-          <% else %>
-            <%= notification.message %>
           <% end %>
-          <% unless notification.read %>
-            <%= link_to '既読', mark_as_read_notification_path(notification), method: :patch, remote: true %>
+          <% if notification.notification_type == 'level_up' %>
+            <%= "レベルアップ！: #{notification.message}" %>
+            <p>次のレベルまでの経験値: <%= notification.next_experience_point %></p>
+            <p>必要最低コメント数: <%= notification.required_comment_count %></p>
+            <p>獲得スキル: <%= notification.skill_get_message%></p>
+            <p>獲得アイテム: <%= notification.item_get_message%></p>
           <% end %>
+          <%# <% unless notification.read %>
+            <%# <%= link_to '既読', mark_as_read_notification_path(notification), method: :patch, remote: true %>
+          <%# <% end %> 
         </li>
       <% end %>
     </ul>
+    </div>
   </div>
 </div>
 

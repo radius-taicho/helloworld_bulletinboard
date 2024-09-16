@@ -46,7 +46,7 @@
   <% if user_signed_in? %>
     <div class="adventure-box">
       <div class="your-status">
-        <p>あなたのレベル Lv. <span class="your-level" id="your-level"><%= current_user.current_level.level_number %></span></p>
+        <p><%= current_user.nickname %> Lv.<span class="your-level" id="your-level"><%= current_user.current_level.level_number %></span></p>
         <label for="fuel">HP: <span>10/20</span></label>
         <meter id="fuel" min="0" max="100" low="33" high="66" optimum="80" value="50">at 50/100</meter>
       </div>

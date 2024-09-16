@@ -68,13 +68,14 @@
   text-align: center;
   border: black 2px solid;
   transform: translateY(40%);
+  overflow-y: scroll;
 }
+
 
 .notification-modal-content ul {
   border-top: 1px solid;
   margin: 0px;
   padding: 0px;
-  overflow-y: auto;
 }
 
 .notification-modal-content li {
@@ -122,6 +123,7 @@
   width: 120px;
   cursor: pointer;
   background-color: white;
+  margin-left: auto;
 }
 
  .edit-profile {
@@ -130,6 +132,7 @@
   margin: 0;
   text-decoration: none;
   color: black;
+  
  }
 
 .profile-detail {
@@ -140,9 +143,10 @@
 }
 
 .profile-user-name {
-  width: 100px;
-  height: 30px;
+  width: auto;
+  height: auto;
   line-height: 30px;
+  margin-right: 7px;
 }
 
 .user-name{

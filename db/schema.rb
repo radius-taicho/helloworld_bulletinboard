@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_14_115916) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_16_064433) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -103,6 +103,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_14_115916) do
     t.datetime "updated_at", null: false
     t.string "notification_type"
     t.bigint "direct_message_request_id"
+    t.integer "next_experience_point"
+    t.integer "required_comment_count"
+    t.string "skill_get_message"
+    t.string "item_get_message"
     t.index ["direct_message_request_id"], name: "index_notifications_on_direct_message_request_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
@@ -131,6 +135,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_14_115916) do
     t.boolean "is_group", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "skills", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name", limit: 50
+    t.text "description"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_skills_on_user_id"
   end
 
   create_table "sns_credentials", charset: "utf8mb3", force: :cascade do |t|
@@ -176,5 +189,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_14_115916) do
   add_foreign_key "posts", "users"
   add_foreign_key "room_users", "rooms"
   add_foreign_key "room_users", "users"
+  add_foreign_key "skills", "users"
   add_foreign_key "sns_credentials", "users"
 end

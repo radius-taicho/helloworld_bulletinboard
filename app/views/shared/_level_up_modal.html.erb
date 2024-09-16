@@ -1,0 +1,12 @@
+<!-- app/views/shared/_level_up_modal.html.erb -->
+<div class="level-up-modal" style="display:none;">
+  <div class="level-up-modal-content">
+    <h2><%= current_user ? "#{current_user.nickname} Level up!!" : "Level up!!" %></h2>
+    <div class="level-up-message"></div>
+    <div class="skill-get-message"></div>
+    <div class="item-get-message"></div>
+    <div class="next-experience-point-message"></div>
+    <div class="required-comment-count-message"></div>
+    <button class="close">とじる</button>
+  </div>
+</div>

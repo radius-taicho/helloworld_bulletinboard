@@ -1,14 +1,14 @@
 <body class="show-page">
   <!-- 残りのHTMLコンテンツ -->
-<% if @from_my_page %>
-  <div class="back-to-my-page">
-    <%= link_to 'マイページに戻る', user_path(current_user), class: "post-top-button" %>
-  </div>
-<% else %>
-   <div class="back-to-post-page">
-    <%= link_to "Top画面へ", root_path, class: "post-top-button" %>
-  </div>
-<% end %>
+  <% if @from_my_page %>
+    <div class="back-to-my-page">
+      <%= link_to 'マイページに戻る', user_path(current_user), class: "post-top-button" %>
+    </div>
+  <% else %>
+    <div class="back-to-post-page">
+      <%= link_to "Top画面へ", root_path, class: "post-top-button" %>
+    </div>
+  <% end %>
 
   <div id="posts-list">
     <div class="post" id="post-box">
@@ -38,68 +38,66 @@
 
       <!-- 投稿者情報 -->
       <div class="poster">
-        <%= link_to "by #{@post.user.nickname}", user_path(@post.user, from: 'nickname'), class: 'post-user-link'%>
+        <%= link_to "by #{@post.user.nickname}", user_path(@post.user, from: 'nickname'), class: 'post-user-link' %>
         <br>
         <%= l @post.created_at %> <!-- 投稿日時の表示 -->
       </div>
     </div>
 
+    <div id="comments-container">
     <% @post.comments.each do |comment| %>
-  <div class="comment" data-comment-id="<%= comment.id %>">
-    <div class="comment-content-box">
-      <p><%= comment.content %></p>
-    </div>
-
-    <div class="commenter">
-      <%= link_to "by #{comment.user.nickname}", user_path(comment.user, from: 'nickname'), class: 'post-user-link'%>
-      <br>
-      <%= l comment.created_at %> <!-- 投稿日時の表示 -->
-    </div>
-
-    <% if comment.user && comment.user.id == (current_user&.id || User.guest.id) %>
-      <%= image_tag "meat-bomb1.png", alt: "meatballmenu image", class: "meatball-menu-image hover-bomb-image" , data: { comment_id: comment.id } %>
-    <% end %>
-
-    <div class="comment-edit-delete-modal-buttons" style="display: none;" data-comment-id="<%= comment.id %>">
-      <% if comment.edit_count < 1 %>
-        <button class="edit-comment-button" data-comment-id="<%= comment.id %>" data-post-id="<%= @post.id %>">Edit</button>
-      <% end %>
-      <button class="delete-comment-button" data-comment-id="<%= comment.id %>" data-post-id="<%= @post.id %>">Delete</button>
-    </div>
-
-    <div class="edit-comment-modal" data-comment-id="<%= comment.id %>" style="display: none;">
-    <div class="comment-content">
-      <!-- モーダルウィンドウを閉じるためのボタン -->
-      <span class="close-modal-button">&times;</span>
-
-      <!-- Ajaxで読み込まれる編集フォームをここに表示 -->
-      <div class="edit-comment-body" data-comment-id="<%= comment.id %>">
-        <!-- ここに部分テンプレートが挿入される -->
-      </div>
-    </div>
-  </div>
-
-    <div class="delete-comment-modal" style="display:none;" data-comment-id="<%= comment.id %>">
-      <div class="comment-delete-box">
-        <div class="delete-details">
-        ※コメント内容を編集できるのは10分以内の一回のみ。削除できるのは投稿から30分以内までです。
+      <div class="comment" data-comment-id="<%= comment.id %>">
+        <div class="comment-content-box">
+          <p><%= comment.content %></p>
         </div>
-        <%= link_to '削除', post_comment_path(@post.id, comment.id), data: { turbo_method: :delete }, class: 'delete-comment-link' %>
-        <button class="cancel-complete-button delete-cancel">キャンセル</button>
+
+        <div class="commenter">
+          <%= link_to "by #{comment.user.nickname}", user_path(comment.user, from: 'nickname'), class: 'post-user-link' %>
+          <br>
+          <%= l comment.created_at %> <!-- 投稿日時の表示 -->
+        </div>
+
+        <% if comment.user && comment.user.id == (current_user&.id || User.guest.id) %>
+          <%= image_tag "meat-bomb1.png", alt: "meatballmenu image", class: "meatball-menu-image hover-bomb-image", data: { comment_id: comment.id } %>
+        <% end %>
+
+        <div class="comment-edit-delete-modal-buttons" style="display: none;" data-comment-id="<%= comment.id %>">
+          <% if comment.edit_count < 1 %>
+            <button class="edit-comment-button" data-comment-id="<%= comment.id %>" data-post-id="<%= @post.id %>">Edit</button>
+          <% end %>
+          <button class="delete-comment-button" data-comment-id="<%= comment.id %>" data-post-id="<%= @post.id %>">Delete</button>
+        </div>
+
+        <div class="edit-comment-modal" data-comment-id="<%= comment.id %>" style="display: none;">
+          <div class="comment-content">
+            <!-- モーダルウィンドウを閉じるためのボタン -->
+            <span class="close-modal-button">&times;</span>
+
+            <!-- Ajaxで読み込まれる編集フォームをここに表示 -->
+            <div class="edit-comment-body" data-comment-id="<%= comment.id %>">
+              <!-- ここに部分テンプレートが挿入される -->
+            </div>
+          </div>
+        </div>
+
+        <div class="delete-comment-modal" style="display:none;" data-comment-id="<%= comment.id %>">
+          <div class="comment-delete-box">
+            <div class="delete-details">
+              ※コメント内容を編集できるのは10分以内の一回のみ。削除できるのは投稿から30分以内までです。
+            </div>
+            <%= link_to '削除', post_comment_path(@post.id, comment.id), data: { turbo_method: :delete }, class: 'delete-comment-link' %>
+            <button class="cancel-complete-button delete-cancel">キャンセル</button>
+          </div>
+        </div>
       </div>
+    <% end %>
     </div>
 
-  </div>
-<% end %>
-
-
-
-      <!-- モーダルボタン -->
+    <!-- モーダルボタン -->
     <div id="modal-buttons">
       <button id="edit-thread-btn" class="edit-button" data-post-id="<%= @post.id %>">編集</button>
       <button id="delete-thread-btn" class="delete-button">削除</button>
     </div>
-
   </div>
 
   <div class="add-comment">
@@ -115,7 +113,8 @@
 
       <!-- 部分テンプレートを使ってフォームを表示 -->
       <div class="comment-body">
-        <%= form_with(model: [@post, @comment], local: true, html: { id: 'comment-form' }) do |f| %>
+        <%= form_with model: [ @post, @post.comments.build ], id: 'comment-form', data: { turbo: false } do |f| %>
+          <%= hidden_field_tag :post_id, @post.id %>
           <div class="comment-form-group">
             <%= f.label :content, "コメント" %>
             <%= f.text_area :content, class: 'comment-content-form' %>
@@ -152,7 +151,6 @@
       <button id="cancel-complete-button" class="delete-cancel">キャンセル</button>
     </div>
   </div>
-  
 
   <!-- JavaScript: 画像ホバー時に画像を変更 -->
   <script>
@@ -195,4 +193,5 @@
       });
     });
   </script>
+   <%= render 'shared/level_up_modal' %>
 </body>
