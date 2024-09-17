@@ -58,22 +58,22 @@ class User < ApplicationRecord
       LevelUpNotificationChannel.broadcast_to(self, {
         level_up_message: "レベル#{level.level_number}に到達しました！",
         skill_get_message: "新しいスキル「#{level.reward_value}」を獲得しました！",
-        next_experience_point: "次のレベルに必要な経験値#{level.exp_required}",
-        required_comment_count: "必要最低コメント数 #{level.exp_required / 5}"
+        next_experience_point: "次のレベルに必要な経験値: #{level.exp_required}",
+        required_comment_count: "必要最低コメント数: #{level.exp_required / 5}"
       })
     when 'item'
       unlock_item(level.reward_value)
       LevelUpNotificationChannel.broadcast_to(self, {
         level_up_message: "レベル#{level.level_number}に到達しました！",
         item_get_message: "新しいアイテム「#{level.reward_value}」を獲得しました！",
-        next_experience_point: "次のレベルに必要な経験値#{level.exp_required}",
-        required_comment_count: "必要最低コメント数#{level.exp_required / 5}"
+        next_experience_point: "次のレベルに必要な経験値: #{level.exp_required}",
+        required_comment_count: "必要最低コメント数: #{level.exp_required / 5}"
       })
     else
       LevelUpNotificationChannel.broadcast_to(self, {
         level_up_message: "レベル#{level.level_number}に到達しました！",
-        next_experience_point: "次のレベルに必要な経験値#{level.exp_required}",
-        required_comment_count: "必要最低コメント数#{level.exp_required / 5}"
+        next_experience_point: "次のレベルに必要な経験値: #{level.exp_required}",
+        required_comment_count: "必要最低コメント数: #{level.exp_required / 5}"
       })
     end
   end

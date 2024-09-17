@@ -8,14 +8,20 @@ class PostsController < ApplicationController
     @posts = Post.search(params[:keyword])
   end
 
+  def latest
+    # 最新の投稿を取得 (例: 直近10件)
+    latest_posts = Post.order(created_at: :desc).limit(10)
+    # 必要なデータだけを返す
+    render json: latest_posts.as_json(include: { user: { only: [:id, :nickname] } }, methods: [:image_url])
+  end
+
   def create
     @post = Post.new(post_params)
     @post.user = current_user || User.guest
   
     respond_to do |format|
       if @post.save
-        format.html { redirect_to root_path, notice: 'Post was successfully created.' }
-        format.json { render json: @post.as_json(include: { user: { only: :nickname } }, methods: [:image_url]), status: :created }
+        format.json { render json: @post.as_json(include: { user: { only: [:id, :nickname] } }, methods: [:image_url]), status: :created }
       else
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end

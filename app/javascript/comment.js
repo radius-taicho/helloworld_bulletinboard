@@ -1,5 +1,4 @@
 document.addEventListener("turbo:load", () => {
-  // モーダルウィンドウの要素を取得
   const commentModalWindow = document.getElementById("comment-modal-window");
   const addCommentButton = document.getElementById("add-comment-button");
   const closeModalButton = document.querySelector('.close-modal-button');
@@ -8,47 +7,39 @@ document.addEventListener("turbo:load", () => {
 
   if (!commentModalWindow || !addCommentButton || !commentForm || !commentsContainer) return;
 
-  // 日時文字列をDateオブジェクトに変換
   const formatDate = (isoDateString) => {
     const date = new Date(isoDateString);
-    return date.toLocaleString('ja-JP'); // 'ja-JP'は日本語のローカライズ
+    return date.toLocaleString('ja-JP');
   };
 
-  // モーダルウィンドウを閉じる関数
   function closeModal(modal) {
     if (modal) {
       modal.style.display = 'none';
     }
   }
 
-  // コメント追加ボタンがクリックされたらモーダルを開く
-  addCommentButton.addEventListener("click", function() {
+  addCommentButton.addEventListener("click", () => {
     commentModalWindow.style.display = "block";
   });
 
-  // モーダルウィンドウの「閉じる」ボタンで閉じる
   if (closeModalButton) {
     closeModalButton.addEventListener('click', () => {
       closeModal(commentModalWindow);
     });
   }
 
-  // ウィンドウ外をクリックした場合にモーダルを閉じる
-  window.addEventListener("click", function(event) {
+  window.addEventListener("click", (event) => {
     if (event.target === commentModalWindow) {
-      commentModalWindow.style.display = "none";
+      closeModal(commentModalWindow);
     }
   });
 
-  // 非同期でコメントを追加する処理
   if (commentForm) {
-    commentForm.addEventListener('submit', function(event) {
+    commentForm.addEventListener('submit', (event) => {
       event.preventDefault();
       
       const formData = new FormData(commentForm);
       const postId = formData.get('post_id');
-
-      console.log(`Submitting comment for post ID: ${postId}`); // デバッグ用ログ
 
       fetch(`/posts/${postId}/comments`, {
         method: 'POST',
@@ -58,16 +49,13 @@ document.addEventListener("turbo:load", () => {
         },
         body: formData,
       })
-      .then(response => {
-        console.log(`Response status: ${response.status}`); // レスポンスのステータスコードをログ
-        return response.json();
-      })
+      .then(response => response.json())
       .then(data => {
-        console.log('Response data:', data); // レスポンスデータをログ
         if (data.success) {
-          addCommentToList(data.comment);
-          commentForm.reset(); // フォームをリセット
-          closeModal(commentModalWindow); // コメント送信後にモーダルを閉じる
+          const currentUserId = data.current_user_id;
+          addCommentToList(data.comment, currentUserId);
+          commentForm.reset();
+          closeModal(commentModalWindow);
         } else {
           console.error('Error:', data.error);
         }
@@ -76,39 +64,124 @@ document.addEventListener("turbo:load", () => {
     });
   }
 
-  // 新しいコメントをHTMLに追加する関数
-  function addCommentToList(comment) {
-    if (!commentsContainer) {
-      console.error("コメント容器が見つかりません。");
-      return;
-    }
-
+  function addCommentToList(comment, currentUserId) {
     const commentHTML = `
       <div class="comment" data-comment-id="${comment.id}">
         <div class="comment-content-box">
           <p>${comment.content}</p>
         </div>
-
         <div class="commenter">
           <a href="/users/${comment.user.id}?from=nickname" class="post-user-link">by ${comment.user.nickname}</a>
           <br>
           ${formatDate(comment.created_at)}
         </div>
-        
-        ${comment.user.id === comment.current_user_id ? `
+        ${parseInt(comment.user.id) === parseInt(currentUserId) ? `
           <img src="/assets/meat-bomb1.png" alt="meatballmenu image" class="meatball-menu-image hover-bomb-image" data-comment-id="${comment.id}">
           <div class="comment-edit-delete-modal-buttons" data-comment-id="${comment.id}">
             <button class="edit-comment-button" data-comment-id="${comment.id}" data-post-id="${comment.post_id}">Edit</button>
             <button class="delete-comment-button" data-comment-id="${comment.id}" data-post-id="${comment.post_id}">Delete</button>
-          </div>` : ''
-        }
+          </div>
+          <div class="edit-comment-modal" data-comment-id="${comment.id}">
+            <div class="comment-content">
+              <span class="close-modal-button">&times;</span>
+              <div class="edit-comment-body" data-comment-id="${comment.id}">
+                <!-- ここに部分テンプレートが挿入される -->
+              </div>
+            </div>
+          </div>
+          <div class="delete-comment-modal" data-comment-id="${comment.id}">
+            <div class="comment-delete-box">
+              <div class="delete-details">
+                ※コメント内容を編集できるのは10分以内の一回のみ。削除できるのは投稿から30分以内までです。
+              </div>
+              <a href="/posts/${comment.post_id}/comments/${comment.id}" data-turbo-method="delete" class="delete-comment-link">削除</a>
+              <button class="cancel-complete-button delete-cancel">キャンセル</button>
+            </div>
+          </div>
+        ` : ''}
       </div>
     `;
-
-    commentsContainer.insertAdjacentHTML('beforeend', commentHTML);
     
-    // デバッグ: HTMLの確認
-    console.log("New comment added:", commentHTML);
-    console.log("Current comments container HTML:", commentsContainer.innerHTML);
+    commentsContainer.insertAdjacentHTML('beforeend', commentHTML);
+    attachHoverBombListeners(comment.id);
+  }
+  
+  function attachHoverBombListeners(commentId) {
+    const hoverBombImage = document.querySelector(`.hover-bomb-image[data-comment-id="${commentId}"]`);
+    const editAndDeleteCommentButtons = document.querySelector(`.comment-edit-delete-modal-buttons[data-comment-id="${commentId}"]`);
+    const editCommentButton = document.querySelector(`.edit-comment-button[data-comment-id="${commentId}"]`);
+    const editCommentModal = document.querySelector(`.edit-comment-modal[data-comment-id="${commentId}"]`);
+    const deleteCommentButton = document.querySelector(`.delete-comment-button[data-comment-id="${commentId}"]`);
+    const deleteCommentModal = document.querySelector(`.delete-comment-modal[data-comment-id="${commentId}"]`);
+    const cancelDeleteCommentButton = deleteCommentModal?.querySelector('.cancel-complete-button');
+  
+    if (hoverBombImage) {
+      hoverBombImage.addEventListener("click", () => {
+        if (editAndDeleteCommentButtons) {
+          editAndDeleteCommentButtons.style.display = editAndDeleteCommentButtons.style.display === "block" ? "none" : "block";
+        }
+      });
+    }
+  
+    window.addEventListener("click", (event) => {
+      if (!hoverBombImage?.contains(event.target) && !editAndDeleteCommentButtons?.contains(event.target)) {
+        if (editAndDeleteCommentButtons) {
+          editAndDeleteCommentButtons.style.display = "none";
+        }
+      }
+      if (event.target === deleteCommentModal) {
+        deleteCommentModal.style.display = "none";
+      }
+      if (event.target === editCommentModal) {
+        editCommentModal.style.display = "none";
+      }
+    });
+  
+    if (deleteCommentButton) {
+      deleteCommentButton.addEventListener("click", () => {
+        if (deleteCommentModal) {
+          deleteCommentModal.style.display = "block";
+        }
+      });
+    }
+  
+    if (editCommentButton) {
+      editCommentButton.addEventListener("click", () => {
+        const postId = editCommentButton.dataset.postId;
+        const commentId = editCommentButton.dataset.commentId;
+  
+        fetch(`/posts/${postId}/comments/${commentId}.json`)
+          .then(response => response.json())
+          .then(data => {
+            if (data.form) {
+              if (editCommentModal) {
+                const commentBody = editCommentModal.querySelector('.edit-comment-body');
+                if (commentBody) {
+                  commentBody.innerHTML = data.form;
+                  editCommentModal.style.display = 'block';
+                } else {
+                  console.warn('Warning: editCommentModal does not contain .edit-comment-body');
+                }
+              } else {
+                console.warn('Warning: editCommentModal is not available');
+              }
+            } else {
+              console.warn('Warning: data.form is not available');
+            }
+          })
+          .catch(error => {
+            console.error('Error during comment fetch:', error);
+            alert('コメントの取得中にエラーが発生しました。');
+          });
+      });
+    }
+  
+    if (cancelDeleteCommentButton) {
+      cancelDeleteCommentButton.addEventListener("click", () => {
+        if (deleteCommentModal) {
+          deleteCommentModal.style.display = "none";
+        }
+      });
+    }
   }
 });

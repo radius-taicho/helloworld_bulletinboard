@@ -61,14 +61,14 @@
           <%= image_tag "meat-bomb1.png", alt: "meatballmenu image", class: "meatball-menu-image hover-bomb-image", data: { comment_id: comment.id } %>
         <% end %>
 
-        <div class="comment-edit-delete-modal-buttons" style="display: none;" data-comment-id="<%= comment.id %>">
+        <div class="comment-edit-delete-modal-buttons" data-comment-id="<%= comment.id %>">
           <% if comment.edit_count < 1 %>
             <button class="edit-comment-button" data-comment-id="<%= comment.id %>" data-post-id="<%= @post.id %>">Edit</button>
           <% end %>
           <button class="delete-comment-button" data-comment-id="<%= comment.id %>" data-post-id="<%= @post.id %>">Delete</button>
         </div>
 
-        <div class="edit-comment-modal" data-comment-id="<%= comment.id %>" style="display: none;">
+        <div class="edit-comment-modal" data-comment-id="<%= comment.id %>">
           <div class="comment-content">
             <!-- モーダルウィンドウを閉じるためのボタン -->
             <span class="close-modal-button">&times;</span>
@@ -80,7 +80,7 @@
           </div>
         </div>
 
-        <div class="delete-comment-modal" style="display:none;" data-comment-id="<%= comment.id %>">
+        <div class="delete-comment-modal" data-comment-id="<%= comment.id %>">
           <div class="comment-delete-box">
             <div class="delete-details">
               ※コメント内容を編集できるのは10分以内の一回のみ。削除できるのは投稿から30分以内までです。
@@ -106,7 +106,7 @@
     </button>
   </div>
 
-  <div id="comment-modal-window" style="display: none;">
+  <div id="comment-modal-window" >
     <div class="comment-content">
       <!-- モーダルウィンドウを閉じるためのボタン -->
       <span class="close-modal-button">&times;</span>
@@ -129,7 +129,7 @@
   </div>
 
   <!-- モーダルウィンドウ -->
-  <div id="edit-form-modal" style="display: none;">
+  <div id="edit-form-modal">
     <div class="edit-modal-content">
       <!-- モーダルウィンドウを閉じるためのボタン -->
       <span class="close-modal-button">&times;</span>
@@ -140,7 +140,7 @@
     </div>
   </div>
 
-  <div id="delete-modal" style="display: none;">
+  <div id="delete-modal">
     <div class="post-delete-box">
       <div class="delete-details">
         ※スレッド内容を編集できるのは10分以内。削除できるのは投稿から30分以内までです。
