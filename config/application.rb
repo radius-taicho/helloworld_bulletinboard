@@ -18,6 +18,8 @@ module HelloworldBulletinboard
     config.active_storage.variant_processor = :mini_magick
     config.time_zone = 'Tokyo'
     config.i18n.default_locale = :ja
+    config.exceptions_app = self.routes
+
 
     # Configuration for the application, engines, and railties goes here.
     #

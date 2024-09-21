@@ -2,8 +2,13 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all.order(created_at: :desc)
     @post = Post.new
+  
+    respond_to do |format|
+      format.html # HTML形式のレスポンス（通常のビューが必要）
+       format.json { render json: @posts }
+    end
   end
-
+  
   def search
     @posts = Post.search(params[:keyword])
   end
@@ -29,14 +34,15 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = Post.find_by(id: params[:id]) # find_byを使用
+    if @post.nil?
+      render 'not-found', status: :not_found
+      return
+    end
     @comments = @post.comments.includes(:user)
     @comment = Comment.new
     @from_my_page = params[:from] == 'mypage'
 
-
-    
-    
     respond_to do |format|
       format.html
       format.json { render json: { post: @post, comments: @comments } }

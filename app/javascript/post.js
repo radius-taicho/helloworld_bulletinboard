@@ -91,7 +91,7 @@ document.addEventListener("turbo:load", () => {
   }
 
   function fetchLatestPosts() {
-    fetch('/latest_posts')
+    fetch('/posts/latest')  // ここを変更
       .then(response => response.json())
       .then(posts => {
         posts.forEach(post => {
@@ -106,4 +106,5 @@ document.addEventListener("turbo:load", () => {
 
   // 5秒ごとに最新の投稿をフェッチ
   setInterval(fetchLatestPosts, 3000);
+
 });

@@ -12,14 +12,18 @@ document.addEventListener("turbo:load", () => {
     return date.toLocaleString('ja-JP');
   };
 
+  let isModalOpen = false;
+
   function closeModal(modal) {
     if (modal) {
       modal.style.display = 'none';
+      isModalOpen = false; // モーダルを閉じると状態を更新
     }
   }
 
   addCommentButton.addEventListener("click", () => {
     commentModalWindow.style.display = "block";
+    isModalOpen = true; // モーダルを開くと状態を更新
   });
 
   if (closeModalButton) {
@@ -40,11 +44,11 @@ document.addEventListener("turbo:load", () => {
       
       const formData = new FormData(commentForm);
       const postId = formData.get('post_id');
-
+      
       fetch(`/posts/${postId}/comments`, {
         method: 'POST',
         headers: {
-          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content,
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
           'Accept': 'application/json',
         },
         body: formData,
@@ -56,6 +60,7 @@ document.addEventListener("turbo:load", () => {
           addCommentToList(data.comment, currentUserId);
           commentForm.reset();
           closeModal(commentModalWindow);
+          refreshComments(); // 新しく追加されたコメントを再取得
         } else {
           console.error('Error:', data.error);
         }
@@ -85,7 +90,6 @@ document.addEventListener("turbo:load", () => {
             <div class="comment-content">
               <span class="close-modal-button">&times;</span>
               <div class="edit-comment-body" data-comment-id="${comment.id}">
-                <!-- ここに部分テンプレートが挿入される -->
               </div>
             </div>
           </div>
@@ -105,7 +109,34 @@ document.addEventListener("turbo:load", () => {
     commentsContainer.insertAdjacentHTML('beforeend', commentHTML);
     attachHoverBombListeners(comment.id);
   }
+
+  function refreshComments() {
+    if (isModalOpen) return; // モーダルが開いている場合は更新しない
+
+    const postIdElement = document.querySelector('[name="post_id"]');
+    if (!postIdElement) {
+      console.error('Error: post_id element not found');
+      return;
+    }
   
+    const postId = postIdElement.value;
+  
+    fetch(`/posts/${postId}/comments/latest`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+      },
+    })
+    .then(response => response.json())
+    .then(data => {
+      commentsContainer.innerHTML = ''; // 既存のコメントをクリア
+      data.comments.forEach(comment => {
+        addCommentToList(comment, data.current_user_id);
+      });
+    })
+    .catch(error => console.error('Error fetching comments:', error));
+  }
+
   function attachHoverBombListeners(commentId) {
     const hoverBombImage = document.querySelector(`.hover-bomb-image[data-comment-id="${commentId}"]`);
     const editAndDeleteCommentButtons = document.querySelector(`.comment-edit-delete-modal-buttons[data-comment-id="${commentId}"]`);
@@ -119,6 +150,8 @@ document.addEventListener("turbo:load", () => {
       hoverBombImage.addEventListener("click", () => {
         if (editAndDeleteCommentButtons) {
           editAndDeleteCommentButtons.style.display = editAndDeleteCommentButtons.style.display === "block" ? "none" : "block";
+          if (editAndDeleteCommentButtons.style.display === "block") 
+            isModalOpen = true;
         }
       });
     }
@@ -141,6 +174,7 @@ document.addEventListener("turbo:load", () => {
       deleteCommentButton.addEventListener("click", () => {
         if (deleteCommentModal) {
           deleteCommentModal.style.display = "block";
+          isModalOpen = true; // モーダルを開くと状態を更新
         }
       });
     }
@@ -159,6 +193,7 @@ document.addEventListener("turbo:load", () => {
                 if (commentBody) {
                   commentBody.innerHTML = data.form;
                   editCommentModal.style.display = 'block';
+                  isModalOpen = true; // モーダルを開くと状態を更新
                 } else {
                   console.warn('Warning: editCommentModal does not contain .edit-comment-body');
                 }
@@ -184,4 +219,7 @@ document.addEventListener("turbo:load", () => {
       });
     }
   }
+  
+  // 5秒ごとに最新のコメントを取得
+  setInterval(refreshComments, 5000);
 });

@@ -14,6 +14,9 @@ class User < ApplicationRecord
   has_many :notifications, dependent: :destroy
   has_many :skills
 
+   # 初期レベル0を設定するメソッド
+   after_create :set_initial_level
+
   def add_experience(points)
     self.experience_points += points
     level_up if experience_points >= current_level.exp_required
@@ -27,6 +30,9 @@ class User < ApplicationRecord
         self.level_id = next_level.id
       end
       if save
+        self.max_hp += current_level.hp_increase
+        self.hp = [self.hp, max_hp].min # 既存のHPが最大HPを超えないようにするp
+
         unlock_rewards_for_level(current_level)
         save_level_up_notification(current_level)
       else
@@ -96,6 +102,20 @@ class User < ApplicationRecord
     Level.where("level_number > ?", current_level.level_number).order(:level_number).first || current_level
   end
 
+  def recover_hp(amount)
+    self.hp += amount
+    self.hp = [self.hp, max_hp].min # 最大HPを超えないようにする
+    save
+  end
+
+  def decrease_hp(amount)
+    self.hp -= amount
+    self.hp = [self.hp, 0].max # HPが0未満にならないようにする
+    save
+  end
+  
+  
+
   def guest?
     email == 'guest@example.com'
   end
@@ -119,5 +139,14 @@ class User < ApplicationRecord
       sns.save
     end
     user
+  end
+
+  private
+
+  def set_initial_level
+    self.level = Level.find_by(level_number: 0) # レベル0を初期設定
+    self.hp = 3
+    self.max_hp = 3
+    save
   end
 end

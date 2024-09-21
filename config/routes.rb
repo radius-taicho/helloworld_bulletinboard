@@ -6,17 +6,17 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :edit, :update]
 
-  get '/latest_posts', to: 'posts#latest'
-
   resources :posts do
-    resources :comments
+    resources :comments do
+      collection do
+        get 'latest'  # これにより /posts/:post_id/comments/latest のルートが作成されます
+      end
+    end
     collection do
       get 'search'
       get 'latest'
     end
   end
-
-  
 
   resources :direct_message_requests, only: [:create] do
     member do

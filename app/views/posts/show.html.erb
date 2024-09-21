@@ -16,6 +16,7 @@
       <% if @post.user && @post.user.id == (current_user&.id || User.guest.id) %>
         <%= image_tag "meat-bomb1.png", alt: "meatballmenu image", class: "meatball-menu-image", id: "hover-bomb-image2" %>
       <% end %>
+      
 
       <div class="post-title-box">
         <h2><%= @post.title %></h2>
@@ -47,9 +48,12 @@
     <div id="comments-container">
     <% @post.comments.each do |comment| %>
       <div class="comment" data-comment-id="<%= comment.id %>">
+
         <div class="comment-content-box">
           <p><%= comment.content %></p>
         </div>
+
+        
 
         <div class="commenter">
           <%= link_to "by #{comment.user.nickname}", user_path(comment.user, from: 'nickname'), class: 'post-user-link' %>
@@ -113,17 +117,17 @@
 
       <!-- 部分テンプレートを使ってフォームを表示 -->
       <div class="comment-body">
-        <%= form_with model: [ @post, @post.comments.build ], id: 'comment-form', data: { turbo: false } do |f| %>
-          <%= hidden_field_tag :post_id, @post.id %>
+        <%= form_with model: [ @post, @comment], id: 'comment-form', data: { turbo: false } do |f| %>
+         <%= hidden_field_tag 'post_id', @post.id %>
           <div class="comment-form-group">
-            <%= f.label :content, "コメント" %>
+           <%= f.label :content, "コメント" %>
             <%= f.text_area :content, class: 'comment-content-form' %>
           </div>
-
           <div class="comment-form-button">
             <%= f.submit '送信', class: 'comment-submit-button' %>
           </div>
         <% end %>
+
       </div>
     </div>
   </div>
