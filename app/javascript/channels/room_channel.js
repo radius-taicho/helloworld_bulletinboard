@@ -1,4 +1,5 @@
-import consumer from "./consumer"
+import consumer from "./consumer" 
+//あとで見直し
 
 document.addEventListener("turbo:load", () => {
   const messageWrapper = document.querySelector('.message-wrapper');

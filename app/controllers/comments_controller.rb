@@ -2,16 +2,42 @@ class CommentsController < ApplicationController
   before_action :set_post
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
-  def create
-    @comment = @post.comments.new(comment_params)
-    @comment.user = current_user || User.guest
+  def latest
+    # last_comment_id パラメータを取得（なければ nil）
+    last_comment_id = params[:last_comment_id].to_i
 
+    # last_comment_id より新しいコメントを取得
+    new_comments = @post.comments.where('id > ?', last_comment_id).order(:created_at)
+
+    # 現在のユーザーIDを取得（ログインユーザーが存在しない場合は nil）
+    current_user_id = current_user&.id || User.guest.id
+
+    # JSON形式でレスポンスを返す
+    render json: {
+      comments: new_comments.as_json(include: { user: { only: [:id, :nickname] } }),
+      current_user_id: current_user_id
+    }
+  end
+
+
+  def create
+    @comment = @post.comments.build(comment_params)
+    @comment.user = current_user || User.guest
+  
     if @comment.save
-      render json: { comment: @comment, message: 'コメントが追加されました' }, status: :created
+      # コメント保存後にレベルアップを確認
+      # 
+      # レベルアップ情報を含めてJSONレスポンスを返す
+      render json: {
+        success: true,
+        comment: @comment.as_json(include: { user: { only: [:id, :nickname] } }),
+        current_user_id: current_user&.id || User.guest.id
+      }
     else
       render json: { errors: @comment.errors.full_messages }, status: :unprocessable_entity
     end
   end
+  
 
   def show
     respond_to do |format|

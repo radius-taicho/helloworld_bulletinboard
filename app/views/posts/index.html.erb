@@ -1,12 +1,13 @@
 
 
 <body class="index-page">
+<%= render 'shared/level_up_modal' %>
 
 <%= render "shared/header" %>
 
 <div id="posts-list">
   <% @posts.each do |post| %>
-    <div class="post" id="post-box">
+    <div class="post" id="post-box" data-post-id="<%= post.id %>">
       <div class="post-title-box">
         <h2> <%= link_to "#{post.title}", post_path(post.id), class: 'post-title-link' %> </h2>
       </div>

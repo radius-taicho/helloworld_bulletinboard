@@ -12,7 +12,9 @@
   <div class="custom-file-upload">
     <%= f.file_field :image, accept: "image/*,video/*", style: "display: none;", class: "media-file-post" %>
     <div class="file-upload-image">
+    <%= f.label :image do %>
       <%= image_tag "camera.png", alt: "Upload Image", class: "custom-upload-button" %>
+    <% end %>
     </div>
 
   <div class="form-button">

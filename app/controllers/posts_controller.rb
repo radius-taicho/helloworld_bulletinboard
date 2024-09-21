@@ -2,10 +2,22 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all.order(created_at: :desc)
     @post = Post.new
+  
+    respond_to do |format|
+      format.html # HTML形式のレスポンス（通常のビューが必要）
+       format.json { render json: @posts }
+    end
   end
-
+  
   def search
     @posts = Post.search(params[:keyword])
+  end
+
+  def latest
+    # 最新の投稿を取得 (例: 直近10件)
+    latest_posts = Post.order(created_at: :desc).limit(10)
+    # 必要なデータだけを返す
+    render json: latest_posts.as_json(include: { user: { only: [:id, :nickname] } }, methods: [:image_url])
   end
 
   def create
@@ -14,8 +26,7 @@ class PostsController < ApplicationController
   
     respond_to do |format|
       if @post.save
-        format.html { redirect_to root_path, notice: 'Post was successfully created.' }
-        format.json { render json: @post.as_json(include: { user: { only: :nickname } }, methods: [:image_url]), status: :created }
+        format.json { render json: @post.as_json(include: { user: { only: [:id, :nickname] } }, methods: [:image_url]), status: :created }
       else
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
@@ -23,14 +34,15 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = Post.find_by(id: params[:id]) # find_byを使用
+    if @post.nil?
+      render 'not-found', status: :not_found
+      return
+    end
     @comments = @post.comments.includes(:user)
     @comment = Comment.new
     @from_my_page = params[:from] == 'mypage'
 
-
-    
-    
     respond_to do |format|
       format.html
       format.json { render json: { post: @post, comments: @comments } }

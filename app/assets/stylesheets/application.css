@@ -22,6 +22,93 @@ body {
   min-width: 1150px;
 }
 
+/* モーダルの背景 */
+.level-up-modal {
+  position: fixed; /* 固定位置 */
+  top: 0;
+  left: 0;
+  width: 100%; /* 横幅全体 */
+  height: 100%; /* 高さ全体 */
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明の背景色 */
+  display: flex; /* Flexboxで中央に配置 */
+  align-items: center; /* 縦方向中央に配置 */
+  justify-content: center; /* 横方向中央に配置 */
+  z-index: 1000; /* モーダルが他のコンテンツの上に表示されるように */
+}
+
+/* モーダルコンテンツ */
+.level-up-modal-content {
+  font-family: "DotGothic16", sans-serif;
+  background-color: #282626; /* 背景色 */
+  color: white;
+  border-radius: 8px; /* 角を丸く */
+  padding: 20px; /* 内側の余白 */
+  max-width: 500px; /* 最大幅 */
+  width: 90%; /* 幅の制限 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* シャドウ */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.level-up-modal-content .level-up-user-name {
+  font-size: 30px;
+}
+
+.level-up-modal-content .level-up-level-up {
+  font-size: 40px;
+}
+
+/* メッセージのスタイル */
+.level-up-message,
+.skill-get-message,
+.item-get-message,
+.next-experience-point-message,
+.required-comment-count-message {
+  
+  font-size: 20px; /* フォントサイズ */
+}
+
+.level-up-message {
+  width: 100%;
+  border-bottom: 1px solid white;
+  text-align: center;
+}
+
+/* 閉じるボタン */
+.close {
+  background-color: #f44336; /* ボタンの背景色 */
+  color: white; /* テキストの色 */
+  border: none; /* ボーダーなし */
+  padding: 10px 20px; /* 内側の余白 */
+  border-radius: 4px; /* 角を丸く */
+  cursor: pointer; /* マウスカーソルをポインターに */
+  font-size: 16px; /* フォントサイズ */
+}
+
+/* ボタンのホバー効果 */
+.close:active {
+  background-color: #d32f2f; /* ホバー時の背景色 */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .form-group {
   display: flex;
   justify-content: center;

@@ -1,6 +1,6 @@
 .user-show-page {
   margin-top: 0;
-  background-color: rgb(209, 209, 236);
+  background-color: #3b3b3b;
   min-width: 960px;
   min-height: 500px;
 }
@@ -16,6 +16,7 @@
   width: 100%;
   height: 40%;
   font-family: "DotGothic16", sans-serif;
+  color: white;
 }
 
 .profile-wrapper {
@@ -67,13 +68,14 @@
   text-align: center;
   border: black 2px solid;
   transform: translateY(40%);
+  overflow-y: scroll;
 }
+
 
 .notification-modal-content ul {
   border-top: 1px solid;
   margin: 0px;
   padding: 0px;
-  overflow-y: auto;
 }
 
 .notification-modal-content li {
@@ -100,12 +102,12 @@
 }
 
 .profile-image {
-  border: 1px solid black;
+  border: 1px solid white;
   border-radius: 33px;
   width: 64px;
   height: 64px;
   margin-right: 10px;
-  background-color: white;
+  background-color: #333;
 }
 
 .profile-image img {
@@ -121,13 +123,16 @@
   width: 120px;
   cursor: pointer;
   background-color: white;
+  margin-left: auto;
 }
+
  .edit-profile {
   font-size: 13px;
   line-height: 26px;
   margin: 0;
   text-decoration: none;
   color: black;
+  
  }
 
 .profile-detail {
@@ -138,9 +143,10 @@
 }
 
 .profile-user-name {
-  width: 100px;
-  height: 30px;
+  width: auto;
+  height: auto;
   line-height: 30px;
+  margin-right: 7px;
 }
 
 .user-name{
@@ -159,6 +165,7 @@
   line-height: 30px;
   padding: 0px 3px;
   border-radius: 5px;
+  color: black;
   
 }
 

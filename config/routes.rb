@@ -7,9 +7,14 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update]
 
   resources :posts do
-    resources :comments
+    resources :comments do
+      collection do
+        get 'latest'  # これにより /posts/:post_id/comments/latest のルートが作成されます
+      end
+    end
     collection do
       get 'search'
+      get 'latest'
     end
   end
 

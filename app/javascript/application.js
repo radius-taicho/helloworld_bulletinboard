@@ -10,3 +10,4 @@ import "notification"
 import "direct-message"
 import "profile-edit"
 import "./channels/room_channel";
+import "./channels/level_up_notification_channel";

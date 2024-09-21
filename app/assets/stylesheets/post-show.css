@@ -1,6 +1,6 @@
 .show-page {
   margin-top: 0;
-  background-color: rgb(209, 209, 236);
+  background-color: #3b3b3b;
 }
 
 .back-to-post-page {
@@ -35,6 +35,7 @@
   padding: 2px;
   font-family: "DotGothic16", sans-serif;
   font-size: 20px;
+  color: white;
 }
 
 
@@ -67,6 +68,7 @@
   justify-content: center;
   align-items: center;
   z-index: 1001;
+  display: none;
 }
 
 .edit-modal-content {
@@ -112,6 +114,7 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  display: none;
 }
 
 .post-delete-box {
