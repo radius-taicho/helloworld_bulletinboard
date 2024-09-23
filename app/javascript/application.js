@@ -1,4 +1,5 @@
 import "@hotwired/turbo-rails"
+import "animation"
 import "post"
 import "edit-delete-modal"
 import "comment"

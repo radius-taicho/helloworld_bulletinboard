@@ -115,7 +115,6 @@ document.addEventListener("turbo:load", () => {
 
     const postIdElement = document.querySelector('[name="post_id"]');
     if (!postIdElement) {
-      console.error('Error: post_id element not found');
       return;
     }
   
@@ -221,5 +220,5 @@ document.addEventListener("turbo:load", () => {
   }
   
   // 5秒ごとに最新のコメントを取得
-  setInterval(refreshComments, 5000);
+  setInterval(refreshComments, 8000);
 });

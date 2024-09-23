@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
+  get 'games/index'
+  get 'usages/index'
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations'
   }
 
   resources :users, only: [:show, :edit, :update]
+
+  resources :usages, only: [:index]
+
+  resources :games
 
   resources :posts do
     resources :comments do

@@ -177,6 +177,8 @@ label {
   background-color: inherit;
   height: 100%;
   line-height: 80px;
+  color: white;
+  cursor: pointer;
 }
 
 
@@ -184,5 +186,16 @@ label {
 .shoes-image {
   width: 40px;
   height: 40px;
+  display: block;
+}
+
+.game-start-link {
+  text-decoration: none;
+  color: white;
+}
+
+.game-start-link:active {
+  box-shadow: unset;
+  transform: translateY(3px);
 }
 

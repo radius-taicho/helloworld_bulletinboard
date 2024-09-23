@@ -31,7 +31,7 @@ class User < ApplicationRecord
       end
       if save
         self.max_hp += current_level.hp_increase
-        self.hp = [self.hp, max_hp].min # 既存のHPが最大HPを超えないようにするp
+        self.hp = self.max_hp
 
         unlock_rewards_for_level(current_level)
         save_level_up_notification(current_level)

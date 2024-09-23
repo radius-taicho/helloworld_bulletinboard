@@ -47,13 +47,13 @@
     <div class="adventure-box">
       <div class="your-status">
         <p><%= current_user.nickname %> Lv.<span class="your-level" id="your-level"><%= current_user.current_level.level_number %></span></p>
-        <label for="fuel">HP: <span>10/20</span></label>
-        <meter id="fuel" min="0" max="100" low="33" high="66" optimum="80" value="50">at 50/100</meter>
+        <label for="fuel">HP: <span><%= current_user.hp%> / <%=current_user.max_hp%></span></label>
+        <meter id="fuel" min="0" max= <%= current_user.max_hp %> low=<%= current_user.max_hp / 3 %>  high=<%=current_user.max_hp%> value=<%= current_user.hp %>></meter>
       </div>
       <div class="adventure">
         <button class="adventure-button">
           <%= image_tag 'adventureshoes.png', alt: '冒険の靴', class: 'shoes-image' %>
-          <p>冒険</p>
+          <%= link_to '冒険', games_path, class: 'game-start-link' %>
         </button>
       </div>
     </div>
@@ -75,8 +75,8 @@
         <%= link_to 'ログイン', new_user_session_path, class: 'login-link' %>
       </button>
     <% end %>
-      <button class="menu-buttons">
-        <%= link_to 'メニュー', '#' %>
+      <button class="menu-buttons menu">
+        メニュー
       </button>
   </div>
 </nav>

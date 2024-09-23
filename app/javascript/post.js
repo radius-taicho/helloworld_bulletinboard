@@ -105,6 +105,6 @@ document.addEventListener("turbo:load", () => {
   }
 
   // 5秒ごとに最新の投稿をフェッチ
-  setInterval(fetchLatestPosts, 3000);
+  setInterval(fetchLatestPosts, 10000);
 
 });
