@@ -67,6 +67,8 @@
   align-items: center;
   z-index: 1001;
   display: none;
+  justify-content: center;
+  align-items: center;
 }
 
 .edit-modal-content {
@@ -113,6 +115,8 @@
   align-items: center;
   z-index: 1000;
   display: none;
+  justify-content: center;
+  align-items: center;
 }
 
 .post-delete-box {
@@ -128,10 +132,6 @@
   height: 200px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   z-index: 1001;
-  position: fixed;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .delete-post {

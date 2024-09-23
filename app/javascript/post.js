@@ -8,7 +8,7 @@ document.addEventListener("turbo:load", () => {
   if (!showPostFormButton) return;
 
   showPostFormButton.addEventListener('click', () => {
-    postFormModal.style.display = 'block';
+    postFormModal.style.display = 'flex';
   });
 
   closeButton.addEventListener('click', () => {
