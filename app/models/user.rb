@@ -12,7 +12,10 @@ class User < ApplicationRecord
   has_many :messages, foreign_key: :sender_id
   has_many :direct_message_requests, dependent: :destroy
   has_many :notifications, dependent: :destroy
-  has_many :skills
+  has_many :user_skills
+  has_many :skills, through: :user_skills
+  has_many :user_characters
+  has_many :characters, through: :user_characters
 
    # 初期レベル0を設定するメソッド
    after_create :set_initial_level
@@ -65,7 +68,7 @@ class User < ApplicationRecord
         level_up_message: "レベル#{level.level_number}に到達しました！",
         skill_get_message: "新しいスキル「#{level.reward_value}」を獲得しました！",
         next_experience_point: "次のレベルに必要な経験値: #{level.exp_required}",
-        required_comment_count: "必要最低コメント数: #{level.exp_required / 5}"
+        required_comment_count: "必要最低コメント数(目安): #{level.exp_required / 5}"
       })
     when 'item'
       unlock_item(level.reward_value)
@@ -73,21 +76,30 @@ class User < ApplicationRecord
         level_up_message: "レベル#{level.level_number}に到達しました！",
         item_get_message: "新しいアイテム「#{level.reward_value}」を獲得しました！",
         next_experience_point: "次のレベルに必要な経験値: #{level.exp_required}",
-        required_comment_count: "必要最低コメント数: #{level.exp_required / 5}"
+        required_comment_count: "必要最低コメント数(目安): #{level.exp_required / 5}"
       })
     else
       LevelUpNotificationChannel.broadcast_to(self, {
         level_up_message: "レベル#{level.level_number}に到達しました！",
         next_experience_point: "次のレベルに必要な経験値: #{level.exp_required}",
-        required_comment_count: "必要最低コメント数: #{level.exp_required / 5}"
+        required_comment_count: "必要最低コメント数(目安): #{level.exp_required / 5}"
       })
     end
   end
 
   def unlock_skill(skill_name)
-    # スキルをユーザーに付与する処理
-    skills.create(name: skill_name)
+    # Skillが存在するか確認し、なければ作成
+    skill = Skill.find_or_initialize_by(name: skill_name)
+  
+    if skill.new_record?
+      skill.user_id = self.id # user_idが設定されるようにする
+      skill.save
+    end
+  
+    # ユーザーとスキルの関連付けを中間テーブルに作成
+    self.skills << skill unless self.skills.include?(skill)
   end
+  
 
   def unlock_item(item_name)
     # アイテムをユーザーに付与する処理

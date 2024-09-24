@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_21_054619) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_24_052239) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_21_054619) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "characters", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "image", null: false
+    t.integer "offense_power"
+    t.integer "defense_power"
+    t.integer "speed"
+    t.integer "likeability", default: 0
+    t.integer "experience_points"
+    t.string "status_effect"
+    t.text "traits"
+    t.string "favorite_item"
+    t.text "backstory"
+    t.integer "max_hp"
+    t.integer "current_hp"
+    t.integer "healing_power"
+    t.string "alignment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "comments", charset: "utf8mb3", force: :cascade do |t|
@@ -155,6 +175,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_21_054619) do
     t.index ["user_id"], name: "index_sns_credentials_on_user_id"
   end
 
+  create_table "user_characters", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "character_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["character_id"], name: "index_user_characters_on_character_id"
+    t.index ["user_id"], name: "index_user_characters_on_user_id"
+  end
+
+  create_table "user_skills", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "skill_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["skill_id"], name: "index_user_skills_on_skill_id"
+    t.index ["user_id"], name: "index_user_skills_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
     t.string "nickname", null: false
     t.string "email", default: "", null: false
@@ -193,4 +231,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_21_054619) do
   add_foreign_key "room_users", "users"
   add_foreign_key "skills", "users"
   add_foreign_key "sns_credentials", "users"
+  add_foreign_key "user_characters", "characters"
+  add_foreign_key "user_characters", "users"
+  add_foreign_key "user_skills", "skills"
+  add_foreign_key "user_skills", "users"
 end

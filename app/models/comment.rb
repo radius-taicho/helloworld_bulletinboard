@@ -17,14 +17,18 @@ class Comment < ApplicationRecord
 
   def award_experience
     # コメント作成者に基本の経験値を付与
-    return if user.guest?
-    
-    user.add_experience(5)
-
-    # コメントされたスレッドの作成者に経験値を付与
-    if post.user_id != user.id
-      # コメントの作成者とスレッドの作成者が異なる場合に追加の経験値を付与
-      User.find(post.user_id).add_experience(10)
+    return if user.guest?  # ゲストユーザーの場合は何もしない
+  
+    if post.user_id == user.id
+      # 自身のスレッドへのコメントの場合は1ポイントの経験値を付与
+      user.add_experience(1)
+    else
+      # 他のスレッドへのコメントの場合は5ポイントの経験値を付与
+      user.add_experience(5)
+  
+      # コメントされたスレッドの作成者に10ポイントの経験値を付与
+      User.find(post.user_id).add_experience(10) if post.user_id != user.id
     end
   end
+  
 end

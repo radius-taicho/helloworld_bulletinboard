@@ -1,29 +1,42 @@
 <body class="game-page">
   <div class="back-to-post-page">
-      <%= link_to "Top画面へ", root_path, class: "post-top-button" %>
-    </div>
+    <%= link_to "Top画面へ", root_path, class: "post-top-button" %>
+  </div>
 
   <div class="game-screen-wrapper">
-
     <div class="upper-game-container">
-        <div class="character-image-box">
-          <%= image_tag 'tebukurodispatch3.png', alt: 'スレッドが見つからないキャラクターイメージ', class:" green-dig-man", id: 'green-moguri' %>
-        </div>
+      <div class="character-image-box">
+        <%= image_tag 'tebukurodispatch3.png', alt: 'スレッドが見つからないキャラクターイメージ', class: "green-dig-man", id: 'green-moguri' %>
+      </div>
     </div>
 
     <div class="lower-game-container">
-      <div class="upper-options">
-        <p>たたかう</p>
-        <p>アイテム</p>
-      </div>
+      <div class="user-options-container">
+        <div class="user-options" id="user-options-view">
+          <div class="upper-options">
+            <p>たたかう</p>
+            <p>アイテム</p>
+          </div>
 
-      <div class="lower-options">
-        <p>スキル</p>
-        <p>にげる</p>
+          <div class="lower-options">
+            <p class="skill-button" id="user-skill-button">スキル</p>
+            <p class="run-button">にげる</p>
+          </div>
+        </div>
+
+        <div class="user-skill-list" id="user-skill-view">
+          <% @skills.each do |skill| %>
+            <p><%= skill.name %></p>
+             
+            <div class="game-back-button">
+              <%= image_tag 'mediumbackbutton.png', width: 80, height: 80 %>
+              <p>もどる</p>
+            </div>
+
+
+          <% end %>
+        </div>
       </div>
     </div>
-
   </div>
-
 </body>
-
