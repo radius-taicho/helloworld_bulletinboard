@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  get 'games/index'
-  get 'usages/index'
+  # config/routes.rb
+  post 'escape', to: 'games#escape' # ルーティングを追加
+
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations'
@@ -9,6 +10,8 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update]
 
   resources :usages, only: [:index]
+
+  resources :results, only: [:index]
 
   resources :games
 

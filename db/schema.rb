@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_24_052239) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_25_030018) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_24_052239) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "character_abilities", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description", null: false
+    t.bigint "character_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["character_id"], name: "index_character_abilities_on_character_id"
+  end
+
   create_table "characters", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "image", null: false
@@ -47,7 +56,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_24_052239) do
     t.integer "speed"
     t.integer "likeability", default: 0
     t.integer "experience_points"
-    t.string "status_effect"
     t.text "traits"
     t.string "favorite_item"
     t.text "backstory"
@@ -57,6 +65,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_24_052239) do
     t.string "alignment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "luck"
   end
 
   create_table "comments", charset: "utf8mb3", force: :cascade do |t|
@@ -175,6 +184,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_24_052239) do
     t.index ["user_id"], name: "index_sns_credentials_on_user_id"
   end
 
+  create_table "status_effects", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "duration", null: false
+    t.bigint "character_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["character_id"], name: "index_status_effects_on_character_id"
+    t.index ["user_id"], name: "index_status_effects_on_user_id"
+  end
+
   create_table "user_characters", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "character_id", null: false
@@ -210,12 +230,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_24_052239) do
     t.integer "experience_points", default: 0, null: false
     t.integer "hp", default: 3
     t.integer "max_hp", default: 3
+    t.integer "offense_power", default: 0
+    t.integer "defense_power", default: 0
+    t.integer "speed", default: 0
+    t.integer "luck", default: 0
+    t.integer "status_points", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "character_abilities", "characters"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "direct_message_requests", "users", column: "receiver_id"
@@ -231,6 +257,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_24_052239) do
   add_foreign_key "room_users", "users"
   add_foreign_key "skills", "users"
   add_foreign_key "sns_credentials", "users"
+  add_foreign_key "status_effects", "characters"
+  add_foreign_key "status_effects", "users"
   add_foreign_key "user_characters", "characters"
   add_foreign_key "user_characters", "users"
   add_foreign_key "user_skills", "skills"

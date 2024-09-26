@@ -58,7 +58,13 @@ Level.create(level_number: 49, exp_required: 6050, hp_increase: 15, reward_type:
 Level.create(level_number: 50, exp_required: 7000, hp_increase: 20, reward_type: nil, reward_value: nil)
 
 Character.create(name: "てぶくろディスパッチ", image: "tebukurodispatch3.png", max_hp:30, current_hp:30, offense_power: 5, defense_power: 1, speed: 70,
-likeability: 0, experience_points: 500, status_effect: nil, traits: "瀕死になると手袋を脱いで逃げる",favorite_item: "手袋", healing_power: 10, alignment: "悪"
+likeability: 0, experience_points: 500, traits: "瀕死になると手袋を脱いで逃げる",favorite_item: "手袋", healing_power: 10, alignment: "悪",
 backstory: "Inverse Regimeのメンバー、偵察部隊隊長")
+
+
+
+
+
+
 
 

@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :skills, through: :user_skills
   has_many :user_characters
   has_many :characters, through: :user_characters
+  has_many :status_effects, dependent: :destroy
+
 
    # 初期レベル0を設定するメソッド
    after_create :set_initial_level
