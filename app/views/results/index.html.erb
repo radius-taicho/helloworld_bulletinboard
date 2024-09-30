@@ -1,3 +1,25 @@
 <body class="results-page">
-  
+  <div class="results-wrapper">
+    <h1>game results</h1>
+    <div class="character-results-container">
+      <div class="character-results-likeability">
+        <%= image_tag 'black-heart.png', alt: '設定のイメージ' %>
+        <p>好感度 100%</p>
+      </div>
+      <div class="character-image-results">
+        <%= image_tag 'h-twins-gals.png', alt: '設定のイメージ' %>
+        <p>エイチツインズ</p>
+      </div>
+
+    </div>
+
+    <div class="results-messages">
+      <div class="likeability-result-message">獲得好感度</div>
+      <div class="item-get--result-message">獲得アイテム</div>
+      <div class="exp-get-result-message">獲得経験値</div>
+    </div>
+
+    <%= link_to 'トップにもどる', root_path, class: 'back-to-top-from-results' %>
+  </div>
+
 </body>

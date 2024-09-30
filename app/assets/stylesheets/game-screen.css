@@ -6,6 +6,7 @@
   display: flex;
   justify-content: center;
   background-color: #242424;
+  font-family: "DotGothic16", sans-serif;
 }
 
 .game-screen-wrapper {
@@ -25,6 +26,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.character-image-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+}
+
+.character-image-box p {
+  font-weight: bold;
+  font-size: x-large;
 }
 
 .lower-game-container {
@@ -92,5 +106,21 @@
   margin: 0;
   text-align: center;
   margin-top: -25px;
+
+}
+
+.back-to-top-from-game {
+  text-decoration: none;
+  color: white;
+  width: 20%;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  display: inline-block;
+  background-color: rgb(219, 52, 52);
+  border-radius: 8px;
+  position: fixed;
+  top: 40px;
+  right: 40px;
 
 }

@@ -5,8 +5,6 @@ document.addEventListener("turbo:load", () => {
   const rightScrollButton = document.querySelector(".scroll-button.right");
   const leftScrollButton = document.querySelector(".scroll-button.left");
 
-  console.log(rightScrollButton);
-
   if (container && imageWidth && rightScrollButton && leftScrollButton) {
     leftScrollButton.addEventListener("click", () => {
       container.scrollBy({ left: -imageWidth * 3, behavior: 'smooth' });
