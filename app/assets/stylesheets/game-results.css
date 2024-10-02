@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center;
   font-family: "DotGothic16", sans-serif;
-  min-height: 700px;
+  min-height: 750px;
 }
 
 .results-wrapper {
@@ -74,7 +74,7 @@
   background-color: rgb(219, 52, 52);
   border-radius: 8px;
   position: absolute;
-  bottom: 40px;
+  bottom: 100px;
   right: 40px;
 
 }

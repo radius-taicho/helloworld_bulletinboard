@@ -6,38 +6,40 @@ class GamesController < ApplicationController
 
   def escape
     @user = current_user
-    @character = find_character # ここでキャラクターを取得するメソッドを追加
-
+    @character = Character.find_by(number: 1) # numberが1のキャラクターを取得
+  
     if can_escape?
       result = "#{current_user.nickname}は逃げ切った!!"
-      # JSON形式でレスポンスを返す場合
-      # ここにsetTimeout(() => {
-    #     // 次の処理
-    #     // 例えば、結果画面に遷移するなど
-    #     window.location.href = '/results'; // 遷移先のURL
-    # }, 1500); // 1500ミリ秒（1.5秒）待機
-    # のようなjsのコードをjsのコードに付け加える
       render json: { message: result }
       
     else
       result = "#{@character.name}が後を追いかけてきた!!"
       # 追跡された場合もJSON形式でレスポンスを返す
       render json: { message: result }
-      character_action
     end
   end
+  
 
   private
 
   def can_escape?
     speed_difference = @character.speed - @user.speed
-    escape_probability = speed_difference > 0 ? 100 - speed_difference : 100
-
+  
+    # スピード差に応じた逃げられる確率を設定
+    escape_probability = case speed_difference
+                         when 1 then 90
+                         when 2 then 80
+                         when 3 then 70
+                         when 4 then 60
+                         when 5 then 50
+                         when 6 then 40
+                         when 7 then 30
+                         when 8..Float::INFINITY then 20 # スピード差が8以上の場合
+                         else 100 # ユーザーが速い場合は100%
+                         end
+  
+    # 確率をパーセンテージで評価
     rand < escape_probability * 0.01
   end
 
-  def find_character
-    # ここで適切なキャラクターを取得するロジックを実装
-    Character.find(params[:character_id]) # 例: character_idをパラメータから取得
-  end
 end

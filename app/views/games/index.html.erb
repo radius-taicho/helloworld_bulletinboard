@@ -15,16 +15,27 @@
     <div class="lower-game-container">
       <div class="user-options-container">
         <div class="user-options" id="user-options-view">
+
+
+          <div class="user-hit-point">
+            <p><%= current_user.nickname %></p>
+            <p>HP: <%= current_user.hp %>/<%= current_user.max_hp %></p>
+          </div>
+
+          <div class="right-options-container">
           <div class="upper-options">
-            <p>たたかう</p>
-            <p>アイテム</p>
+            <button class="fight-command">たたかう</p>
+            <button class="item-command">アイテム</p>
           </div>
 
           <div class="lower-options">
-            <p class="skill-button" id="user-skill-button">スキル</p>
-            <p class="run-button">にげる</p>
+            <button class="skill-command" id="user-skill-command">スキル</p>
+            <button class="escape-command">にげる</p>
+          </div>
           </div>
         </div>
+
+        <div class="message-area"></div>
 
         <div class="user-skill-list" id="user-skill-view">
           <% @skills.each do |skill| %>

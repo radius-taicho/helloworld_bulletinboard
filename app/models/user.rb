@@ -29,23 +29,33 @@ class User < ApplicationRecord
   end
   
   def level_up
-    transaction do
+    ActiveRecord::Base.transaction do
       while experience_points >= current_level&.exp_required
+        # 経験値とレベルを更新
         self.experience_points -= current_level.exp_required
         self.level_id = next_level.id
-      end
-      if save
+        
+        # ステータスを更新
         self.max_hp += current_level.hp_increase
         self.hp = self.max_hp
-
+        self.offense_power += current_level.offense_increase
+        self.defense_power += current_level.defense_increase
+        self.luck += current_level.luck_increase
+        self.speed += current_level.speed_increase
+        self.status_points += current_level.status_point_increase  # 修正箇所
+  
+        # 報酬のアンロックと通知の保存
         unlock_rewards_for_level(current_level)
         save_level_up_notification(current_level)
-      else
-        # エラーハンドリング
-        Rails.logger.error("Failed to save user after leveling up.")
       end
+  
+      # 変更を全て保存
+      raise ActiveRecord::Rollback unless save # 保存に失敗した場合はロールバック
     end
+  rescue => e
+    Rails.logger.error("Failed to level up user: #{e.message}")
   end
+  
 
   def save_level_up_notification(level)
     message = "Lv.#{level.level_number}になりました！"
