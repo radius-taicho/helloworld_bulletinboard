@@ -48,3 +48,4 @@ yarn-debug.log*
 /assets/images
 
 /db/seeds.rb
+db/seeds.rb
