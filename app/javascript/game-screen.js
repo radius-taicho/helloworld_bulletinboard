@@ -13,6 +13,7 @@ document.addEventListener("turbo:load", function() {
   let logs = [];
   let nextTurn = false;
 
+  // 要素が存在しない場合は処理を中断
   if (!fightCommand || !itemCommand || !skillCommand || !escapeCommand || !userOptionsView || !userSkillView || !logArea) return;
 
   function executeCommand(command) {
@@ -33,38 +34,46 @@ document.addEventListener("turbo:load", function() {
       // HPの更新
       updateUserHp(data.user_hp, data.user_max_hp);
   
-      // ログの処理（配列の場合、結合してから判定）
+      // ログの処理
       logs = Array.isArray(data.log) ? data.log : [data.log];
-      const combinedLog = logs.join(" ");
+      currentLogIndex = 0; // ログインデックスをリセット
   
-      // nextTurnをサーバーからの応答で更新
-      nextTurn = data.next_turn || false;  // ここでnextTurnを更新
-
       if (data.battle_over) {
         userOptionsView.style.display = "none";
         logArea.style.display = "block";
-        logArea.innerHTML = `<p>${combinedLog}</p>`;
-      
-        setTimeout(() => {
-          window.location.href = '/results';
-        }, 2000);
+        logArea.style.pointerEvents = "none"; // クリックを無効にする
+        currentLogIndex = 0; // ログインデックスをリセット
+        
+        // 全てのログが表示されたらリザルトに遷移
+        function showAllLogsAndRedirect() {
+            if (currentLogIndex < logs.length) {
+                logArea.innerHTML = `<p>${logs[currentLogIndex]}</p>`;
+                currentLogIndex++;
+                setTimeout(showAllLogsAndRedirect, 1000); // 1秒後に次のログを表示
+            } else {
+                // 最後のログが表示された後にリダイレクト
+                setTimeout(() => {
+                    window.location.href = '/results';
+                }, 1000);
+            }
+        }
+    
+        showAllLogsAndRedirect(); // 全てのログを表示する関数を呼び出す
       } else {
-        currentLogIndex = 0;
-        logArea.innerHTML = "";
-  
+        // 通常の処理
         if (logs.length === 0) {
           userOptionsView.style.display = "none";
           logArea.innerHTML = "<p>ログがありません。</p>";
         } else {
           userOptionsView.style.display = "none";
           logArea.style.display = "block";
-          showNextLog();
+          showNextLog(); // ログ表示を開始
         }
 
         // 逃走成功の場合の処理
-        if (command === "escape" && combinedLog.includes("逃げ切った")) {
+        if (command === "escape" && data.log.includes("逃げ切った")) {
           logArea.removeEventListener("click", showNextLog); // イベントリスナーを削除
-          logArea.innerHTML = `<p>${combinedLog}</p>`;
+          logArea.innerHTML = `<p>${data.log.join(" ")}</p>`; // 一気に表示
           setTimeout(() => {
             window.location.href = '/results';
           }, 2000);
@@ -84,16 +93,16 @@ document.addEventListener("turbo:load", function() {
 
   function showNextLog() {
     if (currentLogIndex < logs.length) {
-      userOptionsView.style.display = "none";
       logArea.innerHTML = `<p>${logs[currentLogIndex]}</p>`;
       currentLogIndex++;
-    } else if (nextTurn) { // 次のターンがある場合に表示
+    } else {
+      // すべてのログを表示した後の処理
       logArea.style.display = "none"; 
       userOptionsView.style.display = "flex";
     }
   }
 
-  logArea.addEventListener('click', showNextLog);
+  logArea.addEventListener('click', showNextLog); // ログエリアをクリックして次のログを表示
 
   skillCommand.addEventListener("click", () => {
     userOptionsView.style.display = "none";

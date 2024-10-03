@@ -120,7 +120,7 @@ class Game < ApplicationRecord
   # アイテム使用処理
   def user_use_item
     # 例: HP回復アイテム
-    recovery_amount = 20 # 回復量を仮定
+    recovery_amount = 10 # 回復量を仮定
     user.hp += recovery_amount
 
     # HPがmax_hpを超えないように制御
