@@ -1,8 +1,6 @@
 <body class="game-page">
-   <%= link_to 'リザルト画面(テスト)', results_path, class: '.back-to-top-from-game' %>
-  <div class="back-to-post-page">
-    <%= link_to "Top画面へ", root_path, class: "post-top-button" %>
-  </div>
+  <!-- ゲームIDを渡すためのコンテナ -->
+  <div id="game-container" data-game-id="<%= @game.id %>"></div>
 
   <div class="game-screen-wrapper">
     <div class="upper-game-container">
@@ -15,23 +13,25 @@
     <div class="lower-game-container">
       <div class="user-options-container">
         <div class="user-options" id="user-options-view">
-
-
-          <div class="user-hit-point">
-            <p><%= current_user.nickname %></p>
-            <p>HP: <%= current_user.hp %>/<%= current_user.max_hp %></p>
+          <div class="user-status-information">
+            <div class="upper-user-status">
+              <p><%= current_user.nickname %></p>
+            </div>
+            <div class="lower-user-status">
+              <p>HP: <%= current_user.hp %>/<%= current_user.max_hp %></p>
+            </div>
           </div>
 
           <div class="right-options-container">
-          <div class="upper-options">
-            <button class="fight-command">たたかう</p>
-            <button class="item-command">アイテム</p>
-          </div>
+            <div class="upper-options">
+              <button class="fight-command">たたかう</button>
+              <button class="item-command">アイテム</button>
+            </div>
 
-          <div class="lower-options">
-            <button class="skill-command" id="user-skill-command">スキル</p>
-            <button class="escape-command">にげる</p>
-          </div>
+            <div class="lower-options">
+              <button class="skill-command" id="user-skill-command">スキル</button>
+              <button class="escape-command">にげる</button>
+            </div>
           </div>
         </div>
 
@@ -45,8 +45,6 @@
               <%= image_tag 'mediumbackbutton.png', width: 80, height: 80 %>
               <p>もどる</p>
             </div>
-
-
           <% end %>
         </div>
       </div>

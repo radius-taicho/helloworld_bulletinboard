@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_01_024934) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_02_004154) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -101,6 +101,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_01_024934) do
     t.bigint "related_entity_id", null: false
     t.index ["related_entity_type", "related_entity_id"], name: "index_exps_on_related_entity"
     t.index ["user_id"], name: "index_exps_on_user_id"
+  end
+
+  create_table "games", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "character_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["character_id"], name: "index_games_on_character_id"
+    t.index ["user_id"], name: "index_games_on_user_id"
   end
 
   create_table "levels", charset: "utf8mb3", force: :cascade do |t|
@@ -254,6 +263,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_01_024934) do
   add_foreign_key "direct_message_requests", "users", column: "receiver_id"
   add_foreign_key "direct_message_requests", "users", column: "sender_id"
   add_foreign_key "exps", "users"
+  add_foreign_key "games", "characters"
+  add_foreign_key "games", "users"
   add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"

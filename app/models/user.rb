@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :user_characters
   has_many :characters, through: :user_characters
   has_many :status_effects, dependent: :destroy
+  has_many :games
 
 
    # 初期レベル0を設定するメソッド

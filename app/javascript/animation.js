@@ -1,7 +1,7 @@
 document.addEventListener("turbo:load", () =>{
 
 const gameStartShoeImage = document.querySelector(".shoes-image");
-const gameStartButton = document.querySelector(".game-start-link");
+const gameStartButton = document.querySelector(".start-game-btn");
 
 if (!gameStartButton||!gameStartShoeImage) return
 

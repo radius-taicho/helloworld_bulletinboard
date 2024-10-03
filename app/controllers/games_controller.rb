@@ -1,45 +1,64 @@
 class GamesController < ApplicationController
-  def index
+  before_action :set_game, only: [:show, :execute_command]
+
+  # ゲーム開始処理
+  def start_game
     @user = current_user
+    @character = Character.find_by(number: 1) # キャラクターを取得
+
+    # 新しいゲームを作成
+    @game = Game.create(user: @user, character: @character)
+
+    # コマンド選択画面へリダイレクト
+    redirect_to game_path(@game) # ゲーム画面へ遷移
+  end
+
+  # ゲーム画面の表示
+  def show
+    @user = @game.user
+    @character = @game.character
     @skills = @user.skills.order(created_at: :desc)
   end
 
-  def escape
-    @user = current_user
-    @character = Character.find_by(number: 1) # numberが1のキャラクターを取得
+  # コマンドを処理
+  def execute_command
+    command = params[:command] # フォームからのコマンドを取得
   
-    if can_escape?
-      result = "#{current_user.nickname}は逃げ切った!!"
-      render json: { message: result }
-      
+    # 有効なコマンドのリストを定義
+    valid_commands = ['attack', 'skill', 'item', 'escape']
+    
+    # コマンドのバリデーション
+    unless valid_commands.include?(command)
+      flash[:alert] = "無効なコマンドです。"
+      redirect_to root_path and return
+    end
+  
+    result = @game.process_command(command) # Gameモデルのメソッドで処理
+  
+    if result[:battle_over]
+      render json: { 
+        log: result[:log], 
+        battle_over: true, 
+        user_hp: result[:user_hp], 
+        user_max_hp: result[:user_max_hp]
+      }
     else
-      result = "#{@character.name}が後を追いかけてきた!!"
-      # 追跡された場合もJSON形式でレスポンスを返す
-      render json: { message: result }
+      current_user = result[:current_user] # 現在のユーザーオブジェクトを取得
+  
+      render json: { 
+        log: result[:log], 
+        battle_over: false, 
+        next_turn: result[:next_turn], # 次のターンの情報を追加して返す
+        user_hp: current_user.hp, 
+        user_max_hp: current_user.max_hp     # ユーザーの現在HP
+      }
     end
   end
-  
 
   private
 
-  def can_escape?
-    speed_difference = @character.speed - @user.speed
-  
-    # スピード差に応じた逃げられる確率を設定
-    escape_probability = case speed_difference
-                         when 1 then 90
-                         when 2 then 80
-                         when 3 then 70
-                         when 4 then 60
-                         when 5 then 50
-                         when 6 then 40
-                         when 7 then 30
-                         when 8..Float::INFINITY then 20 # スピード差が8以上の場合
-                         else 100 # ユーザーが速い場合は100%
-                         end
-  
-    # 確率をパーセンテージで評価
-    rand < escape_probability * 0.01
+  # ゲームデータを設定
+  def set_game
+    @game = Game.find(params[:id])
   end
-
 end

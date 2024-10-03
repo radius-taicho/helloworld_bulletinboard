@@ -62,7 +62,12 @@
 .user-options-container {
   width: 100%;
   height: 100%;
-  padding: 30px 40px;
+}
+
+.message-area {
+  width: 100%;
+  height: 100%;
+  padding: 20px 40px;
 }
 .user-options {
   width: 100%;
@@ -79,16 +84,36 @@
   cursor: pointer;
 }
 
-.user-hit-point {
+.user-status-information {
   width: 25%;
   height: 100%;
-  border-right: 3px solid white;
+  border-right: 5px solid white;
   display: flex;
   flex-direction: column;
+}
+
+.upper-user-status {
+  display: flex;
   justify-content: center;
+  align-items: center;
+  height: 60%;
+  width: 100%;
 
 }
 
+.user-status-information p {
+  margin: 0;
+}
+
+.lower-user-status {
+  height: 40%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+
+
+}
 .right-options-container {
   width: 75%;
   height: 100%;

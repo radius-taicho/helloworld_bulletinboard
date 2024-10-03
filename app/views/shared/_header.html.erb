@@ -51,10 +51,8 @@
         <meter id="fuel" min="0" max= <%= current_user.max_hp %> low=<%= current_user.max_hp / 3 %>  high=<%=current_user.max_hp%> value=<%= current_user.hp %>></meter>
       </div>
       <div class="adventure">
-        <button class="adventure-button">
           <%= image_tag 'adventureshoes.png', alt: '冒険の靴', class: 'shoes-image' %>
-          <%= link_to '冒険', games_path, class: 'game-start-link' %>
-        </button>
+          <%= button_to '冒険', start_game_path, method: :post, class: 'start-game-btn' %>
       </div>
     </div>
   <% end %>
