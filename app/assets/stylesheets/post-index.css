@@ -9,6 +9,47 @@
   border-radius: 10px;
 }
 
+/* 初期状態ではメニューを画面外に配置 */
+#menu {
+  position: fixed;
+  top: 80px;
+  right: -250px; /* メニューを画面外に隠す */
+  width: 200px;
+  height: 240px;
+  background-color: #353535;
+  color: white;
+  transition: left 0.5s, right 0.5s; /* スライドのアニメーション */
+  font-family: "DotGothic16", sans-serif;
+}
+
+#menu nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#menu nav ul li {
+  padding: 15px 20px;
+}
+
+#menu nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+/* メニューが表示された時のスタイル */
+#menu.active {
+  right: 0; /* 左からスライドイン */
+}
+
+.menu-close-button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+
 #posts-list {
   width: 65vw;
   margin: 0 auto;

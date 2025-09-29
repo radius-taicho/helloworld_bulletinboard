@@ -12,7 +12,13 @@ class User < ApplicationRecord
   has_many :messages, foreign_key: :sender_id
   has_many :direct_message_requests, dependent: :destroy
   has_many :notifications, dependent: :destroy
-  has_many :skills
+  has_many :user_skills
+  has_many :skills, through: :user_skills
+  has_many :user_characters
+  has_many :characters, through: :user_characters
+  has_many :status_effects, dependent: :destroy
+  has_many :games
+
 
    # 初期レベル0を設定するメソッド
    after_create :set_initial_level
@@ -24,23 +30,33 @@ class User < ApplicationRecord
   end
   
   def level_up
-    transaction do
+    ActiveRecord::Base.transaction do
       while experience_points >= current_level&.exp_required
+        # 経験値とレベルを更新
         self.experience_points -= current_level.exp_required
         self.level_id = next_level.id
-      end
-      if save
+        
+        # ステータスを更新
         self.max_hp += current_level.hp_increase
-        self.hp = [self.hp, max_hp].min # 既存のHPが最大HPを超えないようにするp
-
+        self.hp = self.max_hp
+        self.offense_power += current_level.offense_increase
+        self.defense_power += current_level.defense_increase
+        self.luck += current_level.luck_increase
+        self.speed += current_level.speed_increase
+        self.status_points += current_level.status_point_increase  # 修正箇所
+  
+        # 報酬のアンロックと通知の保存
         unlock_rewards_for_level(current_level)
         save_level_up_notification(current_level)
-      else
-        # エラーハンドリング
-        Rails.logger.error("Failed to save user after leveling up.")
       end
+  
+      # 変更を全て保存
+      raise ActiveRecord::Rollback unless save # 保存に失敗した場合はロールバック
     end
+  rescue => e
+    Rails.logger.error("Failed to level up user: #{e.message}")
   end
+  
 
   def save_level_up_notification(level)
     message = "Lv.#{level.level_number}になりました！"
@@ -65,7 +81,7 @@ class User < ApplicationRecord
         level_up_message: "レベル#{level.level_number}に到達しました！",
         skill_get_message: "新しいスキル「#{level.reward_value}」を獲得しました！",
         next_experience_point: "次のレベルに必要な経験値: #{level.exp_required}",
-        required_comment_count: "必要最低コメント数: #{level.exp_required / 5}"
+        required_comment_count: "必要最低コメント数(目安): #{level.exp_required / 5}"
       })
     when 'item'
       unlock_item(level.reward_value)
@@ -73,21 +89,30 @@ class User < ApplicationRecord
         level_up_message: "レベル#{level.level_number}に到達しました！",
         item_get_message: "新しいアイテム「#{level.reward_value}」を獲得しました！",
         next_experience_point: "次のレベルに必要な経験値: #{level.exp_required}",
-        required_comment_count: "必要最低コメント数: #{level.exp_required / 5}"
+        required_comment_count: "必要最低コメント数(目安): #{level.exp_required / 5}"
       })
     else
       LevelUpNotificationChannel.broadcast_to(self, {
         level_up_message: "レベル#{level.level_number}に到達しました！",
         next_experience_point: "次のレベルに必要な経験値: #{level.exp_required}",
-        required_comment_count: "必要最低コメント数: #{level.exp_required / 5}"
+        required_comment_count: "必要最低コメント数(目安): #{level.exp_required / 5}"
       })
     end
   end
 
   def unlock_skill(skill_name)
-    # スキルをユーザーに付与する処理
-    skills.create(name: skill_name)
+    # Skillが存在するか確認し、なければ作成
+    skill = Skill.find_or_initialize_by(name: skill_name)
+  
+    if skill.new_record?
+      skill.user_id = self.id # user_idが設定されるようにする
+      skill.save
+    end
+  
+    # ユーザーとスキルの関連付けを中間テーブルに作成
+    self.skills << skill unless self.skills.include?(skill)
   end
+  
 
   def unlock_item(item_name)
     # アイテムをユーザーに付与する処理

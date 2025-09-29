@@ -6,6 +6,17 @@
 <%= render "shared/header" %>
 
 <div id="posts-list">
+  <div id="menu">
+    <span class="menu-close-button">&times;</span>
+    <nav>
+      <ul>
+        <li><a href="#">HOME</a></li>
+        <li><a href="#">ABOUT</a></li>
+        <li><%= link_to '掲示板の使い方', usages_path, class: 'usages-link' %></li>
+      </ul>
+    </nav>
+  </div>
+
   <% @posts.each do |post| %>
     <div class="post" id="post-box" data-post-id="<%= post.id %>">
       <div class="post-title-box">

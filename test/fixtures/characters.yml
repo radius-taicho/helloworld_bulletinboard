@@ -1,0 +1,35 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  image: MyString
+  offense_power: 1
+  defense_power: 1
+  speed: 1
+  likeability: 1
+  experience_points: 1
+  status_effect: MyString
+  traits: MyText
+  favorite_item: MyString
+  backstory: MyText
+  max_hp: 1
+  current_hp: 1
+  healing_power: 1
+  alignment: MyString
+
+two:
+  name: MyString
+  image: MyString
+  offense_power: 1
+  defense_power: 1
+  speed: 1
+  likeability: 1
+  experience_points: 1
+  status_effect: MyString
+  traits: MyText
+  favorite_item: MyString
+  backstory: MyText
+  max_hp: 1
+  current_hp: 1
+  healing_power: 1
+  alignment: MyString

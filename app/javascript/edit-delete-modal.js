@@ -72,7 +72,7 @@ document.addEventListener("turbo:load", ()=> {
               })
               .then(data => {
                 document.querySelector('.edit-modal-body').innerHTML = data.form;
-                editFormModal.style.display = 'block';
+                editFormModal.style.display = 'flex';
               })
               .catch(error => console.error('Error during post edit fetch:', error));
           });
@@ -84,7 +84,7 @@ document.addEventListener("turbo:load", ()=> {
   // 削除ボタンが存在する場合のみ、クリックイベントを設定
   if (deleteThreadBtn) {
     deleteThreadBtn.addEventListener("click", function() {
-      showDeleteModal.style.display = 'block';
+      showDeleteModal.style.display = 'flex';
     });
   }
 

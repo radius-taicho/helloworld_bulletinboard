@@ -329,6 +329,7 @@
   display: flex;
   height: 128px;
   font-family: "DotGothic16", sans-serif;
+  object-fit: none;
 }
 
 .character {
@@ -339,6 +340,7 @@
   padding: 1px;
   background-color: white;
   cursor: pointer;
+  object-fit: none;
 }
 
 .character p {

@@ -116,6 +116,10 @@ img.top-characters-image{
   margin-left: 10px;
   text-align: center;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .adventure-button{
@@ -177,6 +181,8 @@ label {
   background-color: inherit;
   height: 100%;
   line-height: 80px;
+  color: white;
+  cursor: pointer;
 }
 
 
@@ -184,5 +190,26 @@ label {
 .shoes-image {
   width: 40px;
   height: 40px;
+  display: block;
+  cursor: pointer;
+}
+
+.shoes-image:active{
+  box-shadow: unset;
+  transform: translateY(3px);
+}
+
+.start-game-btn {
+  text-decoration: none;
+  color: white;
+  border: none;
+  background: inherit;
+  cursor: pointer;
+  
+}
+
+.start-game-btn:active {
+  box-shadow: unset;
+  transform: translateY(3px);
 }
 

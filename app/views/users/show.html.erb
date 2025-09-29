@@ -83,7 +83,8 @@
       <div class="post-direct-message-collection-buttons">
         <button class="users-post-list-button">投稿一覧</button>
         <button class="direct-message-list-button">DM一覧</button>
-        <button class="character-collection-list-button">仲間図鑑</button>
+        <button class="character-collection-list-button">バケモン図鑑</button>
+        <button class="item-list-button" style="display:none;">アイテム一覧</button>
       </div>
 
       <div class="lists-container">
@@ -140,7 +141,7 @@
               <div class="characters-wrapper">
                 <div class="characters characters1">
                   <div class="character">No.1
-                    <%= image_tag 'iwanttobeG.png', alt: 'iwanttobeGのキャラクターイメージ', class: "character-image" %>
+                    <%= image_tag 'small-h-twins-gals.png', alt: 'iwanttobeGのキャラクターイメージ', class: "character-image" %>
                   </div>
                   <div class="character">No.2</div>
                   <div class="character">No.3</div>
@@ -234,7 +235,7 @@
           <% if notification.notification_type == 'level_up' %>
             <%= "レベルアップ！: #{notification.message}" %>
             <p>次のレベルまでの経験値: <%= notification.next_experience_point %></p>
-            <p>必要最低コメント数: <%= notification.required_comment_count %></p>
+            <p>必要最低コメント数(目安): <%= notification.required_comment_count %></p>
             <p>獲得スキル: <%= notification.skill_get_message%></p>
             <p>獲得アイテム: <%= notification.item_get_message%></p>
           <% end %>

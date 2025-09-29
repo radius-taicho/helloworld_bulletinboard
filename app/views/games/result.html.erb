@@ -1,0 +1,69 @@
+<body class="results-page">
+  <div class="results-wrapper">
+    <h1>game results</h1>
+    <div class="character-results-container">
+      <div class="character-results-likeability">
+
+        <% if @character.likeability == 0 %>
+          <%= image_tag 'likeability-gage0.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% elsif @character.likeability > 0 && @character.likeability < 5 %>
+          <%= image_tag 'likeability-gage1.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% elsif @character.likeability >= 5 && @character.likeability < 10 %>
+          <%= image_tag 'likeability-gage2.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% elsif @character.likeability >= 10 && @character.likeability < 15 %>
+          <%= image_tag 'likeability-gage3.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% elsif @character.likeability >= 15 && @character.likeability < 20 %>
+          <%= image_tag 'likeability-gage4.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% elsif @character.likeability >= 20 && @character.likeability < 25 %>
+          <%= image_tag 'likeability-gage5.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% elsif @character.likeability >= 25 && @character.likeability < 30 %>
+          <%= image_tag 'likeability-gage6.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% elsif @character.likeability >= 30 && @character.likeability < 35 %>
+          <%= image_tag 'likeability-gage7.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% elsif @character.likeability >= 35 && @character.likeability < 40 %>
+          <%= image_tag 'likeability-gage8.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% elsif @character.likeability >= 40 && @character.likeability < 45 %>
+          <%= image_tag 'likeability-gage9.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% elsif @character.likeability >= 45 && @character.likeability < 50 %>
+          <%= image_tag 'likeability-gage10.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% elsif @character.likeability >= 50 && @character.likeability < 55 %>
+          <%= image_tag 'likeability-gage11.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% elsif @character.likeability >= 55 && @character.likeability < 60 %>
+          <%= image_tag 'likeability-gage12.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% elsif @character.likeability >= 60 && @character.likeability < 65 %>
+          <%= image_tag 'likeability-gage13.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% elsif @character.likeability >= 65 && @character.likeability < 70 %>
+          <%= image_tag 'likeability-gage14.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% elsif @character.likeability >= 70 && @character.likeability < 75 %>
+          <%= image_tag 'likeability-gage15.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% elsif @character.likeability >= 75 && @character.likeability < 80 %>
+          <%= image_tag 'likeability-gage16.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% elsif @character.likeability >= 80 && @character.likeability < 85 %>
+          <%= image_tag 'likeability-gage17.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% elsif @character.likeability >= 85 && @character.likeability < 90 %>
+          <%= image_tag 'likeability-gage18.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% elsif @character.likeability >= 90 && @character.likeability < 95 %>
+          <%= image_tag 'likeability-gage19.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% elsif @character.likeability >= 95 && @character.likeability < 100 %>
+          <%= image_tag 'likeability-gage20.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% elsif @character.likeability == 100 %>
+          <%= image_tag 'likeability-gage-max.png', alt: '設定のイメージ', class: "heart-image" %>
+        <% end %>
+
+        <p>総合好感度: <%= @character.likeability %></p>
+      </div>
+      <div class="character-image-results">
+        <%= image_tag 'h-twins-gals.png', alt: '設定のイメージ' %>
+        <p>エイチツインズ</p>
+      </div>
+    </div>
+
+    <div class="results-messages">
+      <div class="likeability-result-message">獲得好感度:</div>
+      <div class="item-get--result-message">獲得アイテム:</div>
+      <div class="exp-get-result-message">獲得経験値:</div>
+    </div>
+
+    <%= link_to 'トップにもどる', root_path, class: 'back-to-top-from-results' %>
+  </div>
+</body>

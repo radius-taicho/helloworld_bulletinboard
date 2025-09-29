@@ -1,10 +1,24 @@
 Rails.application.routes.draw do
+
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations'
   }
 
   resources :users, only: [:show, :edit, :update]
+
+  resources :usages, only: [:index]
+
+  resources :games, only: [:show] do
+    member do
+      post 'execute_command' # コマンド実行用のルート
+      post 'escape'          # 逃げるアクションのルート
+      get 'result'           
+    end
+  end
+
+  post 'start_game', to: 'games#start_game' # ゲーム開始用のルート
+
 
   resources :posts do
     resources :comments do

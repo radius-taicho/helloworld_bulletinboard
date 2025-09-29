@@ -1,0 +1,54 @@
+<body class="game-page">
+  <!-- ゲームIDを渡すためのコンテナ -->
+  <div id="game-container" data-game-id="<%= @game.id %>"></div>
+
+  <div class="game-screen-wrapper">
+    <div class="upper-game-container">
+      <div class="character-image-box">
+        <%= image_tag 'big-h-twins-gals.png', alt: 'スレッドが見つからないキャラクターイメージ', class: "green-dig-man", id: 'green-moguri' %>
+        <p>エイチツインズ</p>
+      </div>
+    </div>
+
+    <div class="lower-game-container">
+      <div class="user-options-container">
+        <div class="user-options" id="user-options-view">
+          <div class="user-status-information">
+            <div class="upper-user-status">
+              <p><%= current_user.nickname %></p>
+            </div>
+            <div class="lower-user-status">
+              <p>HP: <%= current_user.hp %>/<%= current_user.max_hp %></p>
+            </div>
+          </div>
+
+          <div class="right-options-container">
+            <div class="upper-options">
+              <button class="fight-command">たたかう</button>
+              <button class="item-command">アイテム</button>
+            </div>
+
+            <div class="lower-options">
+              <button class="skill-command" id="user-skill-command">スキル</button>
+              <button class="escape-command">にげる</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="message-area"></div>
+
+        <div class="user-skill-list" id="user-skill-view">
+          <% @skills.each do |skill| %>
+            <p class="<%= 'hello-command' if skill.name == 'hello world' %>"><%= skill.name %></p>
+          <% end %>
+
+          <div class="game-back-button">
+            <%= image_tag 'mediumbackbutton.png', width: 80, height: 80 %>
+            <p>もどる</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
