@@ -9,12 +9,11 @@ Rails.application.routes.draw do
 
   resources :usages, only: [:index]
 
-  resources :results, only: [:index]
-
   resources :games, only: [:show] do
     member do
       post 'execute_command' # コマンド実行用のルート
       post 'escape'          # 逃げるアクションのルート
+      get 'result'           
     end
   end
 

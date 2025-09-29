@@ -9,11 +9,13 @@ document.addEventListener("turbo:load", function() {
   const userSkillView = document.getElementById("user-skill-view");
   const userHpDisplay = document.querySelector('.user-status-information .lower-user-status p');
 
+  // 追加する Hello Command ボタン
+  const helloCommand = document.querySelector(".hello-command");
+
   let currentLogIndex = 0;
   let logs = [];
   let nextTurn = false;
 
-  // 要素が存在しない場合は処理を中断
   if (!fightCommand || !itemCommand || !skillCommand || !escapeCommand || !userOptionsView || !userSkillView || !logArea) return;
 
   function executeCommand(command) {
@@ -30,52 +32,50 @@ document.addEventListener("turbo:load", function() {
     .then(response => response.json())
     .then(data => {
       console.log("サーバーから受け取ったデータ:", data);
-  
-      // HPの更新
+
+      // HP更新
       updateUserHp(data.user_hp, data.user_max_hp);
-  
-      // ログの処理
+
       logs = Array.isArray(data.log) ? data.log : [data.log];
-      currentLogIndex = 0; // ログインデックスをリセット
-  
+      currentLogIndex = 0;
+
       if (data.battle_over) {
         userOptionsView.style.display = "none";
         logArea.style.display = "block";
-        logArea.style.pointerEvents = "none"; // クリックを無効にする
-        currentLogIndex = 0; // ログインデックスをリセット
+        logArea.style.pointerEvents = "none";
+        currentLogIndex = 0;
         
-        // 全てのログが表示されたらリザルトに遷移
         function showAllLogsAndRedirect() {
             if (currentLogIndex < logs.length) {
                 logArea.innerHTML = `<p>${logs[currentLogIndex]}</p>`;
                 currentLogIndex++;
-                setTimeout(showAllLogsAndRedirect, 1000); // 1秒後に次のログを表示
+                setTimeout(showAllLogsAndRedirect, 1000);
             } else {
-                // 最後のログが表示された後にリダイレクト
                 setTimeout(() => {
-                    window.location.href = '/results';
+                    const gameId = document.getElementById('game-container').dataset.gameId;
+                    window.location.href = `/games/${gameId}/result`;
                 }, 1000);
             }
         }
     
-        showAllLogsAndRedirect(); // 全てのログを表示する関数を呼び出す
+        showAllLogsAndRedirect();
       } else {
-        // 通常の処理
         if (logs.length === 0) {
           userOptionsView.style.display = "none";
           logArea.innerHTML = "<p>ログがありません。</p>";
         } else {
           userOptionsView.style.display = "none";
           logArea.style.display = "block";
-          showNextLog(); // ログ表示を開始
+          showNextLog();
         }
 
-        // 逃走成功の場合の処理
-        if (command === "escape" && data.log.includes("逃げ切った")) {
-          logArea.removeEventListener("click", showNextLog); // イベントリスナーを削除
-          logArea.innerHTML = `<p>${data.log.join(" ")}</p>`; // 一気に表示
+        const allLogs = data.log.join(" ");
+        if (command === "escape" && allLogs.includes("逃げ切った")) {
+          logArea.removeEventListener("click", showNextLog);
+          logArea.innerHTML = `<p>${data.log.join(" ")}</p>`;
           setTimeout(() => {
-            window.location.href = '/results';
+            const gameId = document.getElementById('game-container').dataset.gameId;
+            window.location.href = `/games/${gameId}/result`;
           }, 2000);
         }
       }
@@ -88,7 +88,9 @@ document.addEventListener("turbo:load", function() {
   }
 
   function updateUserHp(currentHp, maxHp) {
+    console.log("HPを更新します。現在のHP:", currentHp, "最大HP:", maxHp);
     userHpDisplay.innerHTML = `HP: ${currentHp}/${maxHp}`;
+    console.log("HPが更新されました。");
   }
 
   function showNextLog() {
@@ -96,18 +98,18 @@ document.addEventListener("turbo:load", function() {
       logArea.innerHTML = `<p>${logs[currentLogIndex]}</p>`;
       currentLogIndex++;
     } else {
-      // すべてのログを表示した後の処理
       logArea.style.display = "none"; 
       userOptionsView.style.display = "flex";
     }
   }
 
-  logArea.addEventListener('click', showNextLog); // ログエリアをクリックして次のログを表示
+  logArea.addEventListener('click', showNextLog);
 
   skillCommand.addEventListener("click", () => {
     userOptionsView.style.display = "none";
     logArea.style.display = "none";
     userSkillView.style.display = "flex";
+    userSkillView.style.flexDirection = "column";
   });
 
   backButton.addEventListener("click", () => {
@@ -128,5 +130,12 @@ document.addEventListener("turbo:load", function() {
   itemCommand.addEventListener("click", function() {
     userOptionsView.style.display = "none";
     executeCommand("item");
+  });
+
+  // Hello Command にイベントを追加
+  helloCommand.addEventListener("click", function() {
+    userSkillView.style.display = "none";
+    logArea.style.display = "block";
+    executeCommand("hello");
   });
 });

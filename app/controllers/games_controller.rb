@@ -1,14 +1,23 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :execute_command]
+  before_action :set_game, only: [:show, :execute_command, :result]
 
   # ゲーム開始処理
   def start_game
     @user = current_user
     @character = Character.find_by(number: 1) # キャラクターを取得
 
+    # ユーザーのHPを初期化
+
     # 新しいゲームを作成
     @game = Game.create(user: @user, character: @character)
 
+    @character.update(
+      current_hp: @character.max_hp,           # HPを最大値にリセット
+      offense_power: @character.offense_power, # 基本攻撃力にリセット
+      defense_power: @character.defense_power, # 基本防御力にリセット
+      speed: @character.speed,                 # 基本スピードにリセット
+      luck: @character.luck                    # 基本運にリセット
+    )
     # コマンド選択画面へリダイレクト
     redirect_to game_path(@game) # ゲーム画面へ遷移
   end
@@ -25,8 +34,8 @@ class GamesController < ApplicationController
     command = params[:command] # フォームからのコマンドを取得
   
     # 有効なコマンドのリストを定義
-    valid_commands = ['attack', 'skill', 'item', 'escape']
-    
+    valid_commands = ['attack', 'skill', 'item', 'escape', 'hello', 'speak'] # helloとspeakを追加
+  
     # コマンドのバリデーション
     unless valid_commands.include?(command)
       flash[:alert] = "無効なコマンドです。"
@@ -43,22 +52,25 @@ class GamesController < ApplicationController
         user_max_hp: result[:user_max_hp]
       }
     else
-      current_user = result[:current_user] # 現在のユーザーオブジェクトを取得
-  
+      # resultからユーザーのHPを取得
       render json: { 
         log: result[:log], 
         battle_over: false, 
         next_turn: result[:next_turn], # 次のターンの情報を追加して返す
-        user_hp: current_user.hp, 
-        user_max_hp: current_user.max_hp     # ユーザーの現在HP
+        user_hp: result[:user_hp], 
+        user_max_hp: result[:user_max_hp]
       }
     end
   end
 
+  def result
+    @character = @game.character
+    @user = @game.user
+  end
+
   private
 
-  # ゲームデータを設定
   def set_game
-    @game = Game.find(params[:id])
+    @game = Game.find(params[:id]) # ゲームを取得
   end
 end

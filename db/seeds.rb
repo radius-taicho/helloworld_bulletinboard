@@ -10,9 +10,9 @@
 Level.create(level_number: 0, exp_required: 10, hp_increase: 3, offense_increase: 0, defense_increase: 0,
 speed_increase: 0, luck_increase: 0, status_point_increase: 0, reward_type: nil, reward_value: nil)
 Level.create(level_number: 1, exp_required: 50, hp_increase: 3, offense_increase: 1, defense_increase: 1,
-speed_increase: 1, luck_increase: 0, status_point_increase: 0, reward_type: 'skill' , reward_value: 'speak')
+speed_increase: 1, luck_increase: 0, status_point_increase: 0, reward_type: 'skill' , reward_value: 'hello world')
 Level.create(level_number: 2, exp_required: 75, hp_increase: 3, offense_increase: 1, defense_increase: 1,
-speed_increase: 1, luck_increase: 0, status_point_increase: 0, reward_type: nil, reward_value: nil)
+speed_increase: 1, luck_increase: 0, status_point_increase: 0, reward_type: 'skill', reward_value: 'speak')
 Level.create(level_number: 3, exp_required: 100, hp_increase: 3, offense_increase: 0, defense_increase: 1,
 speed_increase: 1, luck_increase: 1, status_point_increase: 3, reward_type: nil, reward_value: nil)
 Level.create(level_number: 4, exp_required: 125, hp_increase: 3, offense_increase: 1, defense_increase: 1,
@@ -113,7 +113,7 @@ Level.create(level_number: 50, exp_required: 7000, hp_increase: 0,  offense_incr
 
 
 
-Character.create(number: 1, name: "エイチツインズ", image: "big-h-twins-gals.png", max_hp:30, current_hp:30, offense_power: 3, defense_power: 5, speed: 3,
+Character.create(number: 1, name: "エイチツインズ", image: "big-h-twins-gals.png", max_hp:16, current_hp:16, offense_power: 2, defense_power: 4, speed: 3,
 likeability: 0, luck: 5, experience_points: 100, traits: "会話系のスキルが効きやすい",favorite_item: "携帯", healing_power: 10, alignment: "悪",
 backstory: "二人ならうちらマヂ最強じゃんの一声で合体した")
 

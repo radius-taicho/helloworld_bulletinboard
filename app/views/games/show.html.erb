@@ -39,14 +39,15 @@
 
         <div class="user-skill-list" id="user-skill-view">
           <% @skills.each do |skill| %>
-            <p><%= skill.name %></p>
-             
-            <div class="game-back-button">
-              <%= image_tag 'mediumbackbutton.png', width: 80, height: 80 %>
-              <p>もどる</p>
-            </div>
+            <p class="<%= 'hello-command' if skill.name == 'hello world' %>"><%= skill.name %></p>
           <% end %>
+
+          <div class="game-back-button">
+            <%= image_tag 'mediumbackbutton.png', width: 80, height: 80 %>
+            <p>もどる</p>
+          </div>
         </div>
+
       </div>
     </div>
   </div>

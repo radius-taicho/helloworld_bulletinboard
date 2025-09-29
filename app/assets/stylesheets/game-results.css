@@ -33,6 +33,7 @@
   width: 60%;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 .character-results-likeability {
@@ -59,7 +60,7 @@
 
 .results-messages {
   font-size: 28px;
-  width: 40%;
+  width: 50%;
 
 }
 
@@ -77,5 +78,10 @@
   bottom: 100px;
   right: 40px;
 
+}
+
+.heart-image {
+  width: 192px;
+  height: 192px;
 }
 
